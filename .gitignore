@@ -1,0 +1,6 @@
+**/__pycache__
+
+/venv_run.ps1
+/agent/libs
+/agent.egg-info
+/venv

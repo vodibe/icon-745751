@@ -8,7 +8,7 @@ def get_url_dataset(useful_schools):
     (nel nostro caso le scuole superiori)
 
     Args:
-        useful_schools (list): tipologie di scuole utili
+        - useful_schools (list): tipologie di scuole utili
     """
 
     print('Creating URL dataset...')
@@ -44,10 +44,10 @@ def process_url(url):
     """Analizza l'URL della scuola e restituisce l'URL valido se questo esiste;
 
     Args:
-        url (string): URL della scuola
+        - url (string): URL della scuola
 
     Returns:
-        string: URL valido della scuola; None se non esiste
+        - string: URL valido della scuola; None se non esiste
     """
     
     print(f'Processing: {url}')
@@ -71,21 +71,6 @@ def process_url(url):
     try:
         # richiesta al server, header necessari per non avere 403
         r = requests.get(url, headers=headers, allow_redirects=False)
-        if not r.ok:
-            if tld_gov:
-                # sito non valido con tld .gov.it, riprovo con tld .edu.it
-                s[2] = 'edu'
-                return process_url('.'.join(s))
-            else:
-                # sito non valido con tld .edu.it
-                return None
-
-        elif r.status_code == 301:
-            # sito valido ma redireziona a un sito aggiornato
-            return r.headers['location']
-        else:
-            # sito valido
-            return url
     except:
         if tld_gov:
             # sito non valido con tld .gov.it, riprovo con tld .edu.it
@@ -94,6 +79,21 @@ def process_url(url):
         else:
             # sito non valido con tld .edu.it
             return None
+    
+    if not r.ok:
+        if tld_gov:
+            # sito non valido con tld .gov.it, riprovo con tld .edu.it
+            s[2] = 'edu'
+            return process_url('.'.join(s))
+        else:
+            # sito non valido con tld .edu.it
+            return None
+    elif r.status_code == 301:
+        # sito valido ma redireziona a un sito aggiornato
+        return r.headers['location']
+    else:
+        # sito valido
+        return url
     
 
 if __name__ == '__main__':

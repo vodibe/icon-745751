@@ -1,241 +1,209 @@
+import agent.definitions as defs
 import requests
-from bs4 import BeautifulSoup, NavigableString, Comment
-import networkx as nx
-import matplotlib.pyplot as plt
-import random
-from agent.definitions import headers
+import htmlmin
+import re
+from bs4 import BeautifulSoup, NavigableString, Tag
 from agent.libs.aipython.searchProblem import Arc
+
+import networkx as nx
+import matplotlib.pyplot as plt 
+from agent.libs.nx_layout.hierarchy_pos import hierarchy_pos
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
+#dimensione minima e massima etichetta nodi NDOM
+_MIN_LABEL_LENGTH = 2
+_MAX_LABEL_LENGTH = 40
+
+# nodi del DOM da non esplorare
+_TAG_BLACKLIST = [
+    'head', 'script', 'style', 'svg', 'meta', 'link', 'title', 'base',
+    'noscript', 'template', 'iframe', 'canvas', 'object', 'embed', 'param',
+    'applet', 'frame', 'frameset', 'map', 'area', 'track', 'data',
+    'figure', 'figcaption', '\n', 'form', 'fieldset', 'p', 'button'
+]
+
+# nodi del DOM che, una volta inseriti nel NDOM, conterranno potenzialmente altri nodi
+_TAG_PARENTS = [
+    'html', 'body', 'ul', 'ol', 'nav', 'article', 'section', 'aside',
+    'header', 'footer', 'table'
+]
+
+# nodi del DOM che per certo rappresentano una foglia del NDOM
+_TAG_LEAFS = [
+    'a', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
+]
+
 
 
 class NaiveDOM():
-    """Classe che modella un albero DOM piu' semplice rispetto a quello dell'intero
-    codice sorgente della pagina. La radice e' l'elemento <html>, i nodi interni sono
-    tutti i nodi che hanno tra i loro discendenti le stringhe visibili sulla pagina.
-    Le foglie sono le stringhe visibili sulla pagina.
 
-    Attributes:
-        NDOM_nodes: dizionario xpath:label dei nodi
-        NDOM_arcs: lista di oggetti Arc della libreria aipython
-        NDOM_start: xpath del nodo radice
-    """
+    def _calc_arc_cost(self, driver: webdriver, NDOM_parent_xpath, xpath) -> float:
+        #const xp = "//body/*[3]/*[5]/*[3]/*[1]/*[2]/*[1]/*[1]/*[1]/*[1]";
+        #const element = document.evaluate(xp, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+        #var rect = element.getBoundingClientRect();
+        #rect.top
+        # DOMRect { x: 205.5,
+        # y: 1262.9666748046875,
+        # width: 472,
+        # height: 62.15000915527344,
+        # top: 1262.9666748046875,
+        # right: 677.5,
+        # bottom: 1325.116683959961,
+        # left: 205.5
+        # }
 
-    # dimensione massima dell'etichetta dei nodi
-    MAX_LABEL_LENGTH = 40
+        #https://stackoverflow.com/questions/15510882/selenium-get-coordinates-or-dimensions-of-element-with-python
 
-    # nodi da non esplorare perche' non contengono stringhe visibili sulla pagina
-    tag_blacklist = [
-        'head', 'script', 'style', 'svg', 'meta', 'link', 'title', 'base',
-        'noscript', 'template', 'iframe', 'canvas', 'object', 'embed', 'param',
-        'applet', 'frame', 'frameset', 'map', 'area', 'track', 'data',
-        'figure', 'figcaption', "\n"
-    ]
+        e = driver.find_element(By.XPATH, '//body/*[3]/*[5]/*[3]/*[1]/*[2]/*[1]/*[1]/*[1]/*[1]' )
 
-    # nodi che contengono stringhe visibili sulla pagina
-    tag_parents = [
-        'html', 'body', 'ul', 'ol', 'nav', 'article', 'section', 'aside',
-        'header', 'footer', 'table'
-    ]
+        location = e.location
+        size = e.size
+        w, h = size['width'], size['height']
 
-    def __init__(self, location, from_file=False):
-        """Crea un nuovo oggetto NaiveDOM
+        print(location)
+        print(size)
+        print(w, h)
+
+
+        return 1
+    
+
+    def _browse_DOM(self, root, DOM_parent_xpath=None, DOM_ci=0, NDOM_parent_xpath=None, driver: webdriver=None):
+
+        is_DOM_tag = isinstance(root, Tag)
+
+        if is_DOM_tag and root.name in _TAG_BLACKLIST:
+            return
+        
+        #inizializzazione
+        xpath = None
+        label = None #None solo quando il nodo non e' ne' nodo del NDOM ne' foglia del NDOM
+        next_NDOM_parent_xpath = None #None se foglia del NDOM, altro se nodo del NDOM     
+
+        is_DOM_root = is_DOM_tag and not DOM_parent_xpath and not NDOM_parent_xpath
+        if is_DOM_root:
+            # root e' la radice del NDOM
+
+            xpath = f'//{root.name}'
+            label = root.name
+
+            next_NDOM_parent_xpath = xpath
+            self.start = xpath
+
+        elif is_DOM_tag and root.name in _TAG_PARENTS:
+            # root e' un nodo interno del NDOM
+
+            xpath = f'{DOM_parent_xpath}/*[{(DOM_ci+1)}]'
+            label = root.name
+
+            next_NDOM_parent_xpath = xpath
+
+        elif is_DOM_tag and root.name in _TAG_LEAFS:
+            # root e' un tag foglia
+
+            xpath = f'{DOM_parent_xpath}/*[{(DOM_ci+1)}]'
+            label = ' '.join(root.stripped_strings)
+        
+        elif is_DOM_tag:
+            # root e' un tag che non e' ne' nodo interno del NDOM ne' foglia del NDOM
+
+            xpath = f'{DOM_parent_xpath}/*[{(DOM_ci+1)}]'
+            next_NDOM_parent_xpath = NDOM_parent_xpath
+        
+        elif isinstance(root, NavigableString):
+            # root e' una stringa, quindi una foglia
+
+            label = repr(root)
+            label_len = len(label)
+            if label_len <= _MIN_LABEL_LENGTH or label_len >= _MAX_LABEL_LENGTH:
+                return
+            
+            xpath = DOM_parent_xpath
+        
+        else:
+            # isinstance(root, (Stylesheet, Script, Template, Comment))
+            return
+        
+        # aggiungo nodo e arco
+        if label:
+            self.nodes[xpath] = label
+            if not is_DOM_root:
+                self.arcs.append(Arc(NDOM_parent_xpath, xpath, cost=self._calc_arc_cost(driver, NDOM_parent_xpath, xpath))) 
+            
+        # sfoglio ciascun sottoalbero
+        if next_NDOM_parent_xpath: 
+            i = 0
+            for child in root.children:
+                self._browse_DOM(child, DOM_parent_xpath=xpath, DOM_ci=i, NDOM_parent_xpath=next_NDOM_parent_xpath)
+                i+=1
+
+
+    def __init__(self, location, from_file=False, driver: webdriver=None):
+        """Crea un nuovo oggetto NaiveDOM.
 
         Args:
-            location (string): Percorso o URL del codice sorgente 
-            from_file (bool, optional): Specifica se creare un nuovo NaiveDOM da file. Default: False.
+            - location (string): Percorso o URL del codice sorgente 
+            - from_file (bool, optional): Specifica se creare un nuovo NaiveDOM da file .html. Default: False.
         """
-        
+
         if from_file:
-            with open(location) as f:
-                soup = BeautifulSoup(f, 'lxml')
+            driver = None
+            with open(location, "r") as f:
+                html = f.read()
+            
         else:
             # scarica il sorgente dell'URL
-            r = requests.get(location, headers=headers)
-
-            # scrivi la risposta su file
-            #with open("dom.txt", "w", encoding='utf-8') as file:
-            #    file.write(r.text)
-            
-            soup = BeautifulSoup(r.text, 'lxml')
-            
-        self.NDOM_nodes = {}
-        self.NDOM_arcs = []
-        self.NDOM_start = None
-
-        def _browse_DOM(root, parent_xpath='', ci=0, NDOM_parent_xpath=''):
-            """Sfoglia l'albero DOM radicato in root al fine di popolare gli attributi
-            NDOM_nodes, NDOM_arcs, NDOM_start. Assume che:
-            - root sia il ci-esimo figlio del nodo genitore parent_xpath.
-            - nel caso in cui root viene aggiunto al NaiveDOM, esso avra' come genitore il
-              nodo con xpath pari a NDOM_parent_xpath
-
-            Args:
-                root: nodo radice
-                parent_xpath (str, optional): nodo genitore del DOM. Default: ''.
-                ci (int, optional): indice di root tra tutti i suoi fratelli. Default: 0.
-                NDOM_parent_xpath (str, optional): nodo genitore del NDOM. Default: ''.
-            """
-            
-            # root e' un tag in blacklist, poto l'albero radicato in root
-            if root.name in NaiveDOM.tag_blacklist or isinstance(root, Comment):
-                return
-
-            try:
-                root.string = root.string.strip()
-                if len(root.string) == 0:
-                    return
-            except Exception as e:
-                print(e)
-                pass
-                
-            ignore_NDOM_node = False
-            is_NDOM_leaf = False
-
-            if not parent_xpath and not NDOM_parent_xpath:
-                # root e' la radice del codice sorgente
-                # metto next_NDOM_parent_xpath = xpath perche' i prossimi figli dell'albero 
-                # NDOM avranno come genitore questo nodo
-                xpath = f'{parent_xpath}/{root.name}'
-                next_NDOM_parent_xpath = xpath
-                self.NDOM_start = xpath
-
-            elif root.name in NaiveDOM.tag_parents:
-                # root e' un tag che presuppone che contenga al suo interno, tra i discendenti,
-                # almeno una stringa, ad es. body, ul, ...
-                xpath = f'{parent_xpath}/*[{ci}]'
-                next_NDOM_parent_xpath = xpath
-
-            elif isinstance(root, NavigableString):
-                # root non e' un tag ma una stringa
-                # l'xpath di questa stringa e' quello del genitore
-                is_NDOM_leaf = True
-                xpath = parent_xpath
-
-            else:
-                # root e' un tag adibito alla costruzione della pagina, ad es. div, span, ...
-                ignore_NDOM_node = True
-                xpath = f'{parent_xpath}/*[{ci}]'
-                next_NDOM_parent_xpath = NDOM_parent_xpath
-            
-            if not ignore_NDOM_node:
-                # aggiungo nodo. la sua label e' il nome del tag oppure la stringa stessa
-                if not is_NDOM_leaf:
-                    label = root.name
-                elif len(root.string) < NaiveDOM.MAX_LABEL_LENGTH:
-                    label = root.string
-                else:
-                    label = root.string[:NaiveDOM.MAX_LABEL_LENGTH]
-
-                self.NDOM_nodes[xpath] = label
-
-                # aggiungo arco
-                if NDOM_parent_xpath and parent_xpath: 
-                    self.NDOM_arcs.append(Arc(NDOM_parent_xpath, xpath))
-
-            # sfoglio ciascun sottoalbero
-            if not is_NDOM_leaf: 
-                i = 0
-                for child in root.children:
-                    _browse_DOM(child, parent_xpath=xpath, ci=i, NDOM_parent_xpath=next_NDOM_parent_xpath)
-                    i+=1
+            r = requests.get(location, headers=defs.headers)
+            html = r.text
         
-        # uso parser html5lib
-        #print(soup.html)
-        _browse_DOM(soup.html)
+        # opzionale, per velocizzare parsing con beautifulsoup
+        #html = htmlmin.minify(html, remove_comments=True, remove_empty_space=True)
+        html = re.sub(">\s*<","><",html)
+        # parser: 'lxml' o 'html5lib' (chiudono tag lasciati aperti)
+        soup = BeautifulSoup(html, 'lxml')
 
-        '''
-        for child in soup.children:
-            if child.name in NaiveDOM.tag_parents:
-                print('--------------')
-                print(child.name)
-                _browse_DOM(child)
-                return
-        '''
+        self.nodes = {}
+        self.nodes_coords = {}
+        self.arcs = []
+        self.start = None
+        
+        self._browse_DOM(soup.html.body)
 
     
     def plot(self):
         """Renderizza il NaiveDOM.
-        Documentazione:
-        https://networkx.org/documentation/latest/reference/generated/networkx.drawing.nx_pylab.draw.html
+        Documentazione: https://networkx.org/documentation/latest/reference/generated/networkx.drawing.nx_pylab.draw.html
         """
 
-        NDOM = nx.Graph()
-        NDOM.add_nodes_from(list(self.NDOM_nodes))
-        NDOM.add_edges_from([(arc.from_node, arc.to_node) for arc in self.NDOM_arcs])
+        G = nx.Graph()
+        G.add_nodes_from(list(self.nodes))
+        G.add_edges_from([(arc.from_node, arc.to_node) for arc in self.arcs])
 
-        pos = hierarchy_pos(NDOM, self.NDOM_start)
-        #pos = hierarchy_pos(NDOM, self.NDOM_start)
-        nx.draw(NDOM, pos=pos, with_labels=False)
-        nx.draw_networkx_labels(NDOM, pos, self.NDOM_nodes)
+        pos = hierarchy_pos(G, self.start)
+        nx.draw(G, pos=pos, with_labels=False)
+        nx.draw_networkx_labels(G, pos, self.nodes)
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=dict(((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs))
         
         plt.show()
 
-def hierarchy_pos(G, root=None, width=1., vert_gap = 0.2, vert_loc = 0, xcenter = 0.5):
-    '''
-    From Joel's answer at https://stackoverflow.com/a/29597209/2966723.  
-    Licensed under Creative Commons Attribution-Share Alike 
-    
-    If the graph is a tree this will return the positions to plot this in a 
-    hierarchical layout.
-    
-    G: the graph (must be a tree)
-    
-    root: the root node of current branch 
-    - if the tree is directed and this is not given, 
-      the root will be found and used
-    - if the tree is directed and this is given, then 
-      the positions will be just for the descendants of this node.
-    - if the tree is undirected and not given, 
-      then a random choice will be used.
-    
-    width: horizontal space allocated for this branch - avoids overlap with other branches
-    
-    vert_gap: gap between levels of hierarchy
-    
-    vert_loc: vertical location of root
-    
-    xcenter: horizontal location of root
-    '''
-    if not nx.is_tree(G):
-        raise TypeError('cannot use hierarchy_pos on a graph that is not a tree')
-
-    if root is None:
-        if isinstance(G, nx.DiGraph):
-            root = next(iter(nx.topological_sort(G)))  #allows back compatibility with nx version 1.11
-        else:
-            root = random.choice(list(G.nodes))
-
-    def _hierarchy_pos(G, root, width=1., vert_gap = 0.2, vert_loc = 0, xcenter = 0.5, pos = None, parent = None):
-        '''
-        see hierarchy_pos docstring for most arguments
-
-        pos: a dict saying where all nodes go if they have been assigned
-        parent: parent of this branch. - only affects it if non-directed
-
-        '''
-    
-        if pos is None:
-            pos = {root:(xcenter,vert_loc)}
-        else:
-            pos[root] = (xcenter, vert_loc)
-        children = list(G.neighbors(root))
-        if not isinstance(G, nx.DiGraph) and parent is not None:
-            children.remove(parent)  
-        if len(children)!=0:
-            dx = width/len(children) 
-            nextx = xcenter - width/2 - dx/2
-            for child in children:
-                nextx += dx
-                pos = _hierarchy_pos(G,child, width = dx, vert_gap = vert_gap, 
-                                    vert_loc = vert_loc-vert_gap, xcenter=nextx,
-                                    pos=pos, parent = root)
-        return pos
- 
-    return _hierarchy_pos(G, root, width, vert_gap, vert_loc, xcenter)
-
 if __name__ == '__main__':
-    #d = NaiveDOM('source.html', from_file=True)
-    d = NaiveDOM('https://www.devitidemarco.edu.it/')
-    #print(d.NDOM_nodes)
+    #d = NaiveDOM('source1.html', from_file=True)
+
+    #https://stackoverflow.com/a/55878622
+    options = webdriver.FirefoxOptions()
+    options.add_argument(f'--user-agent={defs.headers["User-Agent"]}')
+    options.add_argument(f'--width={defs.BROWSER_WIDTH}')
+    options.add_argument(f'--height={defs.BROWSER_HEIGHT}')
+
+    driver = webdriver.Firefox(options=options)
+    driver.get('https://www.devitidemarco.edu.it/')
+
+    d = NaiveDOM('https://www.devitidemarco.edu.it/', driver=driver)
+    print(d.nodes)
+    #print('---------------------------')
     d.plot()
-    #print(d.NDOM_nodes)
-    #print(d.NDOM_arcs)
+    #print('############')
+    #print(d.arcs)

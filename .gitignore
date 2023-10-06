@@ -1,6 +1,14 @@
+# __pycache__
 **/__pycache__
 
+# Python venv files
 /venv_run.ps1
-/agent/libs/aipython
 /agent.egg-info
 /venv
+
+# Exclude some aipython modules
+/agent/libs/aipython/*
+!/agent/libs/aipython/searchGeneric.py
+!/agent/libs/aipython/searchProblem.py
+!/agent/libs/aipython/display.py
+!/agent/libs/aipython/aipython.pdf

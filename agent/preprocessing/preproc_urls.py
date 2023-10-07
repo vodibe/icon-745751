@@ -1,24 +1,24 @@
 import csv
 import requests
-from agent.definitions import ds1_path, ds3_path, headers
+from agent.definitions import ds1_path, ds_schools1_path, headers
 
 
-def get_url_dataset(useful_schools):
+def create_schools_dataset(useful_TGIS):
     """A partire dal CSV memorizzato in ds1_path, crea un CSV
-    memorizzato in DATASET_SCHOOL_PATH_WEB contenente solo le scuole utili
+    memorizzato in DATASET_DIR contenente solo le scuole utili
     (nel nostro caso le scuole superiori)
 
     Args:
-        - useful_schools (list): tipologie di scuole utili
+        - useful_TGIS (list): tipologie di scuole utili (TipologiaGradoIstruzioneScuola)
     """
 
-    print("Creating URL dataset...")
+    print("Creating dataset of useful schools...")
     with open(ds1_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in)
 
         # Features del nuovo file CSV
         fieldnames = ["CODICESCUOLA", "SITOWEBSCUOLA", "SITOWEBSCUOLA_FIX"]
-        with open(ds3_path, "w", newline="") as csv_out:
+        with open(ds_schools1_path, "w", newline="") as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=fieldnames)
             csv_writer.writeheader()
 
@@ -26,8 +26,7 @@ def get_url_dataset(useful_schools):
                 # inserisce nel nuovo CSV solo le scuole utili e che hanno un URL valido
                 if (
                     row["DESCRIZIONECARATTERISTICASCUOLA"] == "NORMALE"
-                    and row["DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA"]
-                    in useful_schools
+                    and row["DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA"] in useful_TGIS
                 ):
                     school_url = process_url(row["SITOWEBSCUOLA"])
 
@@ -38,7 +37,7 @@ def get_url_dataset(useful_schools):
                             "SITOWEBSCUOLA_FIX": school_url,
                         }
                         csv_writer.writerow(new_row)
-    print(f"Done. {ds3_path}")
+    print(f"Done. {ds_schools1_path}")
 
 
 def process_url(url):
@@ -98,8 +97,8 @@ def process_url(url):
 
 
 if __name__ == "__main__":
-    with open("preproc_useful_schools.txt") as f:
-        useful_schools = f.read().splitlines()
+    with open("useful_TGIS.txt") as f:
+        useful_TGIS = f.read().splitlines()
 
     # Crea dataset degli URL validi
-    get_url_dataset(useful_schools=useful_schools)
+    create_schools_dataset(useful_TGIS=useful_TGIS)

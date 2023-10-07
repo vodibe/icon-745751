@@ -33,6 +33,15 @@ class NaiveDOMSearcher:
 
         super().__init__()
 
+    def set_problem_goals(self, goals):
+        """Modifica i nodi obiettivo del problema, senza modificare gli altri attributi
+
+        Args:
+            goals (list): Lista dei nuovi nodi obiettivo
+        """
+
+        self.problem.set_goals(goals)
+
     def search(self) -> Path:
         """Restituisce il (prossimo) path dal nodo iniziale a un nodo obiettivo.
         Restituisce None se non esiste un tale path.

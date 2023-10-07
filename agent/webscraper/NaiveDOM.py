@@ -350,7 +350,7 @@ class NaiveDOM:
         targets_len = len(targets)
         targets_found = 0
 
-        search_problem = Search_problem_from_explicit_graph(
+        problem = Search_problem_from_explicit_graph(
             self.nodes.keys(), self.arcs, self.start
         )
 
@@ -366,8 +366,8 @@ class NaiveDOM:
             print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
 
             if self.nodes_goal:
-                search_problem.set_goals(self.nodes_goal)
-                NDOM_searcher = NaiveDOMSearcher(search_problem)
+                problem.set_goals(self.nodes_goal)
+                NDOM_searcher = NaiveDOMSearcher(problem)
 
                 # restituisce un oggetto Path se esiste un percorso, None altrimenti
                 target_path = NDOM_searcher.search()
@@ -383,22 +383,14 @@ class NaiveDOM:
                 final_target_score += 10
 
         final_target_score = final_target_score / targets_len
-        print(f"Final target score: {final_target_score}")
         return final_target_score
 
 
 if __name__ == "__main__":
-    # d = NaiveDOM('source1.html', from_file=True)
-    # https://www.leonardope.edu.it/
+    # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
+    NDOM_website1 = NaiveDOM("https://itisandria.edu.it/")
 
-    d = NaiveDOM("https://itisandria.edu.it/")
+    target_score_website1 = NDOM_website1.calc_target_score()
+    print(f"Final target score: {target_score_website1}")
 
-    # ff = open('./d.nodes.txt', 'w', encoding='utf-8')
-    # print(d.nodes, file=ff)
-    # ff.close()
-    # print(d.nodes)
-    # print('---------------------------')
-    d.calc_target_score()
-    d.plot()
-    # print('############')
-    # print(d.arcs)
+    NDOM_website1.plot()

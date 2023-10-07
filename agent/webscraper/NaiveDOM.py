@@ -1,11 +1,7 @@
 import agent.definitions as defs
-import requests
-import htmlmin
 import re
 from bs4 import BeautifulSoup, NavigableString, Tag, Comment
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
-
-# from agent.libs.aipython.searchGeneric import LCFSSearcher
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -15,7 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import math
 
-from agent.naivedom.NaiveDOMSearcher import NaiveDOMSearcher
+from NaiveDOMSearcher import NaiveDOMSearcher
 
 
 # dimensione minima e massima etichetta nodi NDOM
@@ -62,6 +58,7 @@ _TAG_PARENTS = [
     "nav",
     "ul",
     "ol",
+    "li",
     "article",
     "aside",
     "footer",
@@ -72,7 +69,7 @@ _TAG_PARENTS = [
 # nodi del DOM che per certo rappresentano una foglia del NDOM
 _TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6"]
 
-_TASKS_DEFAULT = {
+_TARGETS_DEFAULT = {
     1: ["circolari", "comunicazion"],
     2: ["organigramma", "organizzazione"],
     3: ["notizie"],
@@ -116,7 +113,8 @@ class NaiveDOM:
         - location (string): Percorso o URL della pagina di cui si sta cercando di costruire il NDOM
         - nodes (dict): dizionario xpath:label di ogni elemento del NDOM
         - nodes_coords (dict): dizionario xpath:(x, y) di ogni elemento del NDOM
-        - nodes_arcs (list): lista di Arc(from, to, cost)
+        - nodes_goal (list): lista di nodi obiettivo
+        - arcs (list): lista di Arc(from, to, cost)
         - start (string): xpath del nodo radice del NDOM
     """
 
@@ -258,8 +256,9 @@ class NaiveDOM:
                     NDOM_parent_xpath=next_NDOM_parent_xpath,
                     driver=driver,
                 )
-                c = 0 if isinstance(child, (NavigableString, Comment)) else 1
-                i += c
+                # le stringhe dentro un tag non si considerano elementi figli del tag
+                if not isinstance(child, (NavigableString, Comment)):
+                    i += 1
 
     def __init__(self, location, from_file=False):
         """Crea un nuovo oggetto NaiveDOM.
@@ -275,10 +274,11 @@ class NaiveDOM:
         self.nodes_coords = {}  # dict
         self.arcs = []
         self.start = None
-        self.nodes_goal = {}  # set
+        self.nodes_goal = []
 
         # ottenimento sorgente e (eventulamente) driver selenium
-        print(f"Getting HTML of {self.location} ...")
+        print(f"Building NDOM for {self.location}")
+        print(f"Reading HTML...")
         if from_file:
             with open(location, "r") as f:
                 html = f.read()
@@ -304,7 +304,7 @@ class NaiveDOM:
         soup = BeautifulSoup(html, "html5lib")
 
         # popola attributi
-        print("Building NDOM...")
+        print("Parsing HTML <body> tag...")
         self._browse_DOM(soup.html.body, driver=driver)
 
         # chiudi driver
@@ -333,50 +333,58 @@ class NaiveDOM:
 
         plt.show()
 
-    def get_target_score(self, tasks: dict = _TASKS_DEFAULT) -> float:
+    def calc_target_score(self, targets: dict = _TARGETS_DEFAULT) -> float:
         """Restituisce il target score dell'oggetto NaiveDOM.
 
         Args:
-            - tasks (dict, optional): dizionario task id:keyword delle parole chiave utili a
-            individuare i nodi goal del NDOM. Default: _TASKS_DEFAULT.
+            - targets (dict, optional): dizionario task id:keyword delle parole chiave utili a
+            individuare i nodi goal del NDOM. Default: _TARGETS_DEFAULT.
 
         Returns:
             - target_score: float
         """
 
-        target_score = 0
-        task_completed = 0
+        print("Calculating target score of NDOM object...")
 
-        for task_id, task_keywords in tasks.items():
-            self.nodes_goal = set()
+        final_target_score = 0
+        targets_len = len(targets)
+        targets_found = 0
+
+        search_problem = Search_problem_from_explicit_graph(
+            self.nodes.keys(), self.arcs, self.start
+        )
+
+        for target_id, target_keywords in targets.items():
+            # per ogni target individua quali sono i nodi obiettivo del NDOM
+            self.nodes_goal = []
+
             for node_xpath, node_label in self.nodes.items():
-                for keyword in task_keywords:
+                for keyword in target_keywords:
                     if keyword in node_label:
-                        self.nodes_goal.add(node_xpath)
-                        break
+                        self.nodes_goal.append(node_xpath)
+
+            print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
 
             if self.nodes_goal:
-                print("..............")
-                print(f"task keywords {task_keywords}")
-                print(f"nodi obiettivo {self.nodes_goal}")
+                search_problem.set_goals(self.nodes_goal)
+                NDOM_searcher = NaiveDOMSearcher(search_problem)
 
-                ric = NaiveDOMSearcher(
-                    Search_problem_from_explicit_graph(
-                        self.nodes.keys(), self.arcs, self.start, self.nodes_goal
-                    )
-                )
-                path = ric.search()
-                task_score = path.cost
+                # restituisce un oggetto Path se esiste un percorso, None altrimenti
+                target_path = NDOM_searcher.search()
+                targets_found += 1
 
-                print(f"---task score {task_score}")
-                task_completed += 1
+                print("    First path found according to NDOM_searcher:")
+                print(f"    {target_path}")
+                print(f"    Cost: {target_path.cost}")
+                print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
+
+                final_target_score += target_path.cost
             else:
-                task_score = 10
-            target_score += task_score
+                final_target_score += 10
 
-        target_score = target_score / task_completed
-
-        return target_score
+        final_target_score = final_target_score / targets_len
+        print(f"Final target score: {final_target_score}")
+        return final_target_score
 
 
 if __name__ == "__main__":
@@ -390,7 +398,7 @@ if __name__ == "__main__":
     # ff.close()
     # print(d.nodes)
     # print('---------------------------')
-    print(d.get_target_score())
+    d.calc_target_score()
     d.plot()
     # print('############')
     # print(d.arcs)

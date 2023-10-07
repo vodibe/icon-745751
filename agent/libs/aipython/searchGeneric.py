@@ -10,14 +10,15 @@
 
 from agent.libs.aipython.display import Displayable, visualize
 
+
 class Searcher(Displayable):
     """returns a searcher for a problem.
     Paths can be found by repeatedly calling search().
     This does depth-first search unless overridden
     """
+
     def __init__(self, problem):
-        """creates a searcher from a problem
-        """
+        """creates a searcher from a problem"""
         self.problem = problem
         self.initialize_frontier()
         self.num_expanded = 0
@@ -26,36 +27,43 @@ class Searcher(Displayable):
 
     def initialize_frontier(self):
         self.frontier = []
-        
+
     def empty_frontier(self):
         return self.frontier == []
-        
-    def add_to_frontier(self,path):
+
+    def add_to_frontier(self, path):
         self.frontier.append(path)
-        
+
     @visualize
     def search(self):
         """returns (next) path from the problem's start node
-        to a goal node. 
+        to a goal node.
         Returns None if no path exists.
         """
         while not self.empty_frontier():
             path = self.frontier.pop()
-            self.display(2, "Expanding:",path,"(cost:",path.cost,")")
+            self.display(2, "Expanding:", path, "(cost:", path.cost, ")")
             self.num_expanded += 1
-            if self.problem.is_goal(path.end()):    # solution found
-                self.display(1, self.num_expanded, "paths have been expanded and",
-                            len(self.frontier), "paths remain in the frontier")
-                self.solution = path   # store the solution found
+            if self.problem.is_goal(path.end()):  # solution found
+                self.display(
+                    1,
+                    self.num_expanded,
+                    "paths have been expanded and",
+                    len(self.frontier),
+                    "paths remain in the frontier",
+                )
+                self.solution = path  # store the solution found
                 return path
             else:
                 neighs = self.problem.neighbors(path.end())
-                self.display(3,"Neighbors are", neighs)
+                self.display(3, "Neighbors are", neighs)
                 for arc in reversed(list(neighs)):
-                    self.add_to_frontier(Path(path,arc))
-                self.display(3,"Frontier:",self.frontier)
-        self.display(1,"No (more) solutions. Total of",
-                     self.num_expanded,"paths expanded.")
+                    self.add_to_frontier(Path(path, arc))
+                self.display(3, "Frontier:", self.frontier)
+        self.display(
+            1, "No (more) solutions. Total of", self.num_expanded, "paths expanded."
+        )
+
 
 # Depth-first search for problem1; do the following:
 # searcher1 = Searcher(searchProblem.problem1)
@@ -64,8 +72,9 @@ class Searcher(Displayable):
 # searcher_sdg = Searcher(searchProblem.simp_delivery_graph)
 # searcher_sdg.search()  # find first or next solution
 
-import heapq        # part of the Python standard library
+import heapq  # part of the Python standard library
 from agent.libs.aipython.searchProblem import Path
+
 
 class FrontierPQ(object):
     """A frontier consists of a priority queue (heap), frontierpq, of
@@ -77,8 +86,7 @@ class FrontierPQ(object):
     """
 
     def __init__(self):
-        """constructs the frontier, initially an empty priority queue 
-        """
+        """constructs the frontier, initially an empty priority queue"""
         self.frontier_index = 0  # the number of items added to the frontier
         self.frontierpq = []  # the frontier priority queue
 
@@ -89,32 +97,32 @@ class FrontierPQ(object):
     def add(self, path, value):
         """add a path to the priority queue
         value is the value to be minimized"""
-        self.frontier_index += 1    # get a new unique index
-        heapq.heappush(self.frontierpq,(value, -self.frontier_index, path))
+        self.frontier_index += 1  # get a new unique index
+        heapq.heappush(self.frontierpq, (value, -self.frontier_index, path))
 
     def pop(self):
-        """returns and removes the path of the frontier with minimum value.
-        """
-        (_,_,path) = heapq.heappop(self.frontierpq)
-        return path 
+        """returns and removes the path of the frontier with minimum value."""
+        (_, _, path) = heapq.heappop(self.frontierpq)
+        return path
 
-    def count(self,val):
+    def count(self, val):
         """returns the number of elements of the frontier with value=val"""
-        return sum(1 for e in self.frontierpq if e[0]==val)
+        return sum(1 for e in self.frontierpq if e[0] == val)
 
     def __repr__(self):
         """string representation of the frontier"""
-        return str([(n,c,str(p)) for (n,c,p) in self.frontierpq])
-    
+        return str([(n, c, str(p)) for (n, c, p) in self.frontierpq])
+
     def __len__(self):
         """length of the frontier"""
         return len(self.frontierpq)
 
     def __iter__(self):
         """iterate through the paths in the frontier"""
-        for (_,_,path) in self.frontierpq:
+        for _, _, path in self.frontierpq:
             yield path
-    
+
+
 class AStarSearcher(Searcher):
     """returns a searcher for a problem.
     Paths can be found by repeatedly calling search().
@@ -129,31 +137,36 @@ class AStarSearcher(Searcher):
     def empty_frontier(self):
         return self.frontier.empty()
 
-    def add_to_frontier(self,path):
+    def add_to_frontier(self, path):
         """add path to the frontier with the appropriate cost"""
-        value = path.cost+self.problem.heuristic(path.end())
+        value = path.cost + self.problem.heuristic(path.end())
         self.frontier.add(path, value)
+
 
 import agent.libs.aipython.searchProblem as searchProblem
 
-def test(SearchClass, problem=searchProblem.problem1, solutions=[['G','D','B','C','A']] ):
+
+def test(
+    SearchClass, problem=searchProblem.problem1, solutions=[["G", "D", "B", "C", "A"]]
+):
     """Unit test for aipython searching algorithms.
     SearchClass is a class that takes a problem and implements search()
     problem is a search problem
-    solutions is a list of optimal solutions 
+    solutions is a list of optimal solutions
     """
     print("Testing problem 1:")
     schr1 = SearchClass(problem)
     path1 = schr1.search()
-    print("Path found:",path1)
+    print("Path found:", path1)
     assert path1 is not None, "No path is found in problem1"
     assert list(path1.nodes()) in solutions, "Shortest path not found in problem1"
     print("Passed unit test")
 
+
 if __name__ == "__main__":
-    #test(Searcher)      # what needs to be changed to make this succeed?
+    # test(Searcher)      # what needs to be changed to make this succeed?
     test(AStarSearcher)
-    
+
 # example queries:
 # searcher1 = Searcher(searchProblem.simp_delivery_graph)   # DFS
 # searcher1.search()  # find first path
@@ -165,4 +178,3 @@ if __name__ == "__main__":
 # searcher3.search()  # find first path with DFS. What do you expect to happen?
 # searcher4 = AStarSearcher(searchProblem.cyclic_simp_delivery_graph)    # A*
 # searcher4.search()  # find first path
-

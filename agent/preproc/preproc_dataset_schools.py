@@ -3,7 +3,7 @@ import requests
 from agent.definitions import ds1_path, ds_schools1_path, headers
 
 
-def create_schools_dataset(useful_TGIS):
+def create_dataset_schools(useful_TGIS):
     """A partire dal CSV memorizzato in ds1_path, crea un CSV
     memorizzato in DATASET_DIR contenente solo le scuole utili
     (nel nostro caso le scuole superiori)
@@ -17,7 +17,19 @@ def create_schools_dataset(useful_TGIS):
         csv_reader = csv.DictReader(csv_in)
 
         # Features del nuovo file CSV
-        fieldnames = ["CODICESCUOLA", "SITOWEBSCUOLA", "SITOWEBSCUOLA_FIX"]
+        fieldnames = [
+            "CODICESCUOLA",
+            "DENOMINAZIONESCUOLA",
+            "CODICEISTITUTORIFERIMENTO",
+            "DENOMINAZIONEISTITUTORIFERIMENTO",
+            "AREAGEOGRAFICA",
+            "REGIONE",
+            "PROVINCIA",
+            "CAPSCUOLA",
+            "DESCRIZIONECOMUNE",
+            "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA",
+            "SITOWEBSCUOLA",
+        ]
         with open(ds_schools1_path, "w", newline="") as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=fieldnames)
             csv_writer.writeheader()
@@ -33,8 +45,22 @@ def create_schools_dataset(useful_TGIS):
                     if school_url is not None:
                         new_row = {
                             "CODICESCUOLA": row["CODICESCUOLA"],
-                            "SITOWEBSCUOLA": row["SITOWEBSCUOLA"],
-                            "SITOWEBSCUOLA_FIX": school_url,
+                            "DENOMINAZIONESCUOLA": row["DENOMINAZIONESCUOLA"],
+                            "CODICEISTITUTORIFERIMENTO": row[
+                                "CODICEISTITUTORIFERIMENTO"
+                            ],
+                            "DENOMINAZIONEISTITUTORIFERIMENTO": row[
+                                "DENOMINAZIONEISTITUTORIFERIMENTO"
+                            ],
+                            "AREAGEOGRAFICA": row["AREAGEOGRAFICA"],
+                            "REGIONE": row["REGIONE"],
+                            "PROVINCIA": row["PROVINCIA"],
+                            "CAPSCUOLA": row["CAPSCUOLA"],
+                            "DESCRIZIONECOMUNE": row["DESCRIZIONECOMUNE"],
+                            "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA": row[
+                                "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA"
+                            ],
+                            "SITOWEBSCUOLA": school_url,
                         }
                         csv_writer.writerow(new_row)
     print(f"Done. {ds_schools1_path}")
@@ -101,4 +127,4 @@ if __name__ == "__main__":
         useful_TGIS = f.read().splitlines()
 
     # Crea dataset degli URL validi
-    create_schools_dataset(useful_TGIS=useful_TGIS)
+    create_dataset_schools(useful_TGIS=useful_TGIS)

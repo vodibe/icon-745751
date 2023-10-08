@@ -1,5 +1,6 @@
 import agent.definitions as defs
 import re
+import htmlmin
 from bs4 import BeautifulSoup, NavigableString, Tag, Comment
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
 
@@ -291,7 +292,7 @@ class NaiveDOM:
 
         # opzionale, per velocizzare parsing con beautifulsoup
         print("Optimizing HTML...")
-        # html = htmlmin.minify(html, remove_comments=True)
+        html = htmlmin.minify(html, remove_comments=True)
         # rimuove contenuto tag in blacklist
         for tag in _TAG_BLACKLIST:
             html = re.sub(rf"<{tag}[^>]*>.*?</{tag}>", f"<{tag}></{tag}>", html)
@@ -388,9 +389,9 @@ class NaiveDOM:
 
 if __name__ == "__main__":
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
-    NDOM_website1 = NaiveDOM("https://itisandria.edu.it/")
+    NDOM_website1 = NaiveDOM("https://www.liceotedone.edu.it/")
 
-    target_score_website1 = NDOM_website1.calc_target_score()
-    print(f"Final target score: {target_score_website1}")
+    # target_score_website1 = NDOM_website1.calc_target_score()
+    # print(f"Final target score: {target_score_website1}")
 
     NDOM_website1.plot()

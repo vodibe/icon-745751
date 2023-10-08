@@ -16,7 +16,7 @@ Description: Dataset degli URL validi tra tutti quelli elencati nel Dataset #1
 Notes: Tempo di creazione: 2 ore circa
 ==========
 No: 4
-Name: clean_SCUANAGRAFE202324.csv
+Name: SCUANAGRAFE202324_clean.csv
 ID: CODICESCUOLA
 Description: Dataset delle scuole pubbliche italiane (a.s. 2023/2024) in cui sono state aggiunte altre input features per il progetto
 Notes: Tempo di creazione: 2 ore circa

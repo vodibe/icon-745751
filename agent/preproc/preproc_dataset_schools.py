@@ -63,6 +63,7 @@ def create_dataset_schools(useful_TGIS):
                             "SITOWEBSCUOLA": school_url,
                         }
                         csv_writer.writerow(new_row)
+
     print(f"Done. {ds_schools1_path}")
 
 

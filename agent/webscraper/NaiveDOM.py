@@ -1,6 +1,5 @@
 import agent.definitions as defs
 import re
-import htmlmin
 from bs4 import BeautifulSoup, NavigableString, Tag, Comment
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
 
@@ -10,7 +9,7 @@ from agent.libs.nx_layout.hierarchy_pos import hierarchy_pos
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import math
+from math import log, exp
 
 from NaiveDOMSearcher import NaiveDOMSearcher
 
@@ -70,10 +69,11 @@ _TAG_PARENTS = [
 # nodi del DOM che per certo rappresentano una foglia del NDOM
 _TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6"]
 
+# dizionario dei target predefinito
 _TARGETS_DEFAULT = {
     1: ["circolari", "comunicazion"],
     2: ["organigramma", "organizzazione"],
-    3: ["notizie"],
+    3: ["notizie", "news"],
     4: ["progett"],
     5: ["regolament"],
     6: ["amministrazione trasparente"],
@@ -82,7 +82,7 @@ _TARGETS_DEFAULT = {
 }
 
 
-def _get_driver(location) -> webdriver:
+def _create_driver(location) -> webdriver:
     """Restituisce un'istanza della classe webdriver, cioè un browser avente una scheda
     aperta al sito location.
     Vedi: #https://stackoverflow.com/a/55878622
@@ -142,10 +142,7 @@ class NaiveDOM:
             self.nodes_coords[NDOM_parent_xpath] = parent_coords
 
         # coordinate nodo corrente
-        try:
-            elem = driver.find_element(By.XPATH, xpath)
-        except:
-            return 60
+        elem = driver.find_element(By.XPATH, xpath)
 
         elem_coords = (elem.location["x"], elem.location["y"])
         self.nodes_coords[xpath] = elem_coords
@@ -158,16 +155,21 @@ class NaiveDOM:
         ) ** 0.5
 
         # funzione di costo in base alla distanza
-        if distance == 0:
-            return 0
-        else:
-            return round(math.log(distance) * distance / 1200, 1)
+        arc_cost = round(
+            (
+                (distance**1.2 * log(distance + 0.1) * exp(-1.5))
+                / (0.9 * distance + defs.BROWSER_DIAG)
+            ),
+            1,
+        )
+
+        return arc_cost
 
     def _browse_DOM(
         self,
         root,
         DOM_parent_xpath=None,
-        DOM_ci=0,
+        DOM_ci=1,
         NDOM_parent_xpath=None,
         driver: webdriver = None,
     ):
@@ -177,7 +179,7 @@ class NaiveDOM:
         Args:
             - root: Non per forza un elemento bs4.Tag, ma può anche essere di tipo bs4.NavigableString
             - DOM_parent_xpath (optional): xpath elemento genitore del DOM. Default: None.
-            - DOM_ci (int, optional): child index del DOM. Default: 0.
+            - DOM_ci (int, optional): child index del DOM. Default: 1.
             - NDOM_parent_xpath (optional): id del nodo genitore di root (all'interno del NDOM). Default: None.
             - driver (webdriver, optional): istanza webdriver. Default: None.
         """
@@ -213,6 +215,11 @@ class NaiveDOM:
             xpath = f"{DOM_parent_xpath}/*[{(DOM_ci)}]"
             label = " ".join(root.stripped_strings)
 
+            # elimino nodi che contengono testo lungo o non leggibile
+            label_len = len(label)
+            if label_len <= _MIN_LABEL_LENGTH or label_len >= _MAX_LABEL_LENGTH:
+                return
+
         elif is_DOM_tag:
             # root e' un tag che non e' ne' nodo interno del NDOM ne' foglia del NDOM
             xpath = f"{DOM_parent_xpath}/*[{(DOM_ci)}]"
@@ -221,12 +228,13 @@ class NaiveDOM:
 
         elif isinstance(root, NavigableString):
             # root e' una stringa, quindi una foglia
+            xpath = DOM_parent_xpath
             label = repr(root)
+
+            # elimino nodi che contengono testo lungo o non leggibile
             label_len = len(label)
             if label_len <= _MIN_LABEL_LENGTH or label_len >= _MAX_LABEL_LENGTH:
                 return
-
-            xpath = DOM_parent_xpath
 
         else:
             # isinstance(root, (Stylesheet, Script, Template, Comment))
@@ -237,7 +245,7 @@ class NaiveDOM:
             self.nodes[xpath] = label.lower()
 
             # aggiungo arco entrante. ovviamente il nodo radice non ha archi entranti
-            if not is_DOM_root:
+            if not is_DOM_root and NDOM_parent_xpath != xpath:
                 self.arcs.append(
                     Arc(
                         NDOM_parent_xpath,
@@ -261,7 +269,13 @@ class NaiveDOM:
                 if not isinstance(child, (NavigableString, Comment)):
                     i += 1
 
-    def __init__(self, location, from_file=False):
+    def __init__(
+        self,
+        location,
+        from_file=False,
+        driver: webdriver = None,
+        driver_close_at_end=True,
+    ):
         """Crea un nuovo oggetto NaiveDOM.
 
         Args:
@@ -277,6 +291,8 @@ class NaiveDOM:
         self.start = None
         self.nodes_goal = []
 
+        self.features = {}  # dict
+
         # ottenimento sorgente e (eventulamente) driver selenium
         print(f"Building NDOM for {self.location}")
         print(f"Reading HTML...")
@@ -287,12 +303,15 @@ class NaiveDOM:
         else:
             # r = requests.get(location, headers=defs.headers)
             # html = r.text
-            driver = _get_driver(location)
+            if driver:
+                driver.get(location)
+            else:
+                driver = _create_driver(location)
             html = driver.page_source
 
         # opzionale, per velocizzare parsing con beautifulsoup
         print("Optimizing HTML...")
-        html = htmlmin.minify(html, remove_comments=True)
+        # html = htmlmin.minify(html, remove_comments=True)
         # rimuove contenuto tag in blacklist
         for tag in _TAG_BLACKLIST:
             html = re.sub(rf"<{tag}[^>]*>.*?</{tag}>", f"<{tag}></{tag}>", html)
@@ -309,7 +328,7 @@ class NaiveDOM:
         self._browse_DOM(soup.html.body, driver=driver)
 
         # chiudi driver
-        if driver:
+        if driver and driver_close_at_end:
             driver.close()
 
     def plot(self):
@@ -374,14 +393,14 @@ class NaiveDOM:
                 target_path = NDOM_searcher.search()
                 targets_found += 1
 
+                print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
                 print("    First path found according to NDOM_searcher:")
                 print(f"    {target_path}")
                 print(f"    Cost: {target_path.cost}")
-                print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
 
-                final_target_score += target_path.cost
+                final_target_score += round(target_path.cost, 3)
             else:
-                final_target_score += 10
+                final_target_score += 5
 
         final_target_score = final_target_score / targets_len
         return final_target_score
@@ -391,7 +410,33 @@ if __name__ == "__main__":
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
     NDOM_website1 = NaiveDOM("https://www.liceotedone.edu.it/")
 
-    # target_score_website1 = NDOM_website1.calc_target_score()
-    # print(f"Final target score: {target_score_website1}")
+    target_score_website1 = NDOM_website1.calc_target_score()
+    print(f"Final target score: {target_score_website1}")
+
+    # print(NDOM_website1.nodes)
+
+    """
+    with open('nome_file.txt', 'w') as file:
+        # Utilizza la funzione print per scrivere il contenuto nel file
+        print(NDOM_website1.nodes, file=file)
+    
+    with open('nome_file1.txt', 'w') as file1:
+        # Utilizza la funzione print per scrivere il contenuto nel file
+        print(NDOM_website1.arcs, file=file1)
+    
+    # ((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs
+    diz = {}
+    for arc in NDOM_website1.arcs:
+        try:
+            diz[arc.to_node][0] = diz[arc.to_node][0]+1
+            diz[arc.to_node][1].append(arc.from_node)
+        except KeyError:
+            diz[arc.to_node] = [1, [arc.from_node]]
+    
+    with open('conta.txt', 'w') as file2:
+        # Utilizza la funzione print per scrivere il contenuto nel file
+        print(diz, file=file2)
+    
+    """
 
     NDOM_website1.plot()

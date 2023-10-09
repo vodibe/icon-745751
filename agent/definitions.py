@@ -7,7 +7,6 @@ ROOT_DIR = Path(__file__).parent.parent
 DATASETS_DIR = ROOT_DIR / "datasets"
 
 ds1_path = DATASETS_DIR / "SCUANAGRAFESTAT20232420230901.csv"
-ds3_path = DATASETS_DIR / "URLS.csv"
 ds_schools1_path = DATASETS_DIR / "SCUANAGRAFE202324_clean.csv"
 
 # User-Agent
@@ -18,3 +17,4 @@ headers = {
 # Browser width and height
 BROWSER_WIDTH = 1600
 BROWSER_HEIGHT = 900
+BROWSER_DIAG = 1836  # diagonale schermo

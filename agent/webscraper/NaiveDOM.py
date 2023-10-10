@@ -16,7 +16,7 @@ from NaiveDOMSearcher import NaiveDOMSearcher
 
 # dimensione minima e massima etichetta nodi NDOM
 _MIN_LABEL_LENGTH = 2
-_MAX_LABEL_LENGTH = 40
+_MAX_LABEL_LENGTH = 140
 
 # nodi del DOM da non esplorare
 _TAG_BLACKLIST = [
@@ -45,7 +45,6 @@ _TAG_BLACKLIST = [
     "figcaption",
     "form",
     "fieldset",
-    "p",
     "button",
 ]
 
@@ -67,7 +66,7 @@ _TAG_PARENTS = [
 ]
 
 # nodi del DOM che per certo rappresentano una foglia del NDOM
-_TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6"]
+_TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6", "p"]
 
 # dizionario dei target predefinito
 _TARGETS_DEFAULT = {
@@ -80,9 +79,6 @@ _TARGETS_DEFAULT = {
     7: ["registro"],
     8: ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }
-
-# costo di default di un target non trovato
-_TARGET_NOT_FOUND_COST = 5
 
 
 def _create_driver(location) -> webdriver:
@@ -158,6 +154,7 @@ class NaiveDOM:
         ) ** 0.5
 
         # funzione di costo in base alla distanza
+        """
         arc_cost = round(
             (
                 (distance**1.2 * log(distance + 0.1) * exp(-1.5))
@@ -165,8 +162,36 @@ class NaiveDOM:
             ),
             1,
         )
+        arc_cost = round(
+            ((distance * log(distance + 0.1)) / (defs.BROWSER_DIAG * 1.9)),
+            1,
+        )
+        """
+        arc_cost = round(((distance * exp(1.3) / (defs.BROWSER_DIAG))), 1)
 
         return arc_cost
+
+    def _calc_penalty(self, p_type, num_expanded=0) -> float:
+        if p_type == "t":
+            return 5 + (len(self.arcs) // 500) * 0.5
+
+        elif p_type == "g":
+            # graph penalty
+
+            return 0.0000002 * (len(self.nodes) ** 2)
+
+        elif p_type == "p":
+            # path penalty
+            if num_expanded == 0:
+                return 0
+
+            penalty = 0.15 * log(num_expanded)
+            penalty = 0 if penalty < 0 else penalty
+
+            return penalty
+
+        else:
+            return 0
 
     def _browse_DOM(
         self,
@@ -294,7 +319,7 @@ class NaiveDOM:
         self.start = None
         self.nodes_goal = []
 
-        self.features = {}  # dict
+        self.target_not_found_cost = 0
 
         # ottenimento sorgente e (eventulamente) driver selenium
         print(f"Building NDOM for {self.location}")
@@ -329,6 +354,7 @@ class NaiveDOM:
         # popola attributi
         print("Parsing HTML <body> tag...")
         self._browse_DOM(soup.html.body, driver=driver)
+        self.target_not_found_cost = self._calc_penalty("t")
 
         # chiudi driver
         if driver and driver_close_at_end:
@@ -356,7 +382,7 @@ class NaiveDOM:
 
         plt.show()
 
-    def calc_avg_target_cost(self, targets: dict = _TARGETS_DEFAULT) -> float:
+    def get_score(self, targets: dict = _TARGETS_DEFAULT) -> float:
         """Restituisce il target score dell'oggetto NaiveDOM.
 
         Args:
@@ -367,7 +393,7 @@ class NaiveDOM:
             - target_score: float
         """
 
-        print("Calculating target score of NDOM object...")
+        print("Calculating Avg Target Cost of NDOM object...")
 
         avg_target_cost = 0
         targets_len = len(targets)
@@ -382,12 +408,14 @@ class NaiveDOM:
             self.nodes_goal = []
 
             for node_xpath, node_label in self.nodes.items():
+                keyword_found_in_label = False
                 for keyword in target_keywords:
                     if " " in keyword:
                         # ad es. se la keyword è "amministrazione trasparente"
                         # devo cercare questa frase intera all'interno della label
                         if keyword in node_label:
                             self.nodes_goal.append(node_xpath)
+                            keyword_found_in_label = True
                     else:
                         # ad es. se la keyword è "indirizzo" devo fare una ricerca
                         # whole-word.
@@ -396,8 +424,14 @@ class NaiveDOM:
                         s = re.split(r"\s|\.", node_label)
                         if any(st == keyword for st in s):
                             self.nodes_goal.append(node_xpath)
+                            keyword_found_in_label = True
 
-            print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
+                    if keyword_found_in_label:
+                        # esamina l'altro nodo
+                        break
+
+            # print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
+            # print(list(self.nodes[n] for n in self.nodes_goal))
 
             if self.nodes_goal:
                 problem.set_goals(self.nodes_goal)
@@ -407,27 +441,41 @@ class NaiveDOM:
                 target_path = NDOM_searcher.search()
                 targets_found += 1
 
-                print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
-                print("    First path found according to NDOM_searcher:")
-                print(f"    {target_path}")
-                print(f"    Cost: {target_path.cost}")
+                # print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
+                # print("    First path found according to NDOM_searcher:")
+                # print(f"    {target_path}")
+                # print(f"    Cost: {target_path.cost}")
 
-                avg_target_cost += target_path.cost
+                target_cost = round(
+                    target_path.cost
+                    + self._calc_penalty("g")
+                    + self._calc_penalty("p", NDOM_searcher.num_expanded),
+                    1,
+                )
+
+                print(f"{target_cost}", end="\t")
+                avg_target_cost += target_cost
             else:
-                avg_target_cost += _TARGET_NOT_FOUND_COST
+                print("/", end="\t")
+                avg_target_cost += self.target_not_found_cost
 
-        print(f"    {targets_found}/{targets_len} Targets found.")
+        print(f"\n{targets_found}/{targets_len} Targets found.")
         avg_target_cost = round((avg_target_cost / targets_len), 3)
 
         return avg_target_cost
 
 
 if __name__ == "__main__":
-    # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
-    NDOM_website1 = NaiveDOM("https://www.liceotedone.edu.it/")
+    # websites = [ "https://www.liceotedone.edu.it/", ]
 
-    target_score_website1 = NDOM_website1.calc_avg_target_cost()
-    print(f"Final target score: {target_score_website1}")
+    # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
+    NDOM_website1 = NaiveDOM("https://www.einsteinrimini.edu.it/")
+    print(f"Number of nodes: {len(NDOM_website1.nodes)}")
+
+    # print(NDOM_website1.nodes)
+
+    target_score_website1 = NDOM_website1.get_score()
+    print(f"Avg Target Cost: {target_score_website1}")
 
     # print(NDOM_website1.nodes)
 
@@ -455,4 +503,4 @@ if __name__ == "__main__":
     
     """
 
-    NDOM_website1.plot()
+    # NDOM_website1.plot()

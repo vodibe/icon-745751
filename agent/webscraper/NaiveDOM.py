@@ -71,15 +71,18 @@ _TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6"]
 
 # dizionario dei target predefinito
 _TARGETS_DEFAULT = {
-    1: ["circolari", "comunicazion"],
-    2: ["organigramma", "organizzazione"],
-    3: ["notizie", "news"],
-    4: ["progett"],
-    5: ["regolament"],
+    1: ["circolari", "comunicazioni", "circolare"],
+    2: ["organigramma", "organizzazione", "schema organizzativo", "persone"],
+    3: ["notizie", "news", "eventi"],
+    4: ["progetti", "progetto", "projects"],
+    5: ["regolamento", "regolamenti", "regolamentazione"],
     6: ["amministrazione trasparente"],
     7: ["registro"],
     8: ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }
+
+# costo di default di un target non trovato
+_TARGET_NOT_FOUND_COST = 5
 
 
 def _create_driver(location) -> webdriver:
@@ -353,7 +356,7 @@ class NaiveDOM:
 
         plt.show()
 
-    def calc_target_score(self, targets: dict = _TARGETS_DEFAULT) -> float:
+    def calc_avg_target_cost(self, targets: dict = _TARGETS_DEFAULT) -> float:
         """Restituisce il target score dell'oggetto NaiveDOM.
 
         Args:
@@ -366,7 +369,7 @@ class NaiveDOM:
 
         print("Calculating target score of NDOM object...")
 
-        final_target_score = 0
+        avg_target_cost = 0
         targets_len = len(targets)
         targets_found = 0
 
@@ -380,8 +383,19 @@ class NaiveDOM:
 
             for node_xpath, node_label in self.nodes.items():
                 for keyword in target_keywords:
-                    if keyword in node_label:
-                        self.nodes_goal.append(node_xpath)
+                    if " " in keyword:
+                        # ad es. se la keyword è "amministrazione trasparente"
+                        # devo cercare questa frase intera all'interno della label
+                        if keyword in node_label:
+                            self.nodes_goal.append(node_xpath)
+                    else:
+                        # ad es. se la keyword è "indirizzo" devo fare una ricerca
+                        # whole-word.
+                        # ad es.: label = provvedimenti organo indirizzo-politico -> no
+                        # ad es.: label = indirizzo della scuola -> si
+                        s = re.split(r"\s|\.", node_label)
+                        if any(st == keyword for st in s):
+                            self.nodes_goal.append(node_xpath)
 
             print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
 
@@ -398,19 +412,21 @@ class NaiveDOM:
                 print(f"    {target_path}")
                 print(f"    Cost: {target_path.cost}")
 
-                final_target_score += round(target_path.cost, 3)
+                avg_target_cost += target_path.cost
             else:
-                final_target_score += 5
+                avg_target_cost += _TARGET_NOT_FOUND_COST
 
-        final_target_score = final_target_score / targets_len
-        return final_target_score
+        print(f"    {targets_found}/{targets_len} Targets found.")
+        avg_target_cost = round((avg_target_cost / targets_len), 3)
+
+        return avg_target_cost
 
 
 if __name__ == "__main__":
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
     NDOM_website1 = NaiveDOM("https://www.liceotedone.edu.it/")
 
-    target_score_website1 = NDOM_website1.calc_target_score()
+    target_score_website1 = NDOM_website1.calc_avg_target_cost()
     print(f"Final target score: {target_score_website1}")
 
     # print(NDOM_website1.nodes)

@@ -1,7 +1,17 @@
 import agent.definitions as defs
 import re
-from bs4 import BeautifulSoup, NavigableString, Tag, Comment
+import datetime
+from bs4 import (
+    BeautifulSoup,
+    NavigableString,
+    Tag,
+    Comment,
+    Stylesheet,
+    Script,
+    TemplateString,
+)
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
+from NaiveDOMSearcher import NaiveDOMSearcher
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -9,67 +19,65 @@ from agent.libs.nx_layout.hierarchy_pos import hierarchy_pos
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from math import log, exp
-
-from NaiveDOMSearcher import NaiveDOMSearcher
+from selenium.common.exceptions import NoSuchElementException
+from math import exp
 
 
 # dimensione minima e massima etichetta nodi NDOM
-_MIN_LABEL_LENGTH = 2
-_MAX_LABEL_LENGTH = 140
+_MIN_NDOM_LABEL_LENGTH = 2
+_MAX_NDOM_LABEL_LENGTH = 140
 
 # nodi del DOM da non esplorare
 _TAG_BLACKLIST = [
+    "applet",
+    "area",
+    "base",
+    "button",
+    "canvas",
+    "data",
+    "embed",
+    "fieldset",
+    "form",
+    "frame",
+    "frameset",
     "head",
+    "iframe",
+    "link",
+    "map",
+    "meta",
+    "noscript",
+    "object",
+    "param",
     "script",
     "style",
     "svg",
-    "meta",
-    "link",
-    "title",
-    "base",
-    "noscript",
     "template",
-    "iframe",
-    "canvas",
-    "object",
-    "embed",
-    "param",
-    "applet",
-    "frame",
-    "frameset",
-    "map",
-    "area",
+    "title",
     "track",
-    "data",
-    "figcaption",
-    "form",
-    "fieldset",
-    "button",
 ]
 
 # nodi del DOM che, una volta inseriti nel NDOM, conterranno potenzialmente altri nodi
 _TAG_PARENTS = [
-    "html",
-    "body",
-    "header",
-    "section",
-    "nav",
-    "ul",
-    "ol",
-    "li",
+    "address",
     "article",
     "aside",
+    "body",
     "footer",
+    "header",
+    "html",
+    "li",
+    "nav",
+    "ol",
+    "section",
     "table",
-    "address",
+    "ul",
 ]
 
 # nodi del DOM che per certo rappresentano una foglia del NDOM
-_TAG_LEAFS = ["img", "a", "h1", "h2", "h3", "h4", "h5", "h6", "p"]
+_TAG_LEAFS = ["a", "h1", "h2", "h3", "h4", "h5", "h6", "img", "p"]
 
 # dizionario dei target predefinito
-_TARGETS_DEFAULT = {
+_TASKS_DEFAULT = {
     1: ["circolari", "comunicazioni", "circolare"],
     2: ["organigramma", "organizzazione", "schema organizzativo", "persone"],
     3: ["notizie", "news", "eventi"],
@@ -80,14 +88,27 @@ _TARGETS_DEFAULT = {
     8: ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }
 
+FEATURES = [
+    "school_id",
+    "school_url",
+    "page_load_time_ms",
+    "page_width",
+    "page_height",
+    "page_template",
+    "NDOM_nodes",
+    "NDOM_depth",
+    "task_cost",
+    "menu_vertical",
+    "header_height",
+    "footer_height",
+    "num_small_multimedia",
+]
 
-def _create_driver(location) -> webdriver:
+
+def _create_driver() -> webdriver:
     """Restituisce un'istanza della classe webdriver, cioè un browser avente una scheda
     aperta al sito location.
-    Vedi: #https://stackoverflow.com/a/55878622
-
-    Args:
-        location: URL del sito
+    Vedi: https://stackoverflow.com/a/55878622
 
     Returns:
         webdriver: istanza webdriver
@@ -100,7 +121,6 @@ def _create_driver(location) -> webdriver:
     options.add_argument(f"--height={defs.BROWSER_HEIGHT}")
 
     driver = webdriver.Firefox(options=options)
-    driver.get(location)
 
     return driver
 
@@ -121,7 +141,6 @@ class NaiveDOM:
     def _calc_arc_cost(self, driver: webdriver, NDOM_parent_xpath, xpath) -> float:
         """Calcola il costo in termini di usabilità che l'utente paga quando passa dall'
         interagire con l'elemento NDOM_parent_xpath all'interagire con l'elemento xpath.
-        Ulteriori informazioni: report.pdf
         Doc. find_element: https://stackoverflow.com/questions/15510882/selenium-get-coordinates-or-dimensions-of-element-with-python
 
         Args:
@@ -133,6 +152,9 @@ class NaiveDOM:
             float: costo in termini di usabilità
         """
 
+        # costo se l'elemento non si trova
+        node_not_found_cost = 6
+
         # coordinate nodo genitore
         if NDOM_parent_xpath in self.nodes_coords:
             parent_coords = self.nodes_coords[NDOM_parent_xpath]
@@ -141,57 +163,33 @@ class NaiveDOM:
             self.nodes_coords[NDOM_parent_xpath] = parent_coords
 
         # coordinate nodo corrente
-        elem = driver.find_element(By.XPATH, xpath)
+        try:
+            elem = driver.find_element(By.XPATH, xpath)
+        except NoSuchElementException:
+            return node_not_found_cost
 
         elem_coords = (elem.location["x"], elem.location["y"])
         self.nodes_coords[xpath] = elem_coords
 
         # distanza euclidea coord. nodo corrente - coord. nodo genitore
-        ignore_x_coeff = 0 if NDOM_parent_xpath == self.start else 1
+        if NDOM_parent_xpath == self.start:
+            ignore_x_coeff = 0
+
+            # feature "width", "height"
+            self.features["width"] = elem.size["width"]
+            self.features["height"] = elem.size["height"]
+        else:
+            ignore_x_coeff = 1
+
         distance = (
             ((elem_coords[0] - parent_coords[0]) ** 2) * ignore_x_coeff
             + (elem_coords[1] - parent_coords[1]) ** 2
         ) ** 0.5
 
         # funzione di costo in base alla distanza
-        """
-        arc_cost = round(
-            (
-                (distance**1.2 * log(distance + 0.1) * exp(-1.5))
-                / (0.9 * distance + defs.BROWSER_DIAG)
-            ),
-            1,
-        )
-        arc_cost = round(
-            ((distance * log(distance + 0.1)) / (defs.BROWSER_DIAG * 1.9)),
-            1,
-        )
-        """
-        arc_cost = round(((distance * exp(1.3) / (defs.BROWSER_DIAG))), 1)
+        arc_cost = round(((distance * exp(1.3) / (defs.BROWSER_DIAG))), 2)
 
         return arc_cost
-
-    def _calc_penalty(self, p_type, num_expanded=0) -> float:
-        if p_type == "t":
-            return 5 + (len(self.arcs) // 500) * 0.5
-
-        elif p_type == "g":
-            # graph penalty
-
-            return 0.0000002 * (len(self.nodes) ** 2)
-
-        elif p_type == "p":
-            # path penalty
-            if num_expanded == 0:
-                return 0
-
-            penalty = 0.15 * log(num_expanded)
-            penalty = 0 if penalty < 0 else penalty
-
-            return penalty
-
-        else:
-            return 0
 
     def _browse_DOM(
         self,
@@ -214,7 +212,9 @@ class NaiveDOM:
 
         is_DOM_tag = isinstance(root, Tag)
 
-        if is_DOM_tag and root.name in _TAG_BLACKLIST:
+        if (is_DOM_tag and root.name in _TAG_BLACKLIST) or isinstance(
+            root, (Stylesheet, Script, TemplateString, Comment)
+        ):
             return
 
         # inizializzazione
@@ -245,7 +245,10 @@ class NaiveDOM:
 
             # elimino nodi che contengono testo lungo o non leggibile
             label_len = len(label)
-            if label_len <= _MIN_LABEL_LENGTH or label_len >= _MAX_LABEL_LENGTH:
+            if (
+                label_len <= _MIN_NDOM_LABEL_LENGTH
+                or label_len >= _MAX_NDOM_LABEL_LENGTH
+            ):
                 return
 
         elif is_DOM_tag:
@@ -254,19 +257,19 @@ class NaiveDOM:
 
             next_NDOM_parent_xpath = NDOM_parent_xpath
 
-        elif isinstance(root, NavigableString):
+        else:
+            # isinstance(root, NavigableString)
             # root e' una stringa, quindi una foglia
             xpath = DOM_parent_xpath
             label = repr(root)
 
             # elimino nodi che contengono testo lungo o non leggibile
             label_len = len(label)
-            if label_len <= _MIN_LABEL_LENGTH or label_len >= _MAX_LABEL_LENGTH:
+            if (
+                label_len <= _MIN_NDOM_LABEL_LENGTH
+                or label_len >= _MAX_NDOM_LABEL_LENGTH
+            ):
                 return
-
-        else:
-            # isinstance(root, (Stylesheet, Script, Template, Comment))
-            return
 
         if label:
             # aggiungo nodo
@@ -300,28 +303,38 @@ class NaiveDOM:
     def __init__(
         self,
         location,
+        alias="",
         from_file=False,
         driver: webdriver = None,
         driver_close_at_end=True,
     ):
-        """Crea un nuovo oggetto NaiveDOM.
-
-        Args:
-            - location (string): Percorso o URL del codice sorgente
-            - from_file (bool, optional): Specifica se creare un nuovo NaiveDOM da file .html. Default: False.
-        """
-
-        # inizializzazione
+        # inizializzazione attributi
         self.location = location
-        self.nodes = {}  # dict
-        self.nodes_coords = {}  # dict
+        self.nodes = {}  # dict xpath:label
+        self.nodes_coords = {}  # dict xpath:(x,y)
         self.arcs = []
         self.start = None
         self.nodes_goal = []
+        self.pen_task_nf = None
 
-        self.target_not_found_cost = 0
+        # il dizionario delle features è un attributo del NDOM
+        self.features = {
+            "school_id": alias,
+            "school_url": self.location,
+            "page_load_time_ms": None,  # assegnato in __init__
+            "page_width": None,  # assegnato in _calc_arc_cost
+            "page_height": None,  # assegnato in _calc_arc_cost
+            "page_template": None,
+            "NDOM_nodes": None,  # assegnato in __init__
+            "NDOM_depth": None,  # assegnato in
+            "task_cost": [],  # assegnato in get_task_cost
+            "menu_vertical": None,
+            "header_height": None,
+            "footer_height": None,
+            "num_small_multimedia": None,
+        }
 
-        # ottenimento sorgente e (eventulamente) driver selenium
+        # ottenimento sorgente e (eventualmente) driver selenium
         print(f"Building NDOM for {self.location}")
         print(f"Reading HTML...")
         if from_file:
@@ -331,30 +344,39 @@ class NaiveDOM:
         else:
             # r = requests.get(location, headers=defs.headers)
             # html = r.text
-            if driver:
-                driver.get(location)
-            else:
-                driver = _create_driver(location)
+            if not driver:
+                driver = _create_driver()
+
+            load_start = datetime.datetime.now()
+            driver.get(location)
+            load_end = datetime.datetime.now()
+
             html = driver.page_source
 
         # opzionale, per velocizzare parsing con beautifulsoup
-        print("Optimizing HTML...")
+        print("Cleaning HTML...")
         # html = htmlmin.minify(html, remove_comments=True)
-        # rimuove contenuto tag in blacklist
-        for tag in _TAG_BLACKLIST:
+        for tag in _TAG_BLACKLIST:  # rimuove contenuto tag in blacklist
             html = re.sub(rf"<{tag}[^>]*>.*?</{tag}>", f"<{tag}></{tag}>", html)
-        # rimuove commenti
-        html = re.sub(r"<!--(.*?)-->", "", html, flags=re.DOTALL)
-        # rimuove spazi vuoti dopo tag
-        html = re.sub(">\s*<", "><", html)
+        html = re.sub(r"<!--(.*?)-->", "", html, flags=re.DOTALL)  # rimuove commenti
+        html = re.sub(">\s*<", "><", html)  # rimuove spazi vuoti dopo tag
 
         # parser: 'lxml' o 'html5lib' (chiudono tag lasciati aperti)
         soup = BeautifulSoup(html, "html5lib")
 
-        # popola attributi
+        # costruisci NDOM: popola attributi
         print("Parsing HTML <body> tag...")
         self._browse_DOM(soup.html.body, driver=driver)
-        self.target_not_found_cost = self._calc_penalty("t")
+
+        self.pen_task_nf = round((6.5 + (len(self.nodes) // 500) * 0.5), 2)
+        # self.pen_graph = (nodes_len**2) * (10 ** (-6.5))
+
+        # popola features
+        self.features["page_load_time_ms"] = int(
+            (load_end - load_start).total_seconds() * 1000
+        )
+        self.features["NDOM_nodes"] = len(self.nodes)
+        self.features["task_cost"] = self.get_task_cost()
 
         # chiudi driver
         if driver and driver_close_at_end:
@@ -382,34 +404,29 @@ class NaiveDOM:
 
         plt.show()
 
-    def get_score(self, targets: dict = _TARGETS_DEFAULT) -> float:
-        """Restituisce il target score dell'oggetto NaiveDOM.
+    def get_features(self) -> dict:
+        return self.features
 
-        Args:
-            - targets (dict, optional): dizionario task id:keyword delle parole chiave utili a
-            individuare i nodi goal del NDOM. Default: _TARGETS_DEFAULT.
+    def get_task_cost(self, tasks: dict = _TASKS_DEFAULT) -> list[float]:
+        def _calc_pen_paths_expanded(num_expanded) -> float:
+            # penalità data dal numero di percorsi
+            pen_paths_expanded = num_expanded / 280 - 0.2
+            pen_paths_expanded = 0 if pen_paths_expanded < 0 else pen_paths_expanded
 
-        Returns:
-            - target_score: float
-        """
-
-        print("Calculating Avg Target Cost of NDOM object...")
-
-        avg_target_cost = 0
-        targets_len = len(targets)
-        targets_found = 0
+            return pen_paths_expanded
 
         problem = Search_problem_from_explicit_graph(
             self.nodes.keys(), self.arcs, self.start
         )
 
-        for target_id, target_keywords in targets.items():
-            # per ogni target individua quali sono i nodi obiettivo del NDOM
-            self.nodes_goal = []
+        tasks_cost = []
 
+        for task_id, task_keywords in tasks.items():
+            # per ogni task individua quali sono i nodi obiettivo del NDOM
+            self.nodes_goal = []
             for node_xpath, node_label in self.nodes.items():
                 keyword_found_in_label = False
-                for keyword in target_keywords:
+                for keyword in task_keywords:
                     if " " in keyword:
                         # ad es. se la keyword è "amministrazione trasparente"
                         # devo cercare questa frase intera all'interno della label
@@ -430,77 +447,30 @@ class NaiveDOM:
                         # esamina l'altro nodo
                         break
 
-            # print(f"  - Target #{target_id}: {len(self.nodes_goal)} goal nodes found.")
-            # print(list(self.nodes[n] for n in self.nodes_goal))
-
+            # per ogni task calcola il percorso necessario per andare dalla radice
+            # a uno dei nodi obiettivo per quel task
             if self.nodes_goal:
                 problem.set_goals(self.nodes_goal)
                 NDOM_searcher = NaiveDOMSearcher(problem)
 
                 # restituisce un oggetto Path se esiste un percorso, None altrimenti
-                target_path = NDOM_searcher.search()
-                targets_found += 1
+                task_path = NDOM_searcher.search()
 
-                # print(f"    {NDOM_searcher.num_expanded} paths expanded so far.")
-                # print("    First path found according to NDOM_searcher:")
-                # print(f"    {target_path}")
-                # print(f"    Cost: {target_path.cost}")
-
-                target_cost = round(
-                    target_path.cost
-                    + self._calc_penalty("g")
-                    + self._calc_penalty("p", NDOM_searcher.num_expanded),
-                    1,
+                task_cost = round(
+                    task_path.cost
+                    + _calc_pen_paths_expanded(NDOM_searcher.num_expanded)
+                    + (len(list(task_path.nodes())) * 0.15),
+                    2,
                 )
-
-                print(f"{target_cost}", end="\t")
-                avg_target_cost += target_cost
+                tasks_cost.append(task_cost)
             else:
-                print("/", end="\t")
-                avg_target_cost += self.target_not_found_cost
+                tasks_cost.append(self.pen_task_nf)
 
-        print(f"\n{targets_found}/{targets_len} Targets found.")
-        avg_target_cost = round((avg_target_cost / targets_len), 3)
-
-        return avg_target_cost
+        return tasks_cost
 
 
 if __name__ == "__main__":
-    # websites = [ "https://www.liceotedone.edu.it/", ]
-
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
-    NDOM_website1 = NaiveDOM("https://www.einsteinrimini.edu.it/")
-    print(f"Number of nodes: {len(NDOM_website1.nodes)}")
-
-    # print(NDOM_website1.nodes)
-
-    target_score_website1 = NDOM_website1.get_score()
-    print(f"Avg Target Cost: {target_score_website1}")
-
-    # print(NDOM_website1.nodes)
-
-    """
-    with open('nome_file.txt', 'w') as file:
-        # Utilizza la funzione print per scrivere il contenuto nel file
-        print(NDOM_website1.nodes, file=file)
-    
-    with open('nome_file1.txt', 'w') as file1:
-        # Utilizza la funzione print per scrivere il contenuto nel file
-        print(NDOM_website1.arcs, file=file1)
-    
-    # ((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs
-    diz = {}
-    for arc in NDOM_website1.arcs:
-        try:
-            diz[arc.to_node][0] = diz[arc.to_node][0]+1
-            diz[arc.to_node][1].append(arc.from_node)
-        except KeyError:
-            diz[arc.to_node] = [1, [arc.from_node]]
-    
-    with open('conta.txt', 'w') as file2:
-        # Utilizza la funzione print per scrivere il contenuto nel file
-        print(diz, file=file2)
-    
-    """
+    NDOM_website1 = NaiveDOM("https://www.iisantoniosegni.edu.it/")
 
     # NDOM_website1.plot()

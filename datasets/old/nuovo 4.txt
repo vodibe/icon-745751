@@ -1,0 +1,5 @@
+nav:first-of-type ul > li a
+
+https://try.jsoup.org/
+
+https://css-selector-builder.alexvipond.dev/?conditions=%5B%5B%7B%22id%22%3A%22HKadB3K0%22%2C%22pipe%22%3A%22has+a+tag%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%22a%22%5D%7D%2C%7B%22id%22%3A%22paN1DGP8%22%2C%22pipe%22%3A%22is+the+direct+child+of+an+element%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%5B%7B%22id%22%3A%227geS1S1F%22%2C%22pipe%22%3A%22has+a+tag%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%22li%22%5D%7D%2C%7B%22id%22%3A%22h6PeADlk%22%2C%22pipe%22%3A%22is+the+direct+child+of+an+element%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%5B%7B%22id%22%3A%22aD15BQfb%22%2C%22pipe%22%3A%22has+a+tag%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%22ul%22%5D%7D%2C%7B%22id%22%3A%22kpKrZB2X%22%2C%22pipe%22%3A%22is+the+first+child+of+its+type+inside+a+parent%22%2C%22args%22%3A%5B%5D%7D%2C%7B%22id%22%3A%22xJG3IFSS%22%2C%22pipe%22%3A%22is+the+direct+child+of+an+element%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%5B%7B%22id%22%3A%221JkLRJXZ%22%2C%22pipe%22%3A%22has+a+tag%2C+which+I%27ll+specify%22%2C%22args%22%3A%5B%22li%22%5D%7D%5D%5D%7D%5D%5D%7D%5D%5D%7D%5D%5D

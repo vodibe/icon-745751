@@ -1,13 +1,13 @@
 from pathlib import Path
 
 # icon-745751/
-ROOT_DIR = Path(__file__).parent.parent
+DIR_ROOT = Path(__file__).parent.parent
 
 # icon-745751/datasets
-DATASETS_DIR = ROOT_DIR / "datasets"
+DIR_DATASETS = DIR_ROOT / "datasets"
 
-ds1_path = DATASETS_DIR / "SCUANAGRAFESTAT20232420230901.csv"
-ds_schools1_path = DATASETS_DIR / "SCUANAGRAFE202324_clean.csv"
+ds1_path = DIR_DATASETS / "SCUANAGRAFESTAT20232420230901.csv"
+ds_schools1_path = DIR_DATASETS / "SCUANAGRAFE202324_clean.csv"
 
 # User-Agent
 headers = {

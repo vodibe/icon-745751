@@ -1,7 +1,30 @@
 import csv
 import requests
+import agent.definitions as defs
 from agent.definitions import ds1_path, ds1_clean_path, ds2_path, headers
-from agent.ndom.NaiveDOM import FEATURES, FEATURES_ASKABLE, _TASKS_DEFAULT, NaiveDOM, _create_driver
+from agent.ndom.NaiveDOM import ds2_features, ds2_features_askable, NaiveDOM
+
+from selenium import webdriver
+
+
+def _create_driver() -> webdriver:
+    """Restituisce un'istanza della classe webdriver, cioè un browser avente una scheda
+    aperta al sito location.
+    Vedi: https://stackoverflow.com/a/55878622
+
+    Returns:
+        webdriver: istanza webdriver
+    """
+
+    options = webdriver.FirefoxOptions()
+    # options.add_argument("--headless")
+    options.add_argument(f'--user-agent={defs.headers["User-Agent"]}')
+    options.add_argument(f"--width={defs.BROWSER_WIDTH}")
+    options.add_argument(f"--height={defs.BROWSER_HEIGHT}")
+
+    driver = webdriver.Firefox(options=options)
+
+    return driver
 
 
 def create_dataset_schools(useful_TGIS):
@@ -17,8 +40,8 @@ def create_dataset_schools(useful_TGIS):
     with open(ds1_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in)
 
-        # Features del nuovo file CSV
-        fieldnames = [
+        # features del nuovo file CSV
+        ds1_features = [
             "CODICESCUOLA",
             "DENOMINAZIONESCUOLA",
             "CODICEISTITUTORIFERIMENTO",
@@ -31,8 +54,22 @@ def create_dataset_schools(useful_TGIS):
             "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA",
             "SITOWEBSCUOLA",
         ]
+
+        # features che non vanno inserite nel nuovo file CSV
+        ds1_features_excluded = [
+            "ANNOSCOLASTICO",
+            "INDIRIZZOSCUOLA",
+            "CODICECOMUNESCUOLA",
+            "DESCRIZIONECARATTERISTICASCUOLA",
+            "INDICAZIONESEDEDIRETTIVO",
+            "INDICAZIONESEDEOMNICOMPRENSIVO",
+            "INDIRIZZOEMAILSCUOLA",
+            "INDIRIZZOPECSCUOLA",
+            "SEDESCOLASTICA",
+        ]
+
         with open(ds1_clean_path, "w", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=fieldnames)
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds1_features)
             csv_writer.writeheader()
 
             for row in csv_reader:
@@ -44,23 +81,11 @@ def create_dataset_schools(useful_TGIS):
                     school_url = process_url(row["SITOWEBSCUOLA"])
 
                     if school_url is not None:
-                        new_row = {
-                            "CODICESCUOLA": row["CODICESCUOLA"],
-                            "DENOMINAZIONESCUOLA": row["DENOMINAZIONESCUOLA"],
-                            "CODICEISTITUTORIFERIMENTO": row["CODICEISTITUTORIFERIMENTO"],
-                            "DENOMINAZIONEISTITUTORIFERIMENTO": row[
-                                "DENOMINAZIONEISTITUTORIFERIMENTO"
-                            ],
-                            "AREAGEOGRAFICA": row["AREAGEOGRAFICA"],
-                            "REGIONE": row["REGIONE"],
-                            "PROVINCIA": row["PROVINCIA"],
-                            "CAPSCUOLA": row["CAPSCUOLA"],
-                            "DESCRIZIONECOMUNE": row["DESCRIZIONECOMUNE"],
-                            "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA": row[
-                                "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA"
-                            ],
-                            "SITOWEBSCUOLA": school_url,
-                        }
+                        new_row = row
+                        new_row["SITOWEBSCUOLA"] = school_url
+                        for feature in ds1_features_excluded:
+                            del new_row[feature]
+
                         csv_writer.writerow(new_row)
 
     print(f"Done. {ds1_clean_path}")
@@ -123,11 +148,18 @@ def process_url(url):
 
 
 def create_dataset_features(i_resume=0):
+    """Crea il dataset delle feature per ciascun sito. Necessario per addestrare i modelli
+    di SL e UL.
+
+    Args:
+        i_resume (int, optional): Numero di riga del ds_1 a partire dal quale esaminare i siti. Default: 0.
+    """
+
+    print("Creating dataset of features for each website...")
     # validazione indice di ripresa
     i_resume = 0 if i_resume < 0 else i_resume
 
-    print("Creating dataset of features for each website...")
-
+    # creo driver condiviso da tutti i NDOM che vado a creare
     driver = _create_driver()
 
     print(f"(Starting at {i_resume})")
@@ -135,9 +167,7 @@ def create_dataset_features(i_resume=0):
         csv_reader = csv.DictReader(csv_in)
 
         with open(ds2_path, "a", newline="") as csv_out:
-            csv_writer = csv.DictWriter(
-                csv_out, fieldnames=FEATURES + FEATURES_ASKABLE + list(_TASKS_DEFAULT.keys())
-            )
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds2_features)
 
             if i_resume == 0:
                 csv_writer.writeheader()
@@ -155,7 +185,7 @@ def create_dataset_features(i_resume=0):
                         driver_close_at_end=False,
                     )
                     new_row = NDOM_website.get_features()
-                    for feature_askable in FEATURES_ASKABLE:
+                    for feature_askable in ds2_features_askable:
                         new_row[feature_askable] = float(input("- " + feature_askable + ": "))
                     csv_writer.writerow(new_row)
                 i = i + 1
@@ -173,3 +203,6 @@ if __name__ == "__main__":
 
     # crea dataset delle feature di ciascun url
     create_dataset_features(i_resume=202 - 1)
+
+    # todo: cancellare le righe dove la metrica è -1 (siti non corretti)
+    # todo: cancellare duplicati, cioè scuole con stesso sito. far rimanere solo 1.

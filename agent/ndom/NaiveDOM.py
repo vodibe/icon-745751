@@ -13,6 +13,7 @@ from bs4 import (
 )
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
 from agent.ndom.NaiveDOMSearcher import NaiveDOMSearcher
+from agent.preproc.dataset_creator import _create_driver
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -78,7 +79,7 @@ _TAG_PARENTS = [
 _TAG_LEAFS = ["a", "h1", "h2", "h3", "h4", "h5", "h6", "img", "p"]
 
 # dizionario dei target predefinito
-_TASKS_DEFAULT = {
+TASKS_DEFAULT = {
     "task1": ["circolari", "comunicazioni", "circolare"],
     "task2": ["organigramma", "organizzazione", "schema organizzativo", "persone"],
     "task3": ["notizie", "news", "eventi"],
@@ -89,8 +90,8 @@ _TASKS_DEFAULT = {
     "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }
 
-# features del NDOM che verranno considerate in un modello di apprendimento
-FEATURES = [
+# 1^ parte features del NDOM che verranno considerate in un modello di apprendimento
+ds2_features_part = [
     "school_id",
     "school_url",
     "page_load_time_ms",
@@ -100,27 +101,11 @@ FEATURES = [
     "NDOM_height",
 ]
 
-FEATURES_ASKABLE = ["page_template", "menu_orientation", "num_clickable_multim", "metric"]
+# 2^ parte features del sito che verranno considerate in un modello di apprendimento
+ds2_features_askable = ["page_template", "menu_orientation", "num_clickable_multim", "metric"]
 
-
-def _create_driver() -> webdriver:
-    """Restituisce un'istanza della classe webdriver, cioè un browser avente una scheda
-    aperta al sito location.
-    Vedi: https://stackoverflow.com/a/55878622
-
-    Returns:
-        webdriver: istanza webdriver
-    """
-
-    options = webdriver.FirefoxOptions()
-    # options.add_argument("--headless")
-    options.add_argument(f'--user-agent={defs.headers["User-Agent"]}')
-    options.add_argument(f"--width={defs.BROWSER_WIDTH}")
-    options.add_argument(f"--height={defs.BROWSER_HEIGHT}")
-
-    driver = webdriver.Firefox(options=options)
-
-    return driver
+# features incluse nel modello di apprendimento
+ds2_features = ds2_features_part + ds2_features_askable + list(TASKS_DEFAULT.keys())
 
 
 class NaiveDOM:
@@ -189,7 +174,7 @@ class NaiveDOM:
 
         return arc_cost
 
-    def _calc_task_cost(self, tasks: dict = _TASKS_DEFAULT):
+    def _calc_task_cost(self, tasks: dict = TASKS_DEFAULT):
         """A partire dal NDOM e da una lista di task, calcola il costo in usabilità
         necessario per svolgere questi task. Se un task non può essere portato a termine
         (perchè non ci sono nodi obiettivo), si assume che tale task viene eseguito con

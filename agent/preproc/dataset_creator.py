@@ -1,6 +1,7 @@
 import csv
 import requests
-from agent.definitions import ds1_path, ds_schools1_path, headers
+from agent.definitions import ds1_path, ds1_clean_path, ds2_path, headers
+from agent.ndom.NaiveDOM import FEATURES, FEATURES_ASKABLE, _TASKS_DEFAULT, NaiveDOM, _create_driver
 
 
 def create_dataset_schools(useful_TGIS):
@@ -30,7 +31,7 @@ def create_dataset_schools(useful_TGIS):
             "DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA",
             "SITOWEBSCUOLA",
         ]
-        with open(ds_schools1_path, "w", newline="") as csv_out:
+        with open(ds1_clean_path, "w", newline="") as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=fieldnames)
             csv_writer.writeheader()
 
@@ -46,9 +47,7 @@ def create_dataset_schools(useful_TGIS):
                         new_row = {
                             "CODICESCUOLA": row["CODICESCUOLA"],
                             "DENOMINAZIONESCUOLA": row["DENOMINAZIONESCUOLA"],
-                            "CODICEISTITUTORIFERIMENTO": row[
-                                "CODICEISTITUTORIFERIMENTO"
-                            ],
+                            "CODICEISTITUTORIFERIMENTO": row["CODICEISTITUTORIFERIMENTO"],
                             "DENOMINAZIONEISTITUTORIFERIMENTO": row[
                                 "DENOMINAZIONEISTITUTORIFERIMENTO"
                             ],
@@ -64,7 +63,7 @@ def create_dataset_schools(useful_TGIS):
                         }
                         csv_writer.writerow(new_row)
 
-    print(f"Done. {ds_schools1_path}")
+    print(f"Done. {ds1_clean_path}")
 
 
 def process_url(url):
@@ -123,9 +122,54 @@ def process_url(url):
         return url
 
 
+def create_dataset_features(i_resume=0):
+    # validazione indice di ripresa
+    i_resume = 0 if i_resume < 0 else i_resume
+
+    print("Creating dataset of features for each website...")
+
+    driver = _create_driver()
+
+    print(f"(Starting at {i_resume})")
+    with open(ds1_clean_path, "r") as csv_in:
+        csv_reader = csv.DictReader(csv_in)
+
+        with open(ds2_path, "a", newline="") as csv_out:
+            csv_writer = csv.DictWriter(
+                csv_out, fieldnames=FEATURES + FEATURES_ASKABLE + list(_TASKS_DEFAULT.keys())
+            )
+
+            if i_resume == 0:
+                csv_writer.writeheader()
+
+            i = 0
+            for row in csv_reader:
+                if i < i_resume:
+                    pass
+                else:
+                    print(f"\nWebsite #{(i+1)}")
+                    NDOM_website = NaiveDOM(
+                        location=row["SITOWEBSCUOLA"],
+                        alias=row["CODICESCUOLA"],
+                        driver=driver,
+                        driver_close_at_end=False,
+                    )
+                    new_row = NDOM_website.get_features()
+                    for feature_askable in FEATURES_ASKABLE:
+                        new_row[feature_askable] = float(input("- " + feature_askable + ": "))
+                    csv_writer.writerow(new_row)
+                i = i + 1
+    print(f"Done.")
+
+
 if __name__ == "__main__":
+    # crea dataset degli URL validi
+    """
     with open("useful_TGIS.txt") as f:
         useful_TGIS = f.read().splitlines()
 
-    # Crea dataset degli URL validi
     create_dataset_schools(useful_TGIS=useful_TGIS)
+    """
+
+    # crea dataset delle feature di ciascun url
+    create_dataset_features(i_resume=202 - 1)

@@ -13,7 +13,7 @@ from bs4 import (
 )
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
 from agent.ndom.NaiveDOMSearcher import NaiveDOMSearcher
-from agent.preproc.dataset_creator import _create_driver
+from agent.preproc.utils import _create_driver
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -93,7 +93,7 @@ TASKS_DEFAULT = {
 # 1^ parte features del NDOM che verranno considerate in un modello di apprendimento
 ds2_features_part = [
     "school_id",
-    "school_url",
+    "page_url",
     "page_load_time_ms",
     "page_width",
     "page_height",
@@ -102,7 +102,7 @@ ds2_features_part = [
 ]
 
 # 2^ parte features del sito che verranno considerate in un modello di apprendimento
-ds2_features_askable = ["page_template", "menu_orientation", "num_clickable_multim", "metric"]
+ds2_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]
 
 # features incluse nel modello di apprendimento
 ds2_features = ds2_features_part + ds2_features_askable + list(TASKS_DEFAULT.keys())
@@ -170,6 +170,7 @@ class NaiveDOM:
         ) ** 0.5
 
         # funzione di costo in base alla distanza
+        # https://www.desmos.com/calculator/wf68sucipn?lang=it
         arc_cost = round(((distance * exp(1.3) / (defs.BROWSER_DIAG))), 2)
 
         return arc_cost
@@ -363,8 +364,9 @@ class NaiveDOM:
         # il dizionario delle features è un attributo del NDOM
         self.features = dict()
 
-        # ottenimento sorgente e (eventualmente) driver selenium
         print(f"Building NDOM for {self.location}")
+
+        # ottenimento sorgente e istanza driver
         print(f"Reading HTML...")
         if from_file:
             with open(location, "r") as f:
@@ -409,7 +411,7 @@ class NaiveDOM:
         # popola features
         print("Populating features...")
         self.features["school_id"] = alias
-        self.features["school_url"] = self.location
+        self.features["page_url"] = self.location
         self.features["page_load_time_ms"] = int((load_end - load_start).total_seconds() * 1000)
         # "page_width" -> assegnato
         # "page_height" -> assegnato

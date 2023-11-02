@@ -11,6 +11,11 @@ ID: CODICESCUOLA
 Description: Dataset delle scuole pubbliche italiane (a.s. 2023/2024) in cui sono state rimosse features inutili e sostituiti i link non validi.
 Notes: Tempo di creazione: 2 ore circa
 ==========
+No: 1_clean_unique
+Name: SCUANAGRAFE202324_clean_unique.csv
+ID: CODICESCUOLA
+Description: Dataset delle scuole pubbliche italiane (a.s. 2023/2024) in cui sono state rimosse features inutili e sostituiti i link non validi. Rimossi i siti duplicati.
+==========
 No: 2
 Name: SCUANAGRAFE202324_features.csv
 ID: CODICESCUOLA

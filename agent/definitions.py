@@ -13,6 +13,7 @@ DIR_DATASETS = DIR_ROOT / "datasets"
 
 ds1_path = DIR_DATASETS / "SCUANAGRAFESTAT20232420230901.csv"
 ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_clean.csv"
+ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE_clean_unique.csv"  # senza siti duplicati
 ds2_path = DIR_DATASETS / "SCUANAGRAFE202324_features.csv"
 
 # User-Agent

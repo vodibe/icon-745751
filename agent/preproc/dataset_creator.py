@@ -130,7 +130,7 @@ def create_dataset_features(i_resume=1):
     di SL e UL.
 
     Args:
-        i_resume (int, optional): Numero del sito a partire dal quale procedere. Default: 0.
+        i_resume (int, optional): Numero del sito a partire dal quale procedere. Default: 1.
     """
 
     print("Creating dataset of features for each website...")
@@ -186,7 +186,7 @@ if __name__ == "__main__":
     """
 
     # crea dataset delle feature di ciascun url
-    create_dataset_features(i_resume=1)
+    create_dataset_features(i_resume=638)
 
     # todo: cancellare le righe dove la metrica è -1 (siti non corretti)
     # todo: cancellare duplicati, cioè scuole con stesso sito. far rimanere solo 1.

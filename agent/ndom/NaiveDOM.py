@@ -85,7 +85,7 @@ TASKS_DEFAULT = {
     "task3": ["notizie", "news", "eventi"],
     "task4": ["progetti", "progetto", "projects"],
     "task5": ["regolamento", "regolamenti", "regolamentazione"],
-    "task6": ["amministrazione trasparente"],
+    "task6": ["amministrazione trasparente", "ammin. trasparente"],
     "task7": ["registro"],
     "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }

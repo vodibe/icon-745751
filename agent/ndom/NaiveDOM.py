@@ -121,8 +121,6 @@ class NaiveDOM:
         - nodes_goal (list): lista di nodi obiettivo. Cambia a seconda del task da svolgere
         - pen_task_nf (int): costo di default di un task per il quale non esistono nodi obiettivo
         - features (dict): dizionario: feature:valore utile per i modelli di SL.
-
-
     """
 
     def _calc_arc_cost(self, driver: webdriver, NDOM_parent_xpath, xpath) -> float:
@@ -352,6 +350,18 @@ class NaiveDOM:
         driver: webdriver = None,
         driver_close_at_end=True,
     ):
+        """Costruisce un NDOM.
+
+        Args:
+            - location (str): Percorso o URL della pagina.
+            - alias (str, optional): Stringa del NDOM. Default: "".
+            - from_file (bool, optional): True se location è un percorso. Default: False.
+            - driver (webdriver, optional): Istanza di webdriver. Default: None.
+            - driver_close_at_end (bool, optional): True se l'istanza webdriver viene terminata dopo aver costruito il NDOM. Default: True.
+
+        Returns:
+            NaiveDOM: NaiveDOM costruito
+        """
         # inizializzazione attributi
         self.location = location
         self.nodes = {}  # dict xpath:label

@@ -186,7 +186,7 @@ if __name__ == "__main__":
     """
 
     # crea dataset delle feature di ciascun url
-    create_dataset_features(i_resume=1406)
+    create_dataset_features(i_resume=1592)
 
     # todo: cancellare le righe dove la metrica è -1 (siti non corretti)
     # todo: cancellare duplicati, cioè scuole con stesso sito. far rimanere solo 1.

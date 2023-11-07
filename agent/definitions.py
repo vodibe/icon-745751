@@ -11,10 +11,14 @@ DIR_ROOT = Path(__file__).parent.parent
 # icon-745751/datasets
 DIR_DATASETS = DIR_ROOT / "datasets"
 
-ds1_path = DIR_DATASETS / "SCUANAGRAFESTAT20232420230901.csv"
-ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_clean.csv"
-ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE_clean_unique.csv"  # senza siti duplicati
-ds2_path = DIR_DATASETS / "SCUANAGRAFE202324_features.csv"
+ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # ds originale
+ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"  # ds senza altre scuole + url fix
+ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"  # ds senza duplicati
+
+ds2_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"  # ds gt (solo feature richieste)
+
+ds3_gt_full_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_full.csv"  # per modelli di apprendimento
+
 
 # User-Agent
 headers = {

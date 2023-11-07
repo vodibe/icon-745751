@@ -1,7 +1,7 @@
 import csv
 import requests
 import agent.definitions as defs
-from agent.ndom.NaiveDOM import ds2_features, ds2_features_askable, NaiveDOM
+from agent.ndom.NaiveDOM import ds3_features_pk, ds3_features_askable, ds3_features, NaiveDOM
 from utils import _create_driver
 
 
@@ -61,7 +61,7 @@ def process_url(url):
         return url
 
 
-def create_dataset_schools(useful_TGIS):
+def create_ds1_clean(useful_TGIS):
     """A partire dal CSV memorizzato in ds1_path, crea un CSV
     memorizzato in DATASET_DIR contenente solo le scuole utili
     (nel nostro caso le scuole superiori)
@@ -70,12 +70,13 @@ def create_dataset_schools(useful_TGIS):
         - useful_TGIS (list): tipologie di scuole utili (TipologiaGradoIstruzioneScuola)
     """
 
-    print("Creating dataset of useful schools...")
+    print("Creating ds1_clean (useful schools + URL fix)...")
+
     with open(defs.ds1_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in)
 
         # features del nuovo file CSV
-        ds1_features = [
+        ds1_clean_features = [
             "CODICESCUOLA",
             "DENOMINAZIONESCUOLA",
             "CODICEISTITUTORIFERIMENTO",
@@ -90,7 +91,7 @@ def create_dataset_schools(useful_TGIS):
         ]
 
         # features che non vanno inserite nel nuovo file CSV
-        ds1_features_excluded = [
+        ds1_clean_features_excluded = [
             "ANNOSCOLASTICO",
             "INDIRIZZOSCUOLA",
             "CODICECOMUNESCUOLA",
@@ -103,7 +104,7 @@ def create_dataset_schools(useful_TGIS):
         ]
 
         with open(defs.ds1_clean_path, "w", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=ds1_features)
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds1_clean_features)
             csv_writer.writeheader()
 
             for row in csv_reader:
@@ -117,35 +118,32 @@ def create_dataset_schools(useful_TGIS):
                     if school_url is not None:
                         new_row = row
                         new_row["SITOWEBSCUOLA"] = school_url
-                        for feature in ds1_features_excluded:
+                        for feature in ds1_clean_features_excluded:
                             del new_row[feature]
 
                         csv_writer.writerow(new_row)
 
-    print(f"Done. {defs.ds1_clean_path}")
+    print("Done.")
 
 
-def create_dataset_features(i_resume=1):
-    """Crea il dataset delle feature per ciascun sito. Necessario per addestrare i modelli
-    di SL e UL.
+def create_ds2_gt(i_resume=1):
+    """Crea il dataset ground truth delle feature per ciascun sito.
 
     Args:
         i_resume (int, optional): Numero del sito a partire dal quale procedere. Default: 1.
     """
 
-    print("Creating dataset of features for each website...")
     # validazione indice di ripresa
     i_resume = 0 if i_resume <= 1 else (i_resume - 1)
-    print(f"(Starting at {i_resume})")
 
-    # creo driver condiviso da tutti i NDOM che vado a creare
-    driver = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
+    print(f"Creating ds2_gt (user ground truth) (starting at {i_resume})...")
 
+    browser = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
     with open(defs.ds1_clean_unique_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in, delimiter=";")
 
-        with open(defs.ds2_path, "a", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=ds2_features)
+        with open(defs.ds2_gt_path, "a", newline="") as csv_out:
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features_pk + ds3_features_askable)
 
             if i_resume == 0:
                 csv_writer.writeheader()
@@ -155,38 +153,76 @@ def create_dataset_features(i_resume=1):
                 if i < i_resume:
                     pass
                 else:
-                    # analisi sito
+                    # l'utente visualizza il sito
                     print(f"\nWebsite #{(i+1)}")
-                    NDOM_website = NaiveDOM(
-                        location=row["SITOWEBSCUOLA"],
-                        alias=row["CODICESCUOLA"],
-                        driver=driver,
-                        driver_close_at_end=False,
-                    )
+                    browser.get(row["SITOWEBSCUOLA"])
 
-                    # a partire dal NDOM, ottieni le features
-                    new_row = NDOM_website.get_features()
+                    new_row = dict()
 
-                    # ottieni le altre features
-                    for feature_askable in ds2_features_askable:
+                    # features pk assegnate automaticamente per identificare il sito corrente
+                    new_row["school_id"] = row["CODICESCUOLA"]
+                    new_row["page_url"] = row["SITOWEBSCUOLA"]
+
+                    # richiedi le altre features
+                    for feature_askable in ds3_features_askable:
                         new_row[feature_askable] = float(input("- " + feature_askable + ": "))
 
                     csv_writer.writerow(new_row)
                 i = i + 1
-    print(f"Done.")
+    print("Done.")
+
+
+def create_ds3_gt_full():
+    """Crea il dataset delle feature per ciascun sito. Necessario per addestrare i modelli
+    di SL e UL.
+    """
+
+    print("Creating ds3_gt_full (features for each website)...")
+
+    # creo driver condiviso da tutti i NDOM che vado a creare
+    driver = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
+
+    with open(defs.ds2_gt_path, "r") as csv_in:
+        csv_reader = csv.DictReader(csv_in)
+
+        with open(defs.ds3_gt_full_path, "w", newline="") as csv_out:
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features)
+            csv_writer.writeheader()
+
+            for row in csv_reader:
+                # analisi sito
+                NDOM_website = NaiveDOM(
+                    location=row["page_url"],
+                    alias=row["school_id"],
+                    driver=driver,
+                    driver_close_at_end=False,
+                )
+
+                # a partire dal NDOM, ottieni le features
+                new_row = NDOM_website.get_features()
+
+                # ottieni le altre features
+                for feature_askable in ds3_features_askable:
+                    new_row[feature_askable] = row[feature_askable]
+
+                csv_writer.writerow(new_row)
+    print("Done.")
 
 
 if __name__ == "__main__":
-    # crea dataset degli URL validi
-    """
+    """'
     with open("useful_TGIS.txt") as f:
         useful_TGIS = f.read().splitlines()
 
-    create_dataset_schools(useful_TGIS=useful_TGIS)
+    create_ds1_clean(useful_TGIS=useful_TGIS)
     """
 
-    # crea dataset delle feature di ciascun url
-    create_dataset_features(i_resume=1622)
+    # crea ds1_clean_unique (ds senza siti duplicati) (fatto con excel)
 
-    # todo: cancellare le righe dove la metrica è -1 (siti non corretti)
-    # todo: cancellare duplicati, cioè scuole con stesso sito. far rimanere solo 1.
+    """
+    create_ds2_gt(i_resume=1)
+    """
+
+    create_ds3_gt_full()
+
+    # aggiorna ds3_gt_full togliendo siti per i quali metric=-1

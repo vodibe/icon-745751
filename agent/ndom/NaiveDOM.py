@@ -78,6 +78,21 @@ _TAG_PARENTS = [
 # nodi del DOM che per certo rappresentano una foglia del NDOM
 _TAG_LEAFS = ["a", "h1", "h2", "h3", "h4", "h5", "h6", "img", "p"]
 
+# 1^ parte features che verranno considerate in un modello di apprendimento
+ds3_features_pk = ["school_id", "page_url"]
+
+# 3^ parte features
+ds3_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]
+
+# 2^ parte features
+ds3_features_part = [
+    "page_load_time_ms",
+    "page_width",
+    "page_height",
+    "NDOM_nodes",
+    "NDOM_height",
+]
+
 # dizionario dei target predefinito
 TASKS_DEFAULT = {
     "task1": ["circolari", "comunicazioni", "circolare"],
@@ -90,22 +105,10 @@ TASKS_DEFAULT = {
     "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
 }
 
-# 1^ parte features del NDOM che verranno considerate in un modello di apprendimento
-ds2_features_part = [
-    "school_id",
-    "page_url",
-    "page_load_time_ms",
-    "page_width",
-    "page_height",
-    "NDOM_nodes",
-    "NDOM_height",
-]
-
-# 2^ parte features del sito che verranno considerate in un modello di apprendimento
-ds2_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]
-
 # features incluse nel modello di apprendimento
-ds2_features = ds2_features_part + ds2_features_askable + list(TASKS_DEFAULT.keys())
+ds3_features = (
+    ds3_features_pk + ds3_features_part + ds3_features_askable + list(TASKS_DEFAULT.keys())
+)
 
 
 class NaiveDOM:

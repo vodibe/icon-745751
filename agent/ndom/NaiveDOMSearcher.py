@@ -37,7 +37,7 @@ class NaiveDOMSearcher:
         """Modifica i nodi obiettivo del problema, senza modificare gli altri attributi
 
         Args:
-            goals (list): Lista dei nuovi nodi obiettivo
+            - goals (list): Lista dei nuovi nodi obiettivo
         """
 
         self.problem.set_goals(goals)

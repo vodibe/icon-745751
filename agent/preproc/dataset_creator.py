@@ -130,7 +130,7 @@ def create_ds2_gt(i_resume=1):
     """Crea il dataset ground truth delle feature per ciascun sito.
 
     Args:
-        i_resume (int, optional): Numero del sito a partire dal quale procedere. Default: 1.
+        - i_resume (int, optional): Numero del sito a partire dal quale procedere. Default: 1.
     """
 
     # validazione indice di ripresa
@@ -138,7 +138,9 @@ def create_ds2_gt(i_resume=1):
 
     print(f"Creating ds2_gt (user ground truth) (starting at {i_resume})...")
 
+    # creo browser per far visualizzare la pagina all'utente
     browser = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
+
     with open(defs.ds1_clean_unique_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in, delimiter=";")
 
@@ -172,12 +174,12 @@ def create_ds2_gt(i_resume=1):
     print("Done.")
 
 
-def create_ds3_gt_full():
-    """Crea il dataset delle feature per ciascun sito. Necessario per addestrare i modelli
-    di SL e UL.
+def create_ds3_gt():
+    """Crea il dataset di tutte le feature per ciascun sito.
+    Necessario per addestrare i modelli di SL e UL.
     """
 
-    print("Creating ds3_gt_full (features for each website)...")
+    print("Creating ds3_gt (features for each website)...")
 
     # creo driver condiviso da tutti i NDOM che vado a creare
     driver = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
@@ -209,6 +211,28 @@ def create_ds3_gt_full():
     print("Done.")
 
 
+def create_ds3_gt_final():
+    """Rimuove i siti con metrica -1, ovvero quei siti che risultano raggiungibili ma
+    non sono validi (es. cambio dominio, in manutenzione, siti di scuole non correttamente
+    catalogate nel ds1.)
+    """
+
+    print("Creating ds3_gt_final (removing invalid websites)...")
+
+    with open(defs.ds3_gt_path, "r") as csv_in:
+        csv_reader = csv.DictReader(csv_in)
+
+        with open(defs.ds3_gt_final_path, "w", newline="") as csv_out:
+            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features)
+            csv_writer.writeheader()
+
+            for row in csv_reader:
+                metric = float(row["metric"])
+                if metric >= defs.METRIC_MIN_VALUE and metric <= defs.METRIC_MAX_VALUE:
+                    csv_writer.writerow(row)
+    print("Done.")
+
+
 if __name__ == "__main__":
     """'
     with open("useful_TGIS.txt") as f:
@@ -219,10 +243,8 @@ if __name__ == "__main__":
 
     # crea ds1_clean_unique (ds senza siti duplicati) (fatto con excel)
 
-    """
-    create_ds2_gt(i_resume=1)
-    """
+    # create_ds2_gt(i_resume=1)
 
-    create_ds3_gt_full()
+    # create_ds3_gt()
 
-    # aggiorna ds3_gt_full togliendo siti per i quali metric=-1
+    # create_ds3_gt_final()

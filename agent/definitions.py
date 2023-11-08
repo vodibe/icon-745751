@@ -25,6 +25,9 @@ ds2_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"  # ds gt (solo feature
 ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # ds gt con tutte le features
 ds3_gt_final_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"  # ds gt senza siti non validi
 
+test_path = DIR_DATASETS / "test.csv"
+
 # metrica
 METRIC_MIN_VALUE = 1
 METRIC_MAX_VALUE = 5
+METRIC_STEP = 0.1

@@ -78,38 +78,6 @@ _TAG_PARENTS = [
 # nodi del DOM che per certo rappresentano una foglia del NDOM
 _TAG_LEAFS = ["a", "h1", "h2", "h3", "h4", "h5", "h6", "img", "p"]
 
-# 1^ parte features che verranno considerate in un modello di apprendimento
-ds3_features_pk = ["school_id", "page_url"]
-
-# 2^ parte features
-ds3_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]
-
-# 3^ parte features
-ds3_features_part = [
-    "page_load_time_ms",
-    "page_width",
-    "page_height",
-    "NDOM_nodes",
-    "NDOM_height",
-]
-
-# dizionario dei target predefinito
-TASKS_DEFAULT = {
-    "task1": ["circolari", "comunicazioni", "circolare"],
-    "task2": ["organigramma", "organizzazione", "schema organizzativo", "persone"],
-    "task3": ["notizie", "news", "eventi"],
-    "task4": ["progetti", "progetto", "projects"],
-    "task5": ["regolamento", "regolamenti", "regolamentazione"],
-    "task6": ["amministrazione trasparente", "ammin. trasparente"],
-    "task7": ["registro"],
-    "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
-}
-
-# features incluse nel modello di apprendimento
-ds3_features = (
-    ds3_features_pk + ds3_features_part + ds3_features_askable + list(TASKS_DEFAULT.keys())
-)
-
 
 class NaiveDOM:
     """Classe che modella un modello DOM più semplice della pagina web, chiamato NaiveDOM
@@ -176,7 +144,7 @@ class NaiveDOM:
 
         return arc_cost
 
-    def _calc_task_cost(self, tasks: dict = TASKS_DEFAULT):
+    def _calc_task_cost(self, tasks: dict = defs.TASKS_DEFAULT):
         """A partire dal NDOM e da una lista di task, calcola il costo in usabilità
         necessario per svolgere questi task. Se un task non può essere portato a termine
         (perchè non ci sono nodi obiettivo), si assume che tale task viene eseguito con
@@ -389,7 +357,7 @@ class NaiveDOM:
             # r = requests.get(location, headers=defs.headers)
             # html = r.text
             if not driver:
-                driver = _create_driver()
+                driver = _create_driver(defs.BROWSER_WIDTH, defs.BROWSER_HEIGHT)
 
             load_start = datetime.datetime.now()
             driver.get(location)
@@ -459,7 +427,6 @@ class NaiveDOM:
             pos,
             edge_labels=dict(((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs),
         )
-
         plt.show()
 
 
@@ -467,5 +434,5 @@ if __name__ == "__main__":
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
     NDOM_website1 = NaiveDOM("https://itisandria.edu.it/")
 
-    print(NDOM_website1.get_features())
+    # print(NDOM_website1.get_features())
     NDOM_website1.plot()

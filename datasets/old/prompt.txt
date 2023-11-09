@@ -1,0 +1,14 @@
+(venv) PS C:\Users\user\Desktop\icon-745751\agent\models> python supervised.py
+Detecting noisy rows...
+      school_id                           page_url  page_load_time_ms  page_width  page_height  ...  task4  task5  task6  task7  task8
+805  SVRC00601R  https://www.mazzinidavinci.edu.it               1407        1587         2509  ...   3.32   6.50   2.59   2.97   2.43
+924  BATD056016      https://www.itescarafa.edu.it               2559        1587         6287  ...   5.40   3.77   5.08   7.00  13.77
+701  PZSD00201X    https://www.ipsiapotenza.edu.it                506        1604          848  ...   6.50   6.50   6.50   6.50   6.50
+
+[3 rows x 19 columns]
+
+(venv) PS C:\Users\user\Desktop\icon-745751\agent\models> python supervised.py
+Detecting noisy rows...
+Empty DataFrame
+Columns: [school_id, page_url, page_load_time_ms, page_width, page_height, NDOM_nodes, NDOM_height, page_template, page_menu_or, page_ungrouped_multim, metric, task1, task2, task3, task4, task5, task6, task7, task8]
+Index: []

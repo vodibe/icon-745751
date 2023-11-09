@@ -1,7 +1,7 @@
 import csv
 import requests
 import agent.definitions as defs
-from agent.ndom.NaiveDOM import ds3_features_pk, ds3_features_askable, ds3_features, NaiveDOM
+from agent.ndom.NaiveDOM import NaiveDOM
 from utils import _create_driver
 
 
@@ -145,7 +145,9 @@ def create_ds2_gt(i_resume=1):
         csv_reader = csv.DictReader(csv_in, delimiter=";")
 
         with open(defs.ds2_gt_path, "a", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features_pk + ds3_features_askable)
+            csv_writer = csv.DictWriter(
+                csv_out, fieldnames=defs.ds3_features_pk + defs.ds3_features_askable
+            )
 
             if i_resume == 0:
                 csv_writer.writeheader()
@@ -166,7 +168,7 @@ def create_ds2_gt(i_resume=1):
                     new_row["page_url"] = row["SITOWEBSCUOLA"]
 
                     # richiedi le altre features
-                    for feature_askable in ds3_features_askable:
+                    for feature_askable in defs.ds3_features_askable:
                         new_row[feature_askable] = float(input("- " + feature_askable + ": "))
 
                     csv_writer.writerow(new_row)
@@ -188,7 +190,7 @@ def create_ds3_gt():
         csv_reader = csv.DictReader(csv_in)
 
         with open(defs.ds3_gt_full_path, "w", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features)
+            csv_writer = csv.DictWriter(csv_out, fieldnames=defs.ds3_features)
             csv_writer.writeheader()
 
             for row in csv_reader:
@@ -204,7 +206,7 @@ def create_ds3_gt():
                 new_row = NDOM_website.get_features()
 
                 # ottieni le altre features
-                for feature_askable in ds3_features_askable:
+                for feature_askable in defs.ds3_features_askable:
                     new_row[feature_askable] = row[feature_askable]
 
                 csv_writer.writerow(new_row)
@@ -223,7 +225,7 @@ def create_ds3_gt_final():
         csv_reader = csv.DictReader(csv_in)
 
         with open(defs.ds3_gt_final_path, "w", newline="") as csv_out:
-            csv_writer = csv.DictWriter(csv_out, fieldnames=ds3_features)
+            csv_writer = csv.DictWriter(csv_out, fieldnames=defs.ds3_features)
             csv_writer.writeheader()
 
             for row in csv_reader:

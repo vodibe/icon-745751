@@ -24,6 +24,7 @@ ds2_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"  # ds gt (solo feature
 
 ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # ds gt con tutte le features
 ds3_gt_final_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"  # ds gt senza siti non validi
+ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # gt no val non validi
 
 test_path = DIR_DATASETS / "test.csv"
 

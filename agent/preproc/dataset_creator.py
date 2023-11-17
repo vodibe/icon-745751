@@ -189,7 +189,7 @@ def create_ds3_gt():
     with open(defs.ds2_gt_path, "r") as csv_in:
         csv_reader = csv.DictReader(csv_in)
 
-        with open(defs.ds3_gt_full_path, "w", newline="") as csv_out:
+        with open(defs.ds3_gt_path, "w", newline="") as csv_out:
             csv_writer = csv.DictWriter(csv_out, fieldnames=defs.ds3_features)
             csv_writer.writeheader()
 

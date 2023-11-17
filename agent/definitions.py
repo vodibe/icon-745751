@@ -28,6 +28,10 @@ ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # g
 
 test_path = DIR_DATASETS / "test.csv"
 
+# algoritmi di ricerca non informati di default
+uninformed_search_algs = ["DFS", "BFS", "LCFS"]
+benchmark_search_algs_ = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
+
 # features
 ds3_features_pk = ["school_id", "page_url"]
 ds3_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]

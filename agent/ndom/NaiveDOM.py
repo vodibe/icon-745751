@@ -12,6 +12,7 @@ from bs4 import (
     TemplateString,
 )
 from agent.libs.aipython.searchProblem import Arc, Search_problem_from_explicit_graph
+from agent.libs.aipython.searchGeneric import Searcher
 from agent.ndom.NaiveDOMSearcher import NaiveDOMSearcher
 from agent.preproc.utils import _create_driver
 
@@ -186,10 +187,16 @@ class NaiveDOM:
             # a uno dei nodi obiettivo per quel task
             if self.nodes_goal:
                 problem.set_goals(self.nodes_goal)
-                NDOM_searcher = NaiveDOMSearcher(problem)
+
+                if self.search_alg == "NaiveDOMSearcher":
+                    NDOM_searcher = NaiveDOMSearcher(problem)
+                else:
+                    NDOM_searcher = Searcher(problem, self.search_alg)
 
                 # restituisce un oggetto Path se esiste un percorso, None altrimenti
                 task_path = NDOM_searcher.search()
+
+                self.nodes_expanded_per_task[task_id] = NDOM_searcher.num_expanded
 
                 pen_paths_expanded = NDOM_searcher.num_expanded / 280 - 0.2
                 pen_paths_expanded = 0 if pen_paths_expanded < 0 else pen_paths_expanded
@@ -201,6 +208,7 @@ class NaiveDOM:
                 self.features[task_id] = task_cost
             else:
                 self.features[task_id] = self.pen_task_nf
+                self.nodes_expanded_per_task[task_id] = len(self.nodes)
 
     def _browse_DOM(
         self,
@@ -320,6 +328,7 @@ class NaiveDOM:
         from_file=False,
         driver: webdriver = None,
         driver_close_at_end=True,
+        search_alg="NaiveDOMSearcher",
     ):
         """Costruisce un NDOM.
 
@@ -341,6 +350,8 @@ class NaiveDOM:
         self.start = None
         self.nodes_goal = []
         self.pen_task_nf = None
+        self.search_alg = search_alg
+        self.nodes_expanded_per_task = {task: 0 for task, val in defs.TASKS_DEFAULT.items()}
 
         # il dizionario delle features è un attributo del NDOM
         self.features = dict()
@@ -407,7 +418,6 @@ class NaiveDOM:
 
     def get_features(self) -> dict:
         """Restituisce un dizionario feature:valore"""
-
         return self.features
 
     def plot(self):

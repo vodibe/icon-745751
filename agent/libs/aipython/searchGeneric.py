@@ -8,62 +8,8 @@
 # Attribution-NonCommercial-ShareAlike 4.0 International License.
 # See: http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
 
+import agent.definitions as defs
 from agent.libs.aipython.display import Displayable, visualize
-
-
-class Searcher(Displayable):
-    """returns a searcher for a problem.
-    Paths can be found by repeatedly calling search().
-    This does depth-first search unless overridden
-    """
-
-    def __init__(self, problem):
-        """creates a searcher from a problem"""
-        self.problem = problem
-        self.initialize_frontier()
-        self.num_expanded = 0
-        self.add_to_frontier(Path(problem.start_node()))
-        super().__init__()
-
-    def initialize_frontier(self):
-        self.frontier = []
-
-    def empty_frontier(self):
-        return self.frontier == []
-
-    def add_to_frontier(self, path):
-        self.frontier.append(path)
-
-    @visualize
-    def search(self):
-        """returns (next) path from the problem's start node
-        to a goal node.
-        Returns None if no path exists.
-        """
-        while not self.empty_frontier():
-            path = self.frontier.pop()
-            self.display(2, "Expanding:", path, "(cost:", path.cost, ")")
-            self.num_expanded += 1
-            if self.problem.is_goal(path.end()):  # solution found
-                self.display(
-                    1,
-                    self.num_expanded,
-                    "paths have been expanded and",
-                    len(self.frontier),
-                    "paths remain in the frontier",
-                )
-                self.solution = path  # store the solution found
-                return path
-            else:
-                neighs = self.problem.neighbors(path.end())
-                self.display(3, "Neighbors are", neighs)
-                for arc in reversed(list(neighs)):
-                    self.add_to_frontier(Path(path, arc))
-                self.display(3, "Frontier:", self.frontier)
-        self.display(
-            1, "No (more) solutions. Total of", self.num_expanded, "paths expanded."
-        )
-
 
 # Depth-first search for problem1; do the following:
 # searcher1 = Searcher(searchProblem.problem1)
@@ -123,6 +69,83 @@ class FrontierPQ(object):
             yield path
 
 
+class Searcher(Displayable):
+    """returns a searcher for a problem.
+    Paths can be found by repeatedly calling search().
+    This does depth-first search unless overridden
+    """
+
+    def __init__(self, problem, algorithm="DFS"):
+        """creates a searcher from a problem"""
+        if algorithm not in defs.uninformed_search_algs:
+            raise ValueError(f"Search algorithms allowed: {defs.uninformed_search_algs}")
+        self.algorithm = algorithm
+        self.problem = problem
+        self.initialize_frontier()
+        self.num_expanded = 0
+        self.add_to_frontier(Path(problem.start_node()))
+        super().__init__()
+
+    def initialize_frontier(self):
+        if self.algorithm == "DFS" or self.algorithm == "BFS":
+            self.frontier = []
+        elif self.algorithm == "LCFS":
+            self.frontier = FrontierPQ()
+
+    def empty_frontier(self):
+        if self.algorithm == "DFS" or self.algorithm == "BFS":
+            return self.frontier == []
+        elif self.algorithm == "LCFS":
+            return self.frontier.empty()
+
+    def add_to_frontier(self, path):
+        if self.algorithm == "DFS" or self.algorithm == "BFS":
+            self.frontier.append(path)
+        elif self.algorithm == "LCFS":
+            self.frontier.add(path, path.cost)
+
+    def pop_frontier(self):
+        if self.algorithm == "DFS":
+            path = self.frontier.pop()
+        elif self.algorithm == "BFS":
+            path = self.frontier.pop(0)
+        elif self.algorithm == "LCFS":
+            path = self.frontier.pop()
+
+        return path
+
+    @visualize
+    def search(self):
+        """returns (next) path from the problem's start node
+        to a goal node.
+        Returns None if no path exists.
+        """
+        while not self.empty_frontier():
+            path = self.pop_frontier()
+
+            self.display(2, "Expanding:", path, "(cost:", path.cost, ")")
+            self.num_expanded += 1
+            if self.problem.is_goal(path.end()):  # solution found
+                self.display(
+                    1,
+                    self.num_expanded,
+                    "paths have been expanded and",
+                    len(self.frontier),
+                    "paths remain in the frontier",
+                )
+                self.solution = path  # store the solution found
+                return path
+            else:
+                neighs = self.problem.neighbors(path.end())
+                self.display(3, "Neighbors are", neighs)
+                for arc in reversed(list(neighs)):
+                    self.add_to_frontier(Path(path, arc))
+
+                # -----
+                self.display(3, "Frontier:", self.frontier)
+        self.display(1, "No (more) solutions. Total of", self.num_expanded, "paths expanded.")
+
+
 class AStarSearcher(Searcher):
     """returns a searcher for a problem.
     Paths can be found by repeatedly calling search().
@@ -146,9 +169,7 @@ class AStarSearcher(Searcher):
 import agent.libs.aipython.searchProblem as searchProblem
 
 
-def test(
-    SearchClass, problem=searchProblem.problem1, solutions=[["G", "D", "B", "C", "A"]]
-):
+def test(SearchClass, problem=searchProblem.problem1, solutions=[["G", "D", "B", "C", "A"]]):
     """Unit test for aipython searching algorithms.
     SearchClass is a class that takes a problem and implements search()
     problem is a search problem

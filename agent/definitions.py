@@ -1,4 +1,5 @@
 from pathlib import Path
+import numpy as np
 
 # larghezza e altezza schermo
 BROWSER_WIDTH = 1600
@@ -94,4 +95,26 @@ ds3_gt_feature_domains = {
     "task6": lambda v: v >= 0,
     "task7": lambda v: v >= 0,
     "task8": lambda v: v >= 0,
+}
+
+# utili per BN
+
+DISCRETE_MAPPING_DEFAULT = {
+    "page_template": (True, True),
+    "page_menu_or": (True, True),
+    "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),
+    "metric": ([1, 2, 3, 4, np.inf], [1, 2, 3, 4]),
+    "page_load_time_ms": ([0, 1501, 3001, np.inf], [1, 2, 3]),
+    "page_width": ([0, 1800, np.inf], [1, 2]),
+    "page_height": ([0, 2001, 4001, 6001, np.inf], [1, 2, 3, 4]),
+    "NDOM_nodes": ([0, 501, 1001, 1501, np.inf], [1, 2, 3, 4]),
+    "NDOM_height": ([0, 5, 14, np.inf], [1, 2, 3]),
+    "task1": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task2": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task3": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task4": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task5": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task6": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task7": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task8": ([0, 10, 20, np.inf], [1, 2, 3]),
 }

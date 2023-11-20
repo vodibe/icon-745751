@@ -1,0 +1,33 @@
+page_template_id: 1
+URL: https://paswjoomla.net/Jipa4school/
+Content: <script src="/Jipa4school/templates/italiapa/js/uuid.min.js"></script>
+==========
+page_template_id: 2
+URL: http://paswjoomla.net/pasw/
+Content: <script src="/pasw/media/system/js/core.js
+<script src="/pasw4/media/system/js/core.js
+==========
+page_template_id: 3
+URL: http://paswjoomla.net/jfap/
+Content: <script src="/jfap/media/system/js/core.js
+==========
+page_template_id: 4
+URL: https://www.porteapertesulweb.it/
+Content:
+==========
+page_template_id: 5
+URL: https://italia.github.io/design-scuole-pagine-statiche/scuole-la-scuola.html
+Content: <script src="assets/js/bootstrap-italia.js"></script>
+==========
+page_template_id: 6
+URL: https://italiajoo.demoargoweb.com/
+Content:
+==========
+page_template_id: 7
+URL: https://italiawp.demoargoweb.com/
+Content:
+==========
+page_template_id: 8
+URL: https://www.liceopepecalamo.edu.it/
+Content: https://web.spaggiari.eu/www/app/default/index.php?p=pvb&s=pvb
+==========

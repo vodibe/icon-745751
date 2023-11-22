@@ -5,10 +5,13 @@ import pandas as pd
 from pandas import DataFrame
 
 from pgmpy.models import BayesianNetwork
-from pgmpy.estimators import MaximumLikelihoodEstimator
+from pgmpy.estimators import MaximumLikelihoodEstimator, ExpectationMaximization
 from pgmpy.inference import VariableElimination
 from pgmpy.readwrite import BIFWriter
 from pgmpy.factors.discrete import TabularCPD
+
+# variabili latenti
+BN_LATENT_VARS = ["_designer_taste"]
 
 # archi bn, il primo elemento della tupla è l'elemento da cui parte l'arco
 BN_EDGES_DEFAULT = [
@@ -30,11 +33,44 @@ BN_EDGES_DEFAULT = [
     ("page_height", "metric"),
 ]
 
-BN_LATENT_VARS = ["_designer_taste"]
-
-
-BN_ALREADY_KNOWN_CPTS = {
-    "page_ungrouped_multim": TabularCPD(),
+# cpt già conosciute
+BN_KNOWN_CPTS = {
+    # fmt: off
+    # 0-5   1
+    # 6-10  2
+    # 11-20 3
+    # 21+   4
+    TabularCPD(
+        variable="page_ungrouped_multim",
+        variable_card=len(defs.DISCRETE_MAPPING_DEFAULT["page_ungrouped_multim"][1]),
+        values=[
+            # 11     12   21     22   31    32     41   42    51     52   61    62    71    72    81    82    91     92
+            [0.45, 0.70, 0.22, 0.65, 0.22, 0.65, 0.22, 0.65, 0.60, 0.85, 0.30, 0.50, 0.42, 0.78, 0.08, 0.08, 0.2, 0.3],
+            [0.45, 0.20, 0.55, 0.25, 0.55, 0.25, 0.55, 0.25, 0.40, 0.15, 0.50, 0.48, 0.48, 0.21, 0.42, 0.50, 0.2, 0.3],
+            [0.05, 0.07, 0.22, 0.05, 0.22, 0.05, 0.22, 0.05, 0.00, 0.00, 0.15, 0.01, 0.05, 0.01, 0.42, 0.40, 0.3, 0.2],
+            [0.05, 0.03, 0.01, 0.05, 0.01, 0.05, 0.01, 0.05, 0.00, 0.00, 0.05, 0.01, 0.05, 0.00, 0.08, 0.02, 0.3, 0.2]
+        ],
+        evidence=["page_template", "_designer_taste"],
+        evidence_card=[
+            len(defs.DISCRETE_MAPPING_DEFAULT["page_template"][1]),
+            len(defs.DISCRETE_MAPPING_DEFAULT["_designer_taste"][1])
+        ]
+    ),
+    TabularCPD(
+        variable="page_menu_or",
+        variable_card=len(defs.DISCRETE_MAPPING_DEFAULT["page_menu_or"][1]),
+        values=[  # P(page_menu_or = x | page_template)
+            [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.16],
+            [0.97, 0.02, 0.04, 0.02, 0.97, 0.93, 0.93, 0.97, 0.28],
+            [0.01, 0.02, 0.05, 0.02, 0.01, 0.01, 0.01, 0.01, 0.28],
+            [0.01, 0.95, 0.90, 0.95, 0.01, 0.05, 0.05, 0.01, 0.28],
+        ],
+        evidence=["page_template"],
+        evidence_card=[
+            len(defs.DISCRETE_MAPPING_DEFAULT["page_template"][1])
+        ]
+    ),
+    # fmt: on
 }
 
 # queries da sottoporre alla bn
@@ -105,7 +141,7 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
 
     # discretizza variabili continue
     for feature_c in features_continuous:
-        if feature_c in mapping:
+        if feature_c in mapping and feature_c in ds:
             bins, labels = mapping[feature_c]
 
             ds[feature_c] = pd.cut(
@@ -115,13 +151,13 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
                 include_lowest=True,
                 right=False,
             )
-            ds[feature_c] = ds[feature_c].astype(int)  # int64
+            ds[feature_c] = ds[feature_c].astype("int64")  # int64
 
     # rendi int variabili discrete
     float64 = np.dtype("float64")
     for feature_d in features_discrete:
-        if ds[feature_d].dtype is float64:
-            ds[feature_d] = ds[feature_d].astype(int)  # np.int64
+        if feature_d in ds and ds[feature_d].dtype is float64:
+            ds[feature_d] = ds[feature_d].astype(np.int64)  # np.int64
 
 
 def bn_kf_cv(ds, bn):
@@ -129,51 +165,60 @@ def bn_kf_cv(ds, bn):
 
 
 if __name__ == "__main__":
+    # ----- operazioni su dataset
     # leggi dataset
     print("Reading dataset...")
     ds = pd.read_csv(defs.ds3_gt_no_noise_path)
-    ds = ds.drop(defs.ds3_features_excluded, axis=1)
+    bn_features_excluded = defs.ds3_features_excluded + [
+        "page_load_time_ms",
+        "task4",
+        "task5",
+        "task6",
+        "task7",
+        "task8",
+    ]
+    ds = ds.drop(bn_features_excluded, axis=1)
 
-    # discretizza perchè pgmpy supporta inferenza su distribuzione discrete
+    # discretizza perchè pgmpy supporta inferenza su distribuzioni discrete
     discretize_dataset(
         ds=ds,
         feature_domains=defs.ds3_gt_feature_domains,
         mapping=defs.DISCRETE_MAPPING_DEFAULT,
     )
 
-    # -----crea bn (aggiunge automaticamente i nodi)
+    # ----- crea bn
     print("Creating BN structure...")
-
-    for latent_var in BN_LATENT_VARS:
-        ds[latent_var] = np.nan
-
     bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT, latents=BN_LATENT_VARS)
-    bn.name = "bn_gt"
-
-    # apprendimento parametri (cpd) della rete bayesiana
-    print("Learning BN parameters (CPDs)...")
-    unknown_cpts_vars = list(set(bn.nodes()) - set(BN_ALREADY_KNOWN_CPTS.keys()))
-
-    bn_mle = MaximumLikelihoodEstimator(bn, ds)
-    bn_cpts = [bn_mle.estimate_cpd(var) for var in unknown_cpts_vars]
-
-    bn.add_cpds(bn_cpts)
-    bn.add_cpds(BN_ALREADY_KNOWN_CPTS.values())
-
-    """
-    print("Learning BN parameters (CPDs)...")
+    bn.name = "bn_gt.bif"
     bn_state_names = {
-        feature: [state_name for state_name in state_names]
+        feature: state_names
         for feature, (bins, state_names) in defs.DISCRETE_MAPPING_DEFAULT.items()
     }
-    bn.fit(ds, state_names=bn_state_names)
-    """
 
-    # controlla bn
+    # ----- apprendimento parametri (cpd) della rete bayesiana
+    print("Learning BN parameters (CPTs)...")
+    bn.add_cpds(*BN_KNOWN_CPTS)
+    bn.fit(
+        ds,
+        estimator=ExpectationMaximization,
+        state_names=bn_state_names,
+    )
+
+    # non serve
+    unknown_cpt_vars = list(
+        set(bn.nodes()) - set({cpt.variable for cpt in BN_KNOWN_CPTS})
+    )
+
+    # -----------controlla bn
     if bn.check_model():
         print("Saving...")
-        writer = BIFWriter(bn)
-        writer.write_bif(f"./bif/{bn.name}.bif")
+        bif_writer = BIFWriter(bn)
+        bif_writer.write_bif(defs.DIR_BIF / bn.name)
+
+    for cpd in bn.get_cpds():
+        print(cpd)
+
+    sys.exit(0)
 
     # query
     infer_engine = VariableElimination(bn)

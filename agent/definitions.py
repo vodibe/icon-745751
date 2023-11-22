@@ -17,27 +17,20 @@ DIR_ROOT = Path(__file__).parent.parent
 # icon-745751/datasets
 DIR_DATASETS = DIR_ROOT / "datasets"
 
-ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # ds originale
-ds1_clean_path = (
-    DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"
-)  # ds senza altre scuole + url fix
-ds1_clean_unique_path = (
-    DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"
-)  # ds senza duplicati
+# ds originale
+ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # originale
+ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"  # no altre scuole+urlfix
+ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"  # no dupl.
 
-ds2_gt_path = (
-    DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"
-)  # ds gt (solo feature richieste)
+ds2_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"  # gt con solo feature richieste
 
-ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # ds gt con tutte le features
-ds3_gt_final_path = (
-    DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"
-)  # ds gt senza siti non validi
-ds3_gt_no_noise_path = (
-    DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"
-)  # gt no val non validi
+ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # gt con tutte feature
+ds3_gt_final_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"  # gt senza siti nv.
+ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # gt no rum.
 
 test_path = DIR_DATASETS / "test.csv"
+
+DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
 # algoritmi di ricerca non informati di default
 uninformed_search_algs = ["DFS", "BFS", "LCFS"]
@@ -127,6 +120,7 @@ ds3_gt_feature_domains = {
 # utili per BN
 
 DISCRETE_MAPPING_DEFAULT = {
+    "_designer_taste": ([1, 2, np.inf], [1, 2]),
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),
     "page_menu_or": ([0, 1, 2, 3, np.inf], [0, 1, 2, 3]),
     "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),

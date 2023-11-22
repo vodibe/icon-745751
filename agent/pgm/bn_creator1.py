@@ -1,15 +1,18 @@
+import sys
 import agent.definitions as defs
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
 
 from pgmpy.models import BayesianNetwork
+from pgmpy.estimators import MaximumLikelihoodEstimator
 from pgmpy.inference import VariableElimination
 from pgmpy.readwrite import BIFWriter
-
+from pgmpy.factors.discrete import TabularCPD
 
 # archi bn, il primo elemento della tupla è l'elemento da cui parte l'arco
 BN_EDGES_DEFAULT = [
+    ("_designer_taste", "page_ungrouped_multim"),
     ("page_template", "page_menu_or"),
     ("page_template", "page_height"),
     ("page_template", "page_ungrouped_multim"),
@@ -25,6 +28,38 @@ BN_EDGES_DEFAULT = [
     ("page_menu_or", "metric"),
     ("page_ungrouped_multim", "metric"),
     ("page_height", "metric"),
+]
+
+BN_LATENT_VARS = ["_designer_taste"]
+
+
+BN_ALREADY_KNOWN_CPTS = {
+    "page_ungrouped_multim": TabularCPD(),
+}
+
+# queries da sottoporre alla bn
+BN_QUERIES_DEFAULT = [
+    {
+        "query_desc": "P(page_template | metric=4)",
+        "variables": ["page_template"],
+        "evidence": {
+            "metric": 4,
+        },
+    },
+    {
+        "query_desc": "P(page_template | metric=3)",
+        "variables": ["page_template"],
+        "evidence": {
+            "metric": 3,
+        },
+    },
+    {
+        "query_desc": "P(page_ungrouped_multim)",
+        "variables": ["page_ungrouped_multim"],
+        "evidence": {
+            "metric": 4,
+        },
+    },
 ]
 
 
@@ -58,12 +93,12 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
     feature_domains) secondo mapping.
 
     Args:
-        ds (DataFrame): Dataset.
-        feature_domains (dict): domini feature.
-        mapping (dict): dizionario task->(bins, labels) con len(labels) = len(bins)-1.
+        - ds (DataFrame): Dataset.
+        - feature_domains (dict): domini feature.
+        - mapping (dict): dizionario task->(bins, labels) con len(labels) = len(bins)-1.
 
     Returns:
-        DataFrame: Dataframe discretizzato.
+        - DataFrame: Dataframe discretizzato.
     """
     print("Discretizing dataset...")
     features_discrete, features_continuous = get_features_types(feature_domains)
@@ -74,38 +109,81 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
             bins, labels = mapping[feature_c]
 
             ds[feature_c] = pd.cut(
-                x=ds[feature_c], bins=bins, labels=labels, include_lowest=True, right=False
+                x=ds[feature_c],
+                bins=bins,
+                labels=labels,
+                include_lowest=True,
+                right=False,
             )
-            ds[feature_c] = ds[feature_c].astype("int64")
+            ds[feature_c] = ds[feature_c].astype(int)  # int64
 
     # rendi int variabili discrete
     float64 = np.dtype("float64")
     for feature_d in features_discrete:
         if ds[feature_d].dtype is float64:
-            ds[feature_d] = ds[feature_d].astype(np.int64)
+            ds[feature_d] = ds[feature_d].astype(int)  # np.int64
+
+
+def bn_kf_cv(ds, bn):
+    pass
 
 
 if __name__ == "__main__":
     # leggi dataset
     print("Reading dataset...")
     ds = pd.read_csv(defs.ds3_gt_no_noise_path)
+    ds = ds.drop(defs.ds3_features_excluded, axis=1)
 
-    # discretizza perchè pgmpy support inferenza su distribuzione discrete
+    # discretizza perchè pgmpy supporta inferenza su distribuzione discrete
     discretize_dataset(
-        ds=ds, feature_domains=defs.ds3_gt_feature_domains, mapping=defs.DISCRETE_MAPPING_DEFAULT
+        ds=ds,
+        feature_domains=defs.ds3_gt_feature_domains,
+        mapping=defs.DISCRETE_MAPPING_DEFAULT,
     )
 
-    # crea bn (aggiunge automaticamente i nodi)
+    # -----crea bn (aggiunge automaticamente i nodi)
     print("Creating BN structure...")
-    bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT)
+
+    for latent_var in BN_LATENT_VARS:
+        ds[latent_var] = np.nan
+
+    bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT, latents=BN_LATENT_VARS)
     bn.name = "bn_gt"
 
-    # usa stimatore mle
-    bn.fit(ds)
+    # apprendimento parametri (cpd) della rete bayesiana
+    print("Learning BN parameters (CPDs)...")
+    unknown_cpts_vars = list(set(bn.nodes()) - set(BN_ALREADY_KNOWN_CPTS.keys()))
 
-    writer = BIFWriter(bn)
-    writer.write_bif(f"./bif/{bn.name}.bif")
+    bn_mle = MaximumLikelihoodEstimator(bn, ds)
+    bn_cpts = [bn_mle.estimate_cpd(var) for var in unknown_cpts_vars]
 
-    # infer_engine = VariableElimination()
+    bn.add_cpds(bn_cpts)
+    bn.add_cpds(BN_ALREADY_KNOWN_CPTS.values())
 
-    print(bn.nodes())
+    """
+    print("Learning BN parameters (CPDs)...")
+    bn_state_names = {
+        feature: [state_name for state_name in state_names]
+        for feature, (bins, state_names) in defs.DISCRETE_MAPPING_DEFAULT.items()
+    }
+    bn.fit(ds, state_names=bn_state_names)
+    """
+
+    # controlla bn
+    if bn.check_model():
+        print("Saving...")
+        writer = BIFWriter(bn)
+        writer.write_bif(f"./bif/{bn.name}.bif")
+
+    # query
+    infer_engine = VariableElimination(bn)
+    i = 1
+    for query_args in BN_QUERIES_DEFAULT:
+        # mostra la descrizione e rimuovila dal dizionario degli argomenti della query
+        query_desc = query_args.pop("query_desc", None)
+        print(f"- Query #{i}: {query_desc}")
+        query_obj = infer_engine.query(**query_args)
+        print(query_obj)
+        i = i + 1
+
+    print("Done.")

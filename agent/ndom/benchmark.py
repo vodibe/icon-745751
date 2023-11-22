@@ -10,9 +10,9 @@ def benchmark_search_algs(ds_path, out_path, n=400):
     calcola il numero di nodi esaminati per arrivare a un nodo obiettivo.
 
     Args:
-        ds_path: Percorso del DS dove sono contenuti i siti.
-        out_path: Percorso di output dei risultati.
-        n (int): Numero di siti da testare. Default: 400.
+        - ds_path: Percorso del DS dove sono contenuti i siti.
+        - out_path: Percorso di output dei risultati.
+        - n (int): Numero di siti da testare. Default: 400.
     """
 
     ds = pd.read_csv(ds_path)

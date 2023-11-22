@@ -18,14 +18,24 @@ DIR_ROOT = Path(__file__).parent.parent
 DIR_DATASETS = DIR_ROOT / "datasets"
 
 ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # ds originale
-ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"  # ds senza altre scuole + url fix
-ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"  # ds senza duplicati
+ds1_clean_path = (
+    DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"
+)  # ds senza altre scuole + url fix
+ds1_clean_unique_path = (
+    DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"
+)  # ds senza duplicati
 
-ds2_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"  # ds gt (solo feature richieste)
+ds2_gt_path = (
+    DIR_DATASETS / "SCUANAGRAFE202324_2_gt.csv"
+)  # ds gt (solo feature richieste)
 
 ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # ds gt con tutte le features
-ds3_gt_final_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"  # ds gt senza siti non validi
-ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # gt no val non validi
+ds3_gt_final_path = (
+    DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"
+)  # ds gt senza siti non validi
+ds3_gt_no_noise_path = (
+    DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"
+)  # gt no val non validi
 
 test_path = DIR_DATASETS / "test.csv"
 
@@ -35,7 +45,12 @@ benchmark_search_algs_ = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
 
 # features
 ds3_features_pk = ["school_id", "page_url"]
-ds3_features_askable = ["page_template", "page_menu_or", "page_ungrouped_multim", "metric"]
+ds3_features_askable = [
+    "page_template",
+    "page_menu_or",
+    "page_ungrouped_multim",
+    "metric",
+]
 ds3_features_part = [
     "page_load_time_ms",
     "page_width",
@@ -58,8 +73,14 @@ TASKS_DEFAULT = {
 }
 
 ds3_features = (
-    ds3_features_pk + ds3_features_part + ds3_features_askable + list(TASKS_DEFAULT.keys())
+    ds3_features_pk
+    + ds3_features_part
+    + ds3_features_askable
+    + list(TASKS_DEFAULT.keys())
 )
+
+# features da escludere per i modelli di sl e per la bn
+ds3_features_excluded = ds3_features_pk
 
 # intervalli dei domini di alcune feature
 PAGE_TEMPLATE_MIN_VALUE = 1
@@ -75,12 +96,18 @@ METRIC_STEP = 0.1
 ds3_gt_feature_domains = {
     "school_id": str,
     "page_url": str,
-    "page_template": [x for x in range(PAGE_TEMPLATE_MIN_VALUE, PAGE_TEMPLATE_MAX_VALUE + 1)],
-    "page_menu_or": [x for x in range(PAGE_MENU_OR_MIN_VALUE, PAGE_MENU_OR_MAX_VALUE + 1)],
+    "page_template": [
+        x for x in range(PAGE_TEMPLATE_MIN_VALUE, PAGE_TEMPLATE_MAX_VALUE + 1)
+    ],
+    "page_menu_or": [
+        x for x in range(PAGE_MENU_OR_MIN_VALUE, PAGE_MENU_OR_MAX_VALUE + 1)
+    ],
     "page_ungrouped_multim": lambda v: v >= 0 and v % 1 == 0,
     "metric": [
         x / 10
-        for x in range((METRIC_MIN_VALUE * 10), (METRIC_MAX_VALUE * 10 + int(METRIC_STEP * 10)))
+        for x in range(
+            (METRIC_MIN_VALUE * 10), (METRIC_MAX_VALUE * 10 + int(METRIC_STEP * 10))
+        )
     ],
     "page_load_time_ms": lambda v: v >= 0,
     "page_width": lambda v: v >= 0,
@@ -100,8 +127,8 @@ ds3_gt_feature_domains = {
 # utili per BN
 
 DISCRETE_MAPPING_DEFAULT = {
-    "page_template": (True, True),
-    "page_menu_or": (True, True),
+    "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    "page_menu_or": ([0, 1, 2, 3, np.inf], [0, 1, 2, 3]),
     "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),
     "metric": ([1, 2, 3, 4, np.inf], [1, 2, 3, 4]),
     "page_load_time_ms": ([0, 1501, 3001, np.inf], [1, 2, 3]),
@@ -109,12 +136,12 @@ DISCRETE_MAPPING_DEFAULT = {
     "page_height": ([0, 2001, 4001, 6001, np.inf], [1, 2, 3, 4]),
     "NDOM_nodes": ([0, 501, 1001, 1501, np.inf], [1, 2, 3, 4]),
     "NDOM_height": ([0, 5, 14, np.inf], [1, 2, 3]),
-    "task1": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task2": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task3": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task4": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task5": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task6": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task7": ([0, 10, 20, np.inf], [1, 2, 3]),
-    "task8": ([0, 10, 20, np.inf], [1, 2, 3]),
+    "task1": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task2": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task3": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task4": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task5": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task6": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task7": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
+    "task8": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),
 }

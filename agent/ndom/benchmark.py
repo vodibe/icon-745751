@@ -53,4 +53,6 @@ def benchmark_search_algs(ds_path, out_path, n=400):
 
 
 if __name__ == "__main__":
-    benchmark_search_algs(defs.ds3_gt_final_path, "./benchmark2.xlsx", n=400)
+    benchmark_search_algs(
+        defs.ds3_gt_final_path, defs.DIR_GRAPH_BENCHMARK / "benchmark2.xlsx", n=400
+    )

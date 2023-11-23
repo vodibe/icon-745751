@@ -1,10 +1,10 @@
 from pathlib import Path
 import numpy as np
 
-# larghezza e altezza schermo
+# larghezza, altezza, diagonale schermo
 BROWSER_WIDTH = 1600
 BROWSER_HEIGHT = 900
-BROWSER_DIAG = 1836  # diagonale schermo
+BROWSER_DIAG = 1836
 
 # User-Agent
 headers = {
@@ -30,6 +30,10 @@ ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # g
 
 test_path = DIR_DATASETS / "test.csv"
 
+# icon-745751/agent/ndom/benchmark
+DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
+
+# icon-745751/agent/pgm/bif
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
 # algoritmi di ricerca non informati di default
@@ -120,7 +124,7 @@ ds3_gt_feature_domains = {
 # utili per BN
 
 DISCRETE_MAPPING_DEFAULT = {
-    "_designer_taste": ([1, 2, np.inf], [1, 2]),
+    "_designer_taste": ([1, 2, np.inf], [0, 1]),
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),
     "page_menu_or": ([0, 1, 2, 3, np.inf], [0, 1, 2, 3]),
     "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),

@@ -1,1 +1,1 @@
-http://www.cs.cmu.edu/~javabayes/Examples/DogProblem/dog-problem.bif
+Example at: http://www.cs.cmu.edu/~javabayes/Examples/DogProblem/dog-problem.bif

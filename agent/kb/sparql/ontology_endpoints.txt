@@ -1,0 +1,1 @@
+https://dati.istruzione.it/opendata/opendata/sparql/endpoint/

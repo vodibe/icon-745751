@@ -134,7 +134,11 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
             bins, labels = mapping[feature_c]
 
             ds[feature_c] = pd.cut(
-                x=ds[feature_c], bins=bins, labels=labels, include_lowest=True, right=False
+                x=ds[feature_c],
+                bins=bins,
+                labels=labels,
+                include_lowest=True,
+                right=False,
             )
             ds[feature_c] = ds[feature_c].astype("int64")
 
@@ -190,7 +194,9 @@ if __name__ == "__main__":
 
     # discretizza perchè pgmpy support inferenza su distribuzione discrete
     discretize_dataset(
-        ds=ds, feature_domains=defs.ds3_gt_feature_domains, mapping=defs.DISCRETE_MAPPING_DEFAULT
+        ds=ds,
+        feature_domains=defs.ds3_gt_feature_domains,
+        mapping=defs.DS_DISCRETE_MAPPING_DEFAULT,
     )
 
     # crea bn

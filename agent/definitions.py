@@ -1,16 +1,6 @@
 from pathlib import Path
 import numpy as np
 
-# larghezza, altezza, diagonale schermo
-BROWSER_WIDTH = 1600
-BROWSER_HEIGHT = 900
-BROWSER_DIAG = 1836
-
-# User-Agent
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.3;) AppleWebKit/536.10 (KHTML, like Gecko) Chrome/55.0.3745.151 Safari/603"
-}
-
 # icon-745751/
 DIR_ROOT = Path(__file__).parent.parent
 
@@ -35,6 +25,21 @@ DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
 
 # icon-745751/agent/pgm/bif
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
+
+# icon-745751/agent/kb
+DIR_KB = DIR_ROOT / "agent" / "kb"
+DIR_KB_FACTS = DIR_KB / "kb_facts.pl"
+DIR_KB_CLAUSES = DIR_KB / "kb_clauses.pl"
+
+# larghezza, altezza, diagonale schermo
+BROWSER_WIDTH = 1600
+BROWSER_HEIGHT = 900
+BROWSER_DIAG = 1836
+
+# User-Agent
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.3;) AppleWebKit/536.10 (KHTML, like Gecko) Chrome/55.0.3745.151 Safari/603"
+}
 
 # algoritmi di ricerca non informati di default
 uninformed_search_algs = ["DFS", "BFS", "LCFS"]
@@ -123,8 +128,7 @@ ds3_gt_feature_domains = {
 
 # utili per BN
 
-DISCRETE_MAPPING_DEFAULT = {
-    "_designer_taste": ([1, 2, np.inf], [0, 1]),
+DS_DISCRETE_MAPPING_DEFAULT = {
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),
     "page_menu_or": ([0, 1, 2, 3, np.inf], [0, 1, 2, 3]),
     "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),

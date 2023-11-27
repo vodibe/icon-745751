@@ -68,6 +68,13 @@ BN_QUERIES_DEFAULT = [
         },
     },
     {
+        "query_desc": "P(page_template | page_ungrouped_multim=2)",
+        "variables": ["page_template"],
+        "evidence": {
+            "page_ungrouped_multim": 2,
+        },
+    },
+    {
         "query_desc": "P(page_template | page_ungrouped_multim=3)",
         "variables": ["page_template"],
         "evidence": {
@@ -165,7 +172,7 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
             ds[feature_d] = ds[feature_d].astype(np.int64)  # np.int64
 
 
-def create_bn(estimator_id="MLE") -> BayesianNetwork:
+def create_bn(estimator_id="MLE", name=None) -> BayesianNetwork:
     """Crea la BN di default, la salva su file e restituisce l'oggetto BayesianNetwork.
 
     Args:
@@ -209,11 +216,19 @@ def create_bn(estimator_id="MLE") -> BayesianNetwork:
         )
     elif estimator_id == "BDeu":
         bn.fit(
-            ds, estimator=BayesianEstimator, prior_type="BDeu", equivalent_sample_size=10
+            ds,
+            estimator=BayesianEstimator,
+            prior_type="BDeu",
+            equivalent_sample_size=20,
+            state_names=BN_STATE_NAMES,
         )
     else:
         return None
-    bn.name = f"bn_estimator_{estimator_id}.bif"
+
+    if name:
+        bn.name = f"{name}.bif"
+    else:
+        bn.name = f"bn_estimator_{estimator_id}.bif"
 
     # controlla bn
     if bn.check_model():

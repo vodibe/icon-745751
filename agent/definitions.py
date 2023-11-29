@@ -4,10 +4,9 @@ import numpy as np
 # icon-745751/
 DIR_ROOT = Path(__file__).parent.parent
 
-# icon-745751/datasets
+# path datasets
 DIR_DATASETS = DIR_ROOT / "datasets"
 
-# ds originale
 ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # originale
 ds1_clean_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean.csv"  # no altre scuole+urlfix
 ds1_clean_unique_path = DIR_DATASETS / "SCUANAGRAFE202324_1_clean_unique.csv"  # no dupl.
@@ -20,16 +19,16 @@ ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # g
 
 test_path = DIR_DATASETS / "test.csv"
 
-# icon-745751/agent/ndom/benchmark
+# path benchmark ndom
 DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
 
-# icon-745751/agent/pgm/bif
-DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
-
-# icon-745751/agent/kb
+# path knowledge base
 DIR_KB = DIR_ROOT / "agent" / "kb"
 DIR_KB_FACTS = DIR_KB / "kb_facts.pl"
-DIR_KB_CLAUSES = DIR_KB / "kb_clauses.pl"
+DIR_KB_RULES = DIR_KB / "kb_rules.pl"
+
+# path rete bayesiana
+DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
 # larghezza, altezza, diagonale schermo
 BROWSER_WIDTH = 1600

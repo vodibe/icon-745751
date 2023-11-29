@@ -1,5 +1,6 @@
 import csv
 import requests
+from http import HTTPStatus
 import agent.definitions as defs
 from agent.ndom.NaiveDOM import NaiveDOM
 from utils import _create_driver
@@ -53,7 +54,7 @@ def process_url(url):
         else:
             # sito non valido con tld .edu.it
             return None
-    elif r.status_code == 301:
+    elif r.status_code == HTTPStatus.MOVED_PERMANENTLY:
         # sito valido ma redireziona a un sito aggiornato
         return r.headers["location"]
     else:
@@ -169,7 +170,9 @@ def create_ds2_gt(i_resume=1):
 
                     # richiedi le altre features
                     for feature_askable in defs.ds3_features_askable:
-                        new_row[feature_askable] = float(input("- " + feature_askable + ": "))
+                        new_row[feature_askable] = float(
+                            input("- " + feature_askable + ": ")
+                        )
 
                     csv_writer.writerow(new_row)
                 i = i + 1

@@ -1,6 +1,7 @@
 from pathlib import Path
 import numpy as np
 
+# ----- percorsi
 # icon-745751/
 DIR_ROOT = Path(__file__).parent.parent
 
@@ -24,12 +25,17 @@ DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
 
 # path knowledge base
 DIR_KB = DIR_ROOT / "agent" / "kb"
-DIR_KB_FACTS = DIR_KB / "kb_facts.pl"
-DIR_KB_RULES = DIR_KB / "kb_rules.pl"
+DIR_KB_JOBS = DIR_KB / "jobs"
+
+kb_facts_path = DIR_KB / "kb_facts.pl"
+kb_rules_path = DIR_KB / "kb_rules.pl"
+
+kb_job1_facts = DIR_KB_JOBS / "job1_facts.pl"
 
 # path rete bayesiana
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
+# ----- costanti ndom
 # larghezza, altezza, diagonale schermo
 BROWSER_WIDTH = 1600
 BROWSER_HEIGHT = 900
@@ -44,6 +50,7 @@ headers = {
 uninformed_search_algs = ["DFS", "BFS", "LCFS"]
 benchmark_search_algs_ = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
 
+# ----- costanti modelli
 # features
 ds3_features_pk = ["school_id", "page_url"]
 ds3_features_askable = [
@@ -125,7 +132,10 @@ ds3_gt_feature_domains = {
     "task8": lambda v: v >= 0,
 }
 
-# utili per BN
+# ----- costanti KB
+kb_miur_endpoint = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
+
+# ----- costanti BN
 
 DS_DISCRETE_MAPPING_DEFAULT = {
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),

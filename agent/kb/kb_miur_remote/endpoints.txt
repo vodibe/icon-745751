@@ -1,0 +1,2 @@
+https://dati.istruzione.it/opendata/opendata/sparql/endpoint/
+https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query

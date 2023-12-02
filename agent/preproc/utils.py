@@ -12,7 +12,7 @@ def _create_driver(browser_width, browser_height) -> webdriver:
         - browser_height: altezza finestra browser.
 
     Returns:
-        webdriver: istanza webdriver
+        - webdriver: istanza webdriver
     """
 
     options = webdriver.FirefoxOptions()

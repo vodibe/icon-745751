@@ -27,10 +27,10 @@ DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
 DIR_KB = DIR_ROOT / "agent" / "kb"
 DIR_KB_JOBS = DIR_KB / "jobs"
 
-kb_facts_path = DIR_KB / "kb_facts.pl"
-kb_rules_path = DIR_KB / "kb_rules.pl"
+kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
+kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
 
-kb_job1_facts = DIR_KB_JOBS / "job1_facts.pl"
+kb_job1_out_path = DIR_KB_JOBS / "job1_facts_output.pl"
 
 # path rete bayesiana
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
@@ -133,7 +133,8 @@ ds3_gt_feature_domains = {
 }
 
 # ----- costanti KB
-kb_miur_endpoint = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
+
+KB_MIUR_ENDPOINT1 = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
 
 # ----- costanti BN
 

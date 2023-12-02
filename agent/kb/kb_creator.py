@@ -11,22 +11,20 @@ from io import StringIO
 prolog = Prolog()
 
 
-def _pl_str(s) -> str:
-    """Crea una stringa accettata dalla sintassi Prolog a partire da una stringa
-    qualsiasi input_str.
+def _pl_str(v) -> str:
+    """Crea una stringa accettata dalla sintassi Prolog a partire da un qualsiasi input s.
 
     Args:
         - input_str: Stringa di input
 
     Returns:
-        - str: Stringa prolog
+        - str: Stringa Prolog
     """
+    if not isinstance(v, str):
+        return str(v)
 
-    if isinstance(s, str):
-        # escape degli apici
-        prolog_string = s.replace("'", "''")
-    else:
-        prolog_string = s
+    # escape degli apici
+    prolog_string = v.replace("'", "''")
     # una stringa prolog è contornata dagli apici
     return f"'{prolog_string}'"
 
@@ -39,7 +37,7 @@ def create_page_facts_from_ds(ds_path):
         - ds_path: Percorso dataset di partenza.
     """
     print("Creating page facts from dataset...")
-    with open(defs.kb_facts_path, "a") as pl_out:
+    with open(defs.kb_shared_facts_path, "a") as pl_out:
         with open(ds_path, "r") as csv_in:
             csv_reader = csv.DictReader(csv_in, delimiter=",")
 
@@ -53,19 +51,21 @@ def create_page_facts_from_ds(ds_path):
                     f'{row["metric"]}).'
                 )
                 pl_out.write(page_fact)
+    print("Done.")
 
 
-def query_miur_kb(query, endpoint=defs.kb_miur_endpoint) -> DataFrame:
-    """Interroga l'endpoint del MIUR sottoponendo la query. Risultato in formato csv.
+def query_kb_miur(query, endpoint) -> DataFrame:
+    """Interroga l'endpoint del MIUR sottoponendo la query. Ottiene dall'endpoint dati
+    in formato csv. Restituisce una tabella DataFrame.
 
     Args:
         - query: Query SPARQL.
-        - endpoint (optional): Endpoint MIUR. Default: defs.kb_miur_endpoint.
+        - endpoint (optional): Endpoint MIUR.
 
     Returns:
-        - DataFrame: Risultati della query
+        - DataFrame: Risultati della query.
     """
-
+    print("Querying remote endpoint...")
     query_payload = dict()
     query_payload["query"] = query  # urllib.parse.quote_plus(query)
     query_payload["dataType"] = "csv"
@@ -80,12 +80,14 @@ def query_miur_kb(query, endpoint=defs.kb_miur_endpoint) -> DataFrame:
 
 def run_job1():
     """Procedura Job1. Vedi: report.pdf."""
+
     print("Running Job#1...")
 
     # individuo le scuole che hanno siti con redirect errati
-    prolog.consult(f"./{defs.kb_facts_path.name}")
-    prolog.consult(f"./{defs.kb_rules_path.name}")
+    prolog.consult(f"./{defs.kb_shared_facts_path.name}")
+    prolog.consult(f"./{defs.kb_shared_rules_path.name}")
     query_kb = "page_wrongly_redirects(schoolassoc(Url, School_ID))."
+
     for result in prolog.query(query_kb):
         # per ciascuna scuola, ottengo dall'endpoint l'istituto di cui fa parte e l'elenco delle
         # scuole (su ogni riga) associate a quell'istituto.
@@ -104,10 +106,10 @@ def run_job1():
             LIMIT 50
         """
         query_sp = query_sp.replace("@", result["School_ID"])
-        institute_is_related_facts_df = query_miur_kb(query_sp)
+        institute_is_related_facts_df = query_kb_miur(query_sp, defs.KB_MIUR_ENDPOINT1)
 
         # creo i fatti prolog a partire dal dataframe
-        with open(defs.kb_facts_path, "a") as pl_out:
+        with open(defs.kb_shared_facts_path, "a") as pl_out:
             for idx, row in institute_is_related_facts_df.iterrows():
                 institute_is_related_fact = (
                     f"\ninstitute_is_related("
@@ -118,11 +120,11 @@ def run_job1():
                 pl_out.write(institute_is_related_fact)
 
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
-    prolog.consult(f"./{defs.kb_facts_path.name}")
+    prolog.consult(f"./{defs.kb_shared_facts_path.name}")
     query_kb = "institute_is_related_for_job1(institute(Institute_ID, Institute_Name, Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
     # scrivi i risultati (fatti) inerenti al job
-    with open(defs.kb_job1_facts, "w") as job_out:
+    with open(defs.kb_job1_out_path, "w") as job_out:
         for result in prolog.query(query_kb):
             job_fact_p2 = ""
 
@@ -143,7 +145,7 @@ def run_job1():
                     LIMIT 1
                 """
                 query_sp = query_sp.replace("@", school_ID)
-                job_fact_p2_df = query_miur_kb(query_sp)
+                job_fact_p2_df = query_kb_miur(query_sp, defs.KB_MIUR_ENDPOINT1)
 
                 job_fact_p2_ = (
                     "schooladdress("

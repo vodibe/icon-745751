@@ -7,10 +7,10 @@ from utils import _create_driver
 
 
 def process_url(url):
-    """Analizza l'URL della scuola e restituisce l'URL valido se questo esiste;
+    """Analizza l'URL della scuola e restituisce l'URL valido se questo esiste.
 
     Args:
-        - url (string): URL della scuola
+        - url: URL della scuola
 
     Returns:
         - string: URL valido della scuola; None se non esiste

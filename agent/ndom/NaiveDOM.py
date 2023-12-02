@@ -85,13 +85,13 @@ class NaiveDOM:
     o NDOM, dove sono esclusi tag ad uso prettamente tecnico e di struttura della pagina.
 
     Attrs:
-        - location (string): Percorso o URL della pagina di cui si sta costruendo il NDOM
-        - nodes (dict): dizionario xpath:label di ogni elemento del NDOM
-        - nodes_coords (dict): dizionario xpath:(x, y) di ogni elemento del NDOM
-        - arcs (list): lista di Arc(from, to, cost)
-        - start (string): xpath del nodo radice del NDOM
-        - nodes_goal (list): lista di nodi obiettivo. Cambia a seconda del task da svolgere
-        - pen_task_nf (int): costo di default di un task per il quale non esistono nodi obiettivo
+        - location (string): Percorso o URL della pagina di cui si sta costruendo il NDOM.
+        - nodes (dict): dizionario xpath:label di ogni elemento del NDOM.
+        - nodes_coords (dict): dizionario xpath:(x, y) di ogni elemento del NDOM.
+        - arcs (list): lista di Arc(from, to, cost).
+        - start (string): xpath del nodo radice del NDOM.
+        - nodes_goal (list): lista di nodi obiettivo. Cambia a seconda del task da svolgere.
+        - pen_task_nf (int): costo di default di un task per il quale non esistono nodi obiettivo.
         - features (dict): dizionario: feature:valore utile per i modelli di SL.
     """
 
@@ -101,12 +101,12 @@ class NaiveDOM:
         Doc. find_element: https://stackoverflow.com/questions/15510882/selenium-get-coordinates-or-dimensions-of-element-with-python
 
         Args:
-            - driver (webdriver): istanza webdriver
-            - NDOM_parent_xpath: xpath nodo genitore nel modello NDOM
-            - xpath: xpath nodo corrente nel modello NDOM
+            - driver (webdriver): istanza webdriver.
+            - NDOM_parent_xpath: xpath nodo genitore nel modello NDOM.
+            - xpath: xpath nodo corrente nel modello NDOM.
 
         Returns:
-            float: costo in termini di usabilità
+            - float: costo in termini di usabilità.
         """
 
         # costo se l'elemento non si trova
@@ -152,10 +152,12 @@ class NaiveDOM:
         un costo di default, cioè self.pen_task_nf.
 
         Args:
-            tasks (dict, optional): Lista di task. Default:_TASKS_DEFAULT
+            - tasks (dict, optional): Lista di task. Default:_TASKS_DEFAULT.
         """
 
-        problem = Search_problem_from_explicit_graph(self.nodes.keys(), self.arcs, self.start)
+        problem = Search_problem_from_explicit_graph(
+            self.nodes.keys(), self.arcs, self.start
+        )
 
         for task_id, task_keywords in tasks.items():
             # per ogni task individua quali sono i nodi obiettivo del NDOM
@@ -202,7 +204,9 @@ class NaiveDOM:
                 pen_paths_expanded = 0 if pen_paths_expanded < 0 else pen_paths_expanded
 
                 task_cost = round(
-                    task_path.cost + pen_paths_expanded + (len(list(task_path.nodes())) * 0.15),
+                    task_path.cost
+                    + pen_paths_expanded
+                    + (len(list(task_path.nodes())) * 0.15),
                     2,
                 )
                 self.features[task_id] = task_cost
@@ -223,7 +227,7 @@ class NaiveDOM:
         della pagina.
 
         Args:
-            - root: Non per forza un elemento bs4.Tag, ma può anche essere di tipo bs4.NavigableString
+            - root: Non per forza un elemento bs4.Tag, ma può anche essere di tipo bs4.NavigableString.
             - DOM_parent_xpath (optional): xpath elemento genitore del DOM. Default: None.
             - DOM_ci (int, optional): child index del DOM. Default: 1.
             - NDOM_parent_xpath (optional): id del nodo genitore di root (all'interno del NDOM). Default: None.
@@ -240,7 +244,7 @@ class NaiveDOM:
 
         # inizializzazione
         xpath = None
-        label = None  # None solo quando il nodo non e' ne' nodo del NDOM ne' foglia del NDOM
+        label = None  # None solo quando il nodo non e' ne' nodo NDOM ne' foglia del NDOM
         next_NDOM_parent_xpath = None  # None se foglia del NDOM, altro se nodo del NDOM
         next_depth = depth
 
@@ -338,9 +342,10 @@ class NaiveDOM:
             - from_file (bool, optional): True se location è un percorso. Default: False.
             - driver (webdriver, optional): Istanza di webdriver. Default: None.
             - driver_close_at_end (bool, optional): True se l'istanza webdriver viene terminata dopo aver costruito il NDOM. Default: True.
+            - search_alg (optional): Identificatore dell'algoritmo di ricerca da applicare. Default: "NaiveDOMSearcher".
 
         Returns:
-            NaiveDOM: NaiveDOM costruito
+            - NaiveDOM: NaiveDOM costruito
         """
         # inizializzazione attributi
         self.location = location
@@ -351,7 +356,9 @@ class NaiveDOM:
         self.nodes_goal = []
         self.pen_task_nf = None
         self.search_alg = search_alg
-        self.nodes_expanded_per_task = {task: 0 for task, val in defs.TASKS_DEFAULT.items()}
+        self.nodes_expanded_per_task = {
+            task: 0 for task, val in defs.TASKS_DEFAULT.items()
+        }
 
         # il dizionario delle features è un attributo del NDOM
         self.features = dict()
@@ -374,7 +381,9 @@ class NaiveDOM:
             driver.get(location)
             load_end = datetime.datetime.now()
 
-            self.features["page_width"] = driver.execute_script("return document.body.scrollWidth")
+            self.features["page_width"] = driver.execute_script(
+                "return document.body.scrollWidth"
+            )
             self.features["page_height"] = driver.execute_script(
                 "return document.body.scrollHeight"
             )
@@ -404,7 +413,9 @@ class NaiveDOM:
         print("Populating features...")
         self.features["school_id"] = alias
         self.features["page_url"] = self.location
-        self.features["page_load_time_ms"] = int((load_end - load_start).total_seconds() * 1000)
+        self.features["page_load_time_ms"] = int(
+            (load_end - load_start).total_seconds() * 1000
+        )
         # "page_width" -> assegnato
         # "page_height" -> assegnato
         # "page_template" -> assegnato
@@ -435,7 +446,9 @@ class NaiveDOM:
         nx.draw_networkx_edge_labels(
             G,
             pos,
-            edge_labels=dict(((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs),
+            edge_labels=dict(
+                ((arc.from_node, arc.to_node), arc.cost) for arc in self.arcs
+            ),
         )
         plt.show()
 

@@ -177,6 +177,10 @@ def create_bn(estimator_id="MLE", name=None) -> BayesianNetwork:
 
     Args:
         - estimator_id (optional): Id stimatore. Default: "MLE".
+        - name (optional): Nome della BN. Default: None.
+
+    Returns:
+        - BayesianNetwork.
     """
 
     # operazioni su dataset

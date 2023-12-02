@@ -8,11 +8,10 @@ class NaiveDOMSearcher:
     Docs: report.pdf
 
     Attrs:
-        - problem: oggetto della classe Search_problem (o sua sottoclasse) contenente il grafo
-            su cui fare la ricerca
-        - frontier (list): lista di percorsi da esplorare
-        - num_expanded (int): numero di percorsi analizzati
-        - solution (Path): percorso soluzione
+        - problem: oggetto della classe Search_problem (o sua sottoclasse) contenente il grafo su cui fare la ricerca.
+        - frontier (list): lista di percorsi da esplorare.
+        - num_expanded (int): numero di percorsi analizzati.
+        - solution (Path): percorso soluzione.
     """
 
     def __init__(self, problem: Search_problem):

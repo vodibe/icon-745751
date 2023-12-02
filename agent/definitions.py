@@ -30,7 +30,8 @@ DIR_KB_JOBS = DIR_KB / "jobs"
 kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
 kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
 
-kb_job1_out_path = DIR_KB_JOBS / "job1_facts_output.pl"
+kb_job1_facts_i_path = DIR_KB_JOBS / "job1_facts_input.pl"
+kb_job1_facts_o_path = DIR_KB_JOBS / "job1_facts_output.pl"
 
 # path rete bayesiana
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"

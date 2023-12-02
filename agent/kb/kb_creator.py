@@ -12,7 +12,7 @@ prolog = Prolog()
 
 
 def _pl_str(v) -> str:
-    """Crea una stringa accettata dalla sintassi Prolog a partire da un qualsiasi input s.
+    """Crea una stringa accettata dalla sintassi Prolog a partire da un qualsiasi input.
 
     Args:
         - input_str: Stringa di input
@@ -21,10 +21,11 @@ def _pl_str(v) -> str:
         - str: Stringa Prolog
     """
     if not isinstance(v, str):
-        return str(v)
+        return _pl_str(str(v))
+    else:
+        # escape degli apici
+        prolog_string = v.replace("'", "''")
 
-    # escape degli apici
-    prolog_string = v.replace("'", "''")
     # una stringa prolog è contornata dagli apici
     return f"'{prolog_string}'"
 
@@ -106,25 +107,25 @@ def run_job1():
             LIMIT 50
         """
         query_sp = query_sp.replace("@", result["School_ID"])
-        institute_is_related_facts_df = query_kb_miur(query_sp, defs.KB_MIUR_ENDPOINT1)
+        fs_df = query_kb_miur(query_sp, defs.KB_MIUR_ENDPOINT1)  # facts dataframe
 
         # creo i fatti prolog a partire dal dataframe
-        with open(defs.kb_shared_facts_path, "a") as pl_out:
-            for idx, row in institute_is_related_facts_df.iterrows():
-                institute_is_related_fact = (
-                    f"\ninstitute_is_related("
+        with open(defs.kb_job1_facts_i_path, "a") as pl_out:
+            for idx, row in fs_df.iterrows():
+                f = (
+                    f"\ninstitute_is_related_for_job1("
                     f'{_pl_str(row["CodiceIstitutoRiferimento"])}, '
                     f'{_pl_str(row["DenominazioneIstitutoRiferimento"])}, '
                     f'{_pl_str(row["CodiceScuola"])}).'
                 )
-                pl_out.write(institute_is_related_fact)
+                pl_out.write(f)
 
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
-    prolog.consult(f"./{defs.kb_shared_facts_path.name}")
-    query_kb = "institute_is_related_for_job1(institute(Institute_ID, Institute_Name, Institute_Schools_IDs), schoolassoc(Url, School_ID))."
+    prolog.consult(f"./jobs/{defs.kb_job1_facts_i_path.name}")
+    query_kb = "is_valid_report_for_job1(institute(Institute_ID, Institute_Name, Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
     # scrivi i risultati (fatti) inerenti al job
-    with open(defs.kb_job1_out_path, "w") as job_out:
+    with open(defs.kb_job1_facts_o_path, "w") as pl_out:
         for result in prolog.query(query_kb):
             job_fact_p2 = ""
 
@@ -160,13 +161,13 @@ def run_job1():
                 i += 1
 
             job_fact_p1 = (
-                f"\nis_valid_report_for_job1("
+                f"\nis_full_report_for_job1("
                 f'schoolassoc({_pl_str(result["Url"])}, {_pl_str(result["School_ID"])}), '
                 f'institute({_pl_str(result["Institute_ID"])}, {_pl_str(result["Institute_Name"])}, {(result["Institute_Schools_IDs"])}), '
                 f"[{job_fact_p2}])."
             )
 
-            job_out.write(job_fact_p1)
+            pl_out.write(job_fact_p1)
 
 
 if __name__ == "__main__":

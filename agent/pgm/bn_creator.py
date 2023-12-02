@@ -9,6 +9,9 @@ from pgmpy.estimators import MaximumLikelihoodEstimator, BayesianEstimator
 from pgmpy.readwrite import BIFWriter
 from pgmpy.inference import VariableElimination
 
+from pgmpy.factors.discrete import State
+from pgmpy.sampling import BayesianModelSampling
+
 
 # dizionario feature:dominio discreto
 BN_STATE_NAMES = {
@@ -244,6 +247,49 @@ def create_bn(estimator_id="MLE", name=None) -> BayesianNetwork:
 
 
 if __name__ == "__main__":
+    # operazioni su dataset
+    # leggi dataset
+    print("Reading dataset...")
+    ds = pd.read_csv(defs.ds3_gt_no_noise_path)
+    bn_features_excluded = defs.ds3_features_excluded + [
+        "page_load_time_ms",
+        "page_width",
+        "task4",
+        "task5",
+        "task6",
+        "task7",
+        "task8",
+    ]
+    ds = ds.drop(bn_features_excluded, axis=1)
+
+    # discretizza perchè pgmpy supporta inferenza su distribuzioni discrete
+    discretize_dataset(
+        ds=ds,
+        feature_domains=defs.ds3_gt_feature_domains,
+        mapping=defs.DS_DISCRETE_MAPPING_DEFAULT,
+    )
+
+    # crea bn
+    print("Creating BN structure...")
+    bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT)
+
+    # apprendimento parametri (cpd) della bn
+    print("Learning BN parameters...")
+
+    bn.fit(ds, estimator=BayesianEstimator, prior_type="K2", state_names=BN_STATE_NAMES)
+
+    bn_inf_engine = BayesianModelSampling(bn)
+
+    evidence = [State(var="diff", state=0)]
+    sample = bn_inf_engine.rejection_sample(
+        evidence=evidence, size=2, return_type="dataframe"
+    )
+
+
+"""
+
+
+if __name__ == "__main__":
     bn = create_bn(estimator_id="BDeu")
 
     # query
@@ -260,3 +306,5 @@ if __name__ == "__main__":
         print(query_obj)
 
         i = i + 1
+
+"""

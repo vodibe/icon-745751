@@ -33,6 +33,11 @@ kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
 kb_job1_facts_i_path = DIR_KB_JOBS / "job1_facts_input.pl"
 kb_job1_facts_o_path = DIR_KB_JOBS / "job1_facts_output.pl"
 
+kb_job2_facts_i_path = DIR_KB_JOBS / "job2_facts_input.pl"
+kb_job2_facts_o_path = DIR_KB_JOBS / "job2_facts_output.pl"
+
+kb_job3_facts_o_path = DIR_KB_JOBS / "job3_facts_output.pl"
+
 # path rete bayesiana
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
@@ -135,7 +140,10 @@ ds3_gt_feature_domains = {
 
 # ----- costanti KB
 
+# https://dati.istruzione.it/opendata/opendata/sparql/endpoint/
 KB_MIUR_ENDPOINT1 = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
+# https://www.wikidata.org/wiki/Wikidata:Lists/SPARQL_endpoints
+KB_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 
 # ----- costanti BN
 

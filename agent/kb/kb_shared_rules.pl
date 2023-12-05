@@ -23,7 +23,7 @@ is_list_length([_ | Tail], Length) :-
 
 % %%%%%% JOB1
 
-% l'atomo institute_has_school compare nei file job1_facts_input.pl e job2_facts_input.pl
+% l'atomo institute_has_school compare nei file job1_clauses.pl e job2_clauses.pl
 :- multifile institute_has_school/2.
 
 % page_wrongly_redirects/1 (predicato)
@@ -73,39 +73,48 @@ is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_
 
 % %%%%%% JOB3
 
-:- discontiguous school_is_in_place/4.
+:- discontiguous school_is_in_place/2.
+
 
 % page_has_good_metric/1
 % Vero quando il primo termine si riferisce a una pagina con buona metrica.
 page_has_good_metric(schoolassoc(Url, School_ID)) :-
-    page(schoolassoc(Url, School_ID), _, _, Metric),
-    Metric > 3.8.
+    page(schoolassoc(Url, School_ID), details(_, _, _, _, _, Ungrouped_multim), _, Metric),
+    Metric > 3.8,
+    Ungrouped_multim =< 6.
 
-% is_relative_frequency_for_region/2
-% Vero quando il secondo termine è la frequenza relativa dei siti con buona metrica della regione Region.
-is_relative_frequency_for_region(Region, Relative_Frequency) :-
 
-    findall(_, (school_is_in_place(School_ID, _, _, region(Region, _)), page_has_good_metric(schoolassoc(_, School_ID))), List_Good_In_Region),
-    is_list_length(List_Good_In_Region, Numerator),
 
-    findall(_, (school_is_in_place(School_ID, _, _, region(Region, _))), List_All_In_Region),
-    is_list_length(List_All_In_Region, Denominator),
+
+% is_relative_frequency_for_place/2
+% Vero quando il secondo termine è la frequenza relativa dei siti con buona metrica dell'area di ricerca Place.
+is_relative_frequency_for_place(Place, Relative_Frequency) :-
+
+    findall(_, (school_is_in_place(School_ID, Place), page_has_good_metric(schoolassoc(_, School_ID))), List_Good_In_Place),
+    is_list_length(List_Good_In_Place, Numerator),
+
+    findall(_, (school_is_in_place(_, Place)), List_All_In_Place),
+    is_list_length(List_All_In_Place, Denominator),
     
     Relative_Frequency is Numerator / Denominator.
 
-% is_rank_of_regions/1
-% Vero quando Rank indica una lista (ordinata in modo decrescente) di simboli di funzione region_rf
-is_rank_of_regions(Rank) :-
-    findall(region_rf(Region, Relative_Frequency), is_relative_frequency_for_region(Region, Relative_Frequency), Unordered_Rank),
-    predsort(better_region, Unordered_Rank, Rank_Ascendant),
+% is_rank_of_places/1
+% Vero quando Rank indica una lista (ordinata in modo decrescente) di simboli di funzione place_rf
+is_rank_of_places(Rank) :-
+    findall(X, school_is_in_place(_, X), List_Places_W_Dups),
+    setof(Y, member(Y, List_Places_W_Dups), List_Places_WO_Dups),
+    %member(Place, List_Places_WO_Dups),
+
+    findall(place_rf(Place, Relative_Frequency), (member(Place, List_Places_WO_Dups), is_relative_frequency_for_place(Place, Relative_Frequency)), Unordered_Rank),
+    predsort(place_order, Unordered_Rank, Rank_Ascendant),
     reverse(Rank_Ascendant, Rank).
 
-% better_region/3
-% Criterio per stabilire se il simbolo di funzione region_rf è < o > di un altro.
-better_region(<, region_rf(_, Relative_Frequence1), region_rf(_, Relative_Frequence2)) :-
+% place_order/3
+% Criterio per stabilire se il simbolo di funzione place_rf è < o > di un altro.
+place_order(<, place_rf(_, Relative_Frequence1), place_rf(_, Relative_Frequence2)) :-
 	Relative_Frequence1 =< Relative_Frequence2.
 	
-better_region(>, region_rf(_, Relative_Frequence1), region_rf(_, Relative_Frequence2)) :-
+place_order(>, place_rf(_, Relative_Frequence1), place_rf(_, Relative_Frequence2)) :-
 	Relative_Frequence1 > Relative_Frequence2.
 
 

@@ -49,7 +49,7 @@ def _pl_str(v) -> str:
     return f"'{prolog_string}'"
 
 
-def _query_wikidata_sparql(query, endpoint=defs.KB_WIKIDATA_ENDPOINT) -> DataFrame:
+def _query_wikidata_kb(query, endpoint=defs.KB_WIKIDATA_ENDPOINT) -> DataFrame:
     """Interroga l'endpoint SPARQL di Wikidata e ottiene il risultato in forma DataFrame.
 
     Args:
@@ -62,22 +62,20 @@ def _query_wikidata_sparql(query, endpoint=defs.KB_WIKIDATA_ENDPOINT) -> DataFra
 
     params = {"query": query, "format": "json"}
 
-    headers = {"User-Agent": "MyWikidataQuery/1.0 (your@email.com)"}
-
-    response = requests.post(endpoint, headers=headers, data=params)
+    response = requests.post(endpoint, headers=defs.headers, data=params)
     response.raise_for_status()
 
     data = response.json()
     bindings = data.get("results", {}).get("bindings", [])
 
-    df = DataFrame(bindings)
-    df = df.apply(lambda x: x.str.get("value") if x.name == "value" else x)
-    df = df.map(lambda x: x.get("value") if isinstance(x, dict) else x)
+    query_df = DataFrame(bindings)
+    query_df = query_df.apply(lambda x: x.str.get("value") if x.name == "value" else x)
+    query_df = query_df.map(lambda x: x.get("value") if isinstance(x, dict) else x)
 
-    return df
+    return query_df
 
 
-def _query_miur_sparql(query, endpoint) -> DataFrame:
+def _query_miur_kb(query, endpoint) -> DataFrame:
     """Interroga l'endpoint del MIUR sottoponendo la query. Ottiene dall'endpoint dati
     in formato csv. Restituisce una tabella DataFrame.
 

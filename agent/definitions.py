@@ -1,11 +1,10 @@
 from pathlib import Path
 import numpy as np
 
-# ----- percorsi
-# icon-745751/
-DIR_ROOT = Path(__file__).parent.parent
+# ----- PERCORSO RADICE
+DIR_ROOT = Path(__file__).parent.parent  # icon-745751/
 
-# path datasets
+# ----- DATASET
 DIR_DATASETS = DIR_ROOT / "datasets"
 
 ds1_path = DIR_DATASETS / "SCUANAGRAFE202324_1.csv"  # originale
@@ -18,30 +17,9 @@ ds3_gt_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt.csv"  # gt con tutte featur
 ds3_gt_final_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_final.csv"  # gt senza siti nv.
 ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # gt no rum.
 
-test_path = DIR_DATASETS / "test.csv"
+ds_test_path = DIR_DATASETS / "test.csv"
 
-# path benchmark ndom
-DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
-
-# path knowledge base
-DIR_KB = DIR_ROOT / "agent" / "kb"
-DIR_KB_JOBS = DIR_KB / "jobs"
-
-kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
-kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
-
-kb_job1_facts_i_path = DIR_KB_JOBS / "job1_facts_input.pl"
-kb_job1_facts_o_path = DIR_KB_JOBS / "job1_facts_output.pl"
-
-kb_job2_facts_i_path = DIR_KB_JOBS / "job2_facts_input.pl"
-kb_job2_facts_o_path = DIR_KB_JOBS / "job2_facts_output.pl"
-
-kb_job3_facts_o_path = DIR_KB_JOBS / "job3_facts_output.pl"
-
-# path rete bayesiana
-DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
-
-# ----- costanti ndom
+# ----- NDOM
 # larghezza, altezza, diagonale schermo
 BROWSER_WIDTH = 1600
 BROWSER_HEIGHT = 900
@@ -52,12 +30,25 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.3;) AppleWebKit/536.10 (KHTML, like Gecko) Chrome/55.0.3745.151 Safari/603"
 }
 
+# dizionario dei target predefinito
+TASKS_DEFAULT = {
+    "task1": ["circolari", "comunicazioni", "circolare"],
+    "task2": ["organigramma", "organizzazione", "schema organizzativo", "persone"],
+    "task3": ["notizie", "news", "eventi"],
+    "task4": ["progetti", "progetto", "projects"],
+    "task5": ["regolamento", "regolamenti", "regolamentazione"],
+    "task6": ["amministrazione trasparente", "ammin. trasparente"],
+    "task7": ["registro"],
+    "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
+}
+
 # algoritmi di ricerca non informati di default
 uninformed_search_algs = ["DFS", "BFS", "LCFS"]
 benchmark_search_algs_ = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
 
-# ----- costanti modelli
-# features
+DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
+
+# ----- MODELLI
 ds3_features_pk = ["school_id", "page_url"]
 ds3_features_askable = [
     "page_template",
@@ -74,18 +65,6 @@ ds3_features_part = [
 ]
 ds3_target = "metric"
 
-# dizionario dei target predefinito
-TASKS_DEFAULT = {
-    "task1": ["circolari", "comunicazioni", "circolare"],
-    "task2": ["organigramma", "organizzazione", "schema organizzativo", "persone"],
-    "task3": ["notizie", "news", "eventi"],
-    "task4": ["progetti", "progetto", "projects"],
-    "task5": ["regolamento", "regolamenti", "regolamentazione"],
-    "task6": ["amministrazione trasparente", "ammin. trasparente"],
-    "task7": ["registro"],
-    "task8": ["indirizzo", "i luoghi", "dove siamo", "contatti"],
-}
-
 ds3_features = (
     ds3_features_pk
     + ds3_features_part
@@ -93,7 +72,6 @@ ds3_features = (
     + list(TASKS_DEFAULT.keys())
 )
 
-# features da escludere per i modelli di sl e per la bn
 ds3_features_excluded = ds3_features_pk
 
 # intervalli dei domini di alcune feature
@@ -138,14 +116,35 @@ ds3_gt_feature_domains = {
     "task8": lambda v: v >= 0,
 }
 
-# ----- costanti KB
+# ----- KB
+DIR_KB = DIR_ROOT / "agent" / "kb"
+DIR_KB_JOBS = DIR_KB / "jobs"
+
+kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
+kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
+
+# percorsi job
+job1_clauses_path = DIR_KB_JOBS / "job1_clauses.pl"
+job1_output_path = DIR_KB_JOBS / "job1_output.pl"
+
+job2_clauses_path = DIR_KB_JOBS / "job2_clauses.pl"
+job2_output_path = DIR_KB_JOBS / "job2_output.pl"
+
+job3_clauses_path = DIR_KB_JOBS / "job3_clauses.pl"
+job3_output_path = DIR_KB_JOBS / "job3_output.txt"
+
+job4_clauses_path = DIR_KB_JOBS / "job4_clauses.pl"
+job4_output_path = DIR_KB_JOBS / "job4_output.txt"
+
+# endpoints
 
 # https://dati.istruzione.it/opendata/opendata/sparql/endpoint/
 KB_MIUR_ENDPOINT1 = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
 # https://www.wikidata.org/wiki/Wikidata:Lists/SPARQL_endpoints
 KB_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 
-# ----- costanti BN
+# ----- BN
+DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
 DS_DISCRETE_MAPPING_DEFAULT = {
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),

@@ -1,0 +1,20 @@
+{'Rank': [
+    'place_rf(citt� metropolitana di Cagliari, 0.5454545454545454)',
+    'place_rf(provincia di Catanzaro, 0.5)',
+    'place_rf(ente di decentramento regionale di Trieste, 0.5)',
+    'place_rf(citt� metropolitana di Milano, 0.5)',
+    'place_rf(citt� metropolitana di Palermo, 0.4782608695652174)',
+    'place_rf(citt� metropolitana di Bari, 0.43333333333333335)',
+    'place_rf(provincia di Potenza, 0.42857142857142855)',
+    'place_rf(provincia di Ancona, 0.42857142857142855)',
+    'place_rf(citt� metropolitana di Napoli, 0.4264705882352941)',
+    'place_rf(citt� metropolitana di Torino, 0.40540540540540543)',
+    'place_rf(provincia di Campobasso, 0.375)',
+    'place_rf(citt� metropolitana di Roma Capitale, 0.2878787878787879)',
+    'place_rf(citt� metropolitana di Firenze, 0.2727272727272727)',
+    'place_rf(provincia di Perugia, 0.25)',
+    'place_rf(citt� metropolitana di Venezia, 0.25)',
+    'place_rf(citt� metropolitana di Genova, 0.25)',
+    "place_rf(provincia dell'Aquila, 0.2222222222222222)",
+    'place_rf(citt� metropolitana di Bologna, 0.17647058823529413)'
+]}

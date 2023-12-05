@@ -1,5 +1,6 @@
 import agent.definitions as defs
-from agent.preproc.utils import _pl_str, _query_miur_sparql, _query_wikidata_sparql
+from agent.preproc.utils import _pl_str, _query_miur_kb
+from agent.kb.geofacts.geofacts import create_geofacts3_from_ds, create_geofacts4_from_ds
 import csv
 from pyswip import Prolog
 
@@ -15,7 +16,7 @@ def create_page_facts_from_ds(ds_path):
         - ds_path: Percorso dataset di partenza.
     """
     print("Creating page facts from dataset...")
-    with open(defs.kb_shared_facts_path, "a") as pl_out:
+    with open(defs.kb_shared_facts_path, "w") as pl_out:
         with open(ds_path, "r") as csv_in:
             csv_reader = csv.DictReader(csv_in, delimiter=",")
 
@@ -32,69 +33,13 @@ def create_page_facts_from_ds(ds_path):
     print("Done.")
 
 
-def create_geo_facts_from_ds(ds_path):
-    """Crea una lista di fatti, ciascuno rappresentante semanticamente una pagina del
-    dataset ds_path.
-
-    Args:
-        - ds_path: Percorso dataset di partenza.
-    """
-    print("Creating geo-facts from dataset...")
-    with open(defs.kb_shared_facts_path, "a") as pl_out:
-        with open(ds_path, "r") as csv_in:
-            csv_reader = csv.DictReader(csv_in, delimiter=",")
-
-            for row in csv_reader:
-                #
-
-                # fmt:off
-                query_rem = (
-                    """
-                    PREFIX miur: <http://www.miur.it/ns/miur#>
-                    Select ?CodiceCatastaleComune {
-                        graph ?g {
-                            ?S miur:CODICESCUOLA """ + _pl_str(row["school_id"]) + """.
-                            ?S miur:CODICECOMUNESCUOLA ?CodiceCatastaleComune.
-                        }
-                    }
-                    LIMIT 1
-                    """
-                )  # fmt:on
-                query_df1 = _query_miur_sparql(query_rem, defs.KB_MIUR_ENDPOINT1)
-
-                # fmt:off
-                query_rem = (
-                    """
-                    SELECT ?ProvinciaCodice ?RegioneLabel ?RegionePopolazione
-                    WHERE {
-                        ?Citta wdt:P806 """ + _pl_str(query_df1.loc[0, "CodiceCatastaleComune"]) + """.
-                        ?Citta wdt:P131 ?Provincia.
-                        ?Provincia wdt:P131 ?Regione.
-                        ?Provincia wdt:P395 ?ProvinciaCodice.
-                        ?Regione wdt:P1082 ?RegionePopolazione.
-                        
-                        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],it". }
-                    }
-                    LIMIT 1
-                    """
-                )  # fmt:on
-                query_df2 = _query_wikidata_sparql(query_rem)
-
-                geofact = (
-                    f'\nschool_is_in_place({_pl_str(row["school_id"])}, '
-                    f'city({_pl_str(query_df1.loc[0, "CodiceCatastaleComune"])}), '
-                    f'province({_pl_str(query_df2.loc[0, "ProvinciaCodice"])}), '
-                    f'region({_pl_str(query_df2.loc[0, "RegioneLabel"])}, {_pl_str(query_df2.loc[0, "RegionePopolazione"])}) ).'
-                )
-                pl_out.write(geofact)
-    print("Done.")
-
-
-def run_job1():
+def run_job1(out_path=defs.job1_output_path):
     """Procedura Job1. Vedi: report.pdf."""
 
     print("Running Job 1...")
 
+    # -----
+    print("Creating necessary facts...")
     # individuo le scuole che hanno siti con redirect errati
     query_kb = "page_wrongly_redirects(schoolassoc(Url, School_ID))."
 
@@ -120,10 +65,10 @@ def run_job1():
             LIMIT 50
             """
         )  # fmt:on
-        query_df = _query_miur_sparql(query_rem, defs.KB_MIUR_ENDPOINT1)
+        query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(defs.kb_job1_facts_i_path, "a") as pl_out:
+        with open(defs.job1_clauses_path, "w") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -133,11 +78,13 @@ def run_job1():
                 )
                 pl_out.write(f)
 
+    # -----
+    print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
-    prolog.consult(f"./jobs/{defs.kb_job1_facts_i_path.name}")
+    prolog.consult(f"./jobs/{defs.job1_clauses_path.name}")
     query_kb = "is_partial_report1(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
-    with open(defs.kb_job1_facts_o_path, "w") as pl_out:
+    with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
             # per ogni partial report, costruisco un full report.
             # la costruzione di un full report non richiede ulteriori query sulla kb locale,
@@ -165,7 +112,7 @@ def run_job1():
                     LIMIT 1
                     """
                 )  # fmt:on
-                query_df = _query_miur_sparql(query_rem, defs.KB_MIUR_ENDPOINT1)
+                query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
                 # creazione ultima parte (lista di simboli di funzione schooladdress)
                 school_contact = (
@@ -187,23 +134,20 @@ def run_job1():
 
             pl_out.write(full_report)
 
-    print(f"Done. Facts generated at {defs.kb_job1_facts_o_path}.")
+    print(f"Done. Output generated at {out_path}.")
 
 
-def run_job2():
+def run_job2(out_path=defs.job2_output_path):
     """Procedura Job2. Vedi: report.pdf."""
 
     print("Running Job 2...")
 
+    # -----
+    print("Creating necessary facts...")
     # individuo le scuole che hanno siti da migliorare
     query_kb = "page_needs_improvement(schoolassoc(Url, School_ID))."
 
     for result in prolog.query(query_kb):
-        # step:
-        # result = singola scuola con sito da migliorare
-        # scuola -> istituto a cui fa capo
-        # istituto a cui fa capo -> tutte le scuole associate all'istituto (compresa quella di partenza)
-
         # fmt:off
         query_rem = (
             """
@@ -220,10 +164,10 @@ def run_job2():
             LIMIT 50
             """
         )  # fmt:on
-        query_df = _query_miur_sparql(query_rem, defs.KB_MIUR_ENDPOINT1)
+        query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(defs.kb_job2_facts_i_path, "a") as pl_out:
+        with open(defs.job2_clauses_path, "w") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -233,16 +177,14 @@ def run_job2():
                 )
                 pl_out.write(f)
 
+    # -----
+    print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con sito da migliorare.
-    prolog.consult(f"./jobs/{defs.kb_job2_facts_i_path.name}")
+    prolog.consult(f"./jobs/{defs.job2_clauses_path.name}")
     query_kb = "is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
-    with open(defs.kb_job2_facts_o_path, "w") as pl_out:
+    with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
-            # per ogni partial report, costruisco un full report.
-            # la costruzione di un full report non richiede ulteriori query sulla kb locale,
-            # ma solamente l'interrogazione della kb remota.
-
             list_school_contacts = ""
 
             i = 1
@@ -265,7 +207,7 @@ def run_job2():
                     LIMIT 1
                     """
                 )  # fmt:on
-                query_df = _query_miur_sparql(query_rem, defs.KB_MIUR_ENDPOINT1)
+                query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
                 # creazione ultima parte (lista di simboli di funzione schooladdress)
                 school_contact = (
@@ -287,32 +229,63 @@ def run_job2():
 
             pl_out.write(full_report)
 
-    print(f"Done. Facts generated at {defs.kb_job2_facts_o_path}.")
+    print(f"Done. Output generated at {out_path}.")
 
 
-def run_job3():
+def run_job3(out_path=defs.job3_output_path):
     """Procedura Job3. Vedi: report.pdf."""
 
     print("Running Job 3...")
 
-    query_kb = "is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
+    # -----
+    print("Creating necessary facts...")
+    # create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, defs.job3_clauses_path)
+    prolog.consult(f"./jobs/{defs.job3_clauses_path.name}")
 
-    with open(defs.kb_job3_facts_o_path, "w") as pl_out:
+    # -----
+    print("Running query on local KB...")
+    query_kb = "is_rank_of_places(Rank)."
+
+    with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
-            pl_out.write(result)
+            pl_out.write(repr(result))
 
-    print(f"Done. Facts generated at {defs.kb_job3_facts_o_path}.")
+    print(f"Done. Facts generated at {out_path}.")
+
+
+def run_job4(out_path=defs.job4_output_path):
+    """Procedura Job4. Vedi: report.pdf."""
+
+    print("Running Job 4...")
+
+    # -----
+    print("Creating necessary facts...")
+    create_geofacts4_from_ds(defs.ds3_gt_no_noise_path, defs.job4_clauses_path)
+    prolog.consult(f"./jobs/{defs.job4_clauses_path.name}")
+
+    # -----
+    print("Running query on local KB...")
+    query_kb = "is_rank_of_places(Rank)."
+
+    with open(out_path, "w") as pl_out:
+        for result in prolog.query(query_kb):
+            pl_out.write(repr(result))
+
+    print(f"Done. Facts generated at {out_path}.")
 
 
 if __name__ == "__main__":
-    create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
-    create_geo_facts_from_ds(defs.ds3_gt_no_noise_path)
+    # tutti i job consultano i fatti e regole condivise
+    # create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
 
     prolog.consult(f"./{defs.kb_shared_facts_path.name}")
     prolog.consult(f"./{defs.kb_shared_rules_path.name}")
 
-    run_job1()
+    # job
+    # run_job1()
 
-    run_job2()
+    # run_job2()
 
-    run_job3()
+    # run_job3()
+
+    run_job4()

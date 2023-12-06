@@ -276,16 +276,16 @@ def run_job4(out_path=defs.job4_output_path):
 
 if __name__ == "__main__":
     # tutti i job consultano i fatti e regole condivise
-    # create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
+    create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
 
     prolog.consult(f"./{defs.kb_shared_facts_path.name}")
     prolog.consult(f"./{defs.kb_shared_rules_path.name}")
 
     # job
-    # run_job1()
+    run_job1()
 
-    # run_job2()
+    run_job2()
 
-    # run_job3()
+    run_job3()
 
     run_job4()

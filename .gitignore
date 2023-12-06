@@ -6,6 +6,9 @@
 /agent.egg-info
 /venv
 
+# Developing hints and links
+/docs/misc/_dev
+
 # Exclude some aipython modules
 /agent/libs/aipython/*
 !/agent/libs/aipython/searchGeneric.py

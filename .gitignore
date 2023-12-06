@@ -2,7 +2,7 @@
 **/__pycache__
 
 # Python venv files
-/venv_run.ps1
+#/venv_run.ps1
 /agent.egg-info
 /venv
 

@@ -5,8 +5,9 @@ L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l�
 
 ## Download
 1. Download [SWI-Prolog](https://www.swi-prolog.org/Download.html).
-2. ```git clone https://github.com/vodibe/icon-745751.git```
-3. ```cd path/to/icon-745751```
-4. ```python -m venv icon-745751```
-5. ```pip install -e .```
-
+2. `git clone https://github.com/vodibe/icon-745751.git`
+3. `cd path/to/icon-745751`
+4. `python -m venv venv`
+5. Abilitare l'ambiente virtuale Python. 
+   - Su Windows: `.\venv_run.ps1`
+6. `pip install -e .`

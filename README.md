@@ -48,8 +48,7 @@ Vedere `docs/report.pdf`. Questo file rimanda ai percorsi dove sono memorizzati 
    # sito web -> NDOM
    myNDOM = NaiveDOM("https://www.liceofermicanosa.edu.it/")
    # sorgente locale -> NDOM
-   myNDOM = NaiveDOM(location="mysource.html",
-                     from_file=True)
+   myNDOM = NaiveDOM(location="mysource.html", from_file=True)
 
    # leggiamo le features estratte
    print(myNDOM.get_features())

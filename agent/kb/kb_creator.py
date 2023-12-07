@@ -253,14 +253,15 @@ def run_job3(out_path=defs.job3_output_path):
     print(f"Done. Facts generated at {out_path}.")
 
 
-def run_job4(out_path=defs.job4_output_path):
+def run_job4(out_path=defs.job4_output_path, geofacts_created=False):
     """Procedura Job4. Vedi: report.pdf."""
 
     print("Running Job 4...")
 
     # -----
-    print("Creating necessary facts...")
-    create_geofacts4_from_ds(defs.ds3_gt_no_noise_path, defs.job4_clauses_path)
+    if not geofacts_created:
+        print("Creating necessary facts...")
+        create_geofacts4_from_ds(defs.ds3_gt_no_noise_path, defs.job4_clauses_path)
     prolog.consult(f"./jobs/{defs.job4_clauses_path.name}")
 
     # -----
@@ -288,4 +289,4 @@ if __name__ == "__main__":
 
     run_job3()
 
-    run_job4()
+    run_job4(geofacts_created=True)

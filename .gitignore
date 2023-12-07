@@ -1,15 +1,15 @@
 # __pycache__
 **/__pycache__
 
-# Python venv files
+# Ambiente virtuale Python
 #/venv_run.ps1
 /agent.egg-info
 /venv
 
-# Developing hints and links
+# Link utili per lo sviluppo
 /docs/misc/_dev
 
-# Exclude some aipython modules
+# Escludi alcuni moduli di aipython
 /agent/libs/aipython/*
 !/agent/libs/aipython/searchGeneric.py
 !/agent/libs/aipython/searchProblem.py

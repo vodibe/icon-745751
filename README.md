@@ -113,4 +113,5 @@ Vedere `docs/report.pdf`. Viene riportato tutto ciò che cerchiamo di fare nel p
 3. ```bash
    python bn_creator.py
    ```
+4. **Percorso risultati**: `agent/pgm/bif/`
    

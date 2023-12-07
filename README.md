@@ -4,7 +4,7 @@
 L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l’applicazione di alcuni metodi di Ingegneria della Conoscenza su un dominio di interesse, in questo caso l’usabilità di una pagina web. Questo richiede che prima si vada a circoscrivere un ambito di riferimento, che nel nostro caso, è l’insieme delle Homepage delle scuole superiori pubbliche italiane (aggiornate a settembre 2023).
 
 ## Download
-1. Download [SWI-Prolog](https://www.swi-prolog.org/Download.html).
+1. Download [Python](https://www.python.org/downloads/) e [SWI-Prolog](https://www.swi-prolog.org/Download.html).
 2. Clonare la repo.
    ```bash
    git clone https://github.com/vodibe/icon-745751.git
@@ -13,64 +13,104 @@ L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l�
    ```bash
    cd path/to/icon-745751
    ```
-4. Creare ambiente virtuale Python.
+4. Creare e abilitare ambiente virtuale Python.
    ```bash
    python -m venv venv
-   ```
-5. Abilitare l'ambiente virtuale Python. 
-   ```bash
-   .\venv_run.ps1
+
+   venv\Scripts\Activate # Windows
+   source venv/bin/activate # Linux
    ```
 6. Installare pacchetto del progetto nell'ambiente virtuale. 
    ```bash
    pip install -e .
    ```
+7. Installare dipendenze.
+   ```bash
+   pip install -r requirements.txt
+   ```
    
-## Documentazione e risultati
-Vedere `docs/report.pdf`. Questo file rimanda ai percorsi dove sono memorizzati i vari output delle sezioni del progetto.
-
 ## Esecuzione
+Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
 
-**Tutti i seguenti step sono facoltativi, in quanto il progetto include già i vari risultati.**
+### :books: Documentazione e Risultati
+Vedere `docs/report.pdf`. Viene riportato tutto ciò che cerchiamo di fare nel progetto. In ogni sezione si rimanda ai percorsi dove sono memorizzati i vari output.
 
-1. Aprire la cartella del progetto con un qualsiasi IDE, ad es. [VS Code](https://code.visualstudio.com/). 
+### :globe_with_meridians: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML sorgente locale...
+1. ```bash
+   cd agent/ndom
+   ```
+2. (Facoltativo) Modificare `NaiveDOM.py`
+   ```python
+   if __name__ == "__main__":
+      # sito web -> NDOM
+      myNDOM = NaiveDOM("https://www.liceofermicanosa.edu.it/")
+      # sorgente locale -> NDOM
+      myNDOM = NaiveDOM(location="mysource.html", from_file=True)
+
+      # leggiamo le features estratte
+      print(myNDOM.get_features())
+      # visualizziamo
+      myNDOM.plot()
+   ```
+3. ```bash
+   python NaiveDOM.py
+   ```
+### :bar_chart: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
+1. Aprire la cartella del progetto con un qualsiasi IDE che supporti la visualizzazione di notebook `.ipynb` , ad es. [VS Code](https://code.visualstudio.com/). 
    ```bash
    cd path/to/icon-745751/
    code .
    ```
-2. Creazione dei dataset (già inclusi).
-3. Creare ed esplorare un NDOM per un qualsiasi sito web o file sorgente locale.
-   ```bash
-   cd agent/ndom
+2. ```bash
+   pip install ipykernel
    ```
-   Modificare il file `agent/ndom/NaiveDOM.py`.
-   ```python
-   # sito web -> NDOM
-   myNDOM = NaiveDOM("https://www.liceofermicanosa.edu.it/")
-   # sorgente locale -> NDOM
-   myNDOM = NaiveDOM(location="mysource.html", from_file=True)
+3. Aprire `agent/models/nb_supervised_learning.ipynb`.
+4. Eseguire in ordine tutte le celle di codice.
 
-   # leggiamo le features estratte
-   print(myNDOM.get_features())
-   # visualizziamo
-   myNDOM.plot()
-   ```
-   Eseguirlo.
-   ```bash
-   python NaiveDOM.py
-   ```
-4. Esplorare il procedimento di costruzione dei modelli di apprendimento.
-   Eseguire (in ordine) ogni cella di codice del file `agent/models/nb_supervised_learning.ipynb`.
-
-5. Sfruttare la base di conoscenza per creare i report dei Job. Questa fase impiegherà qualche minuto, si effettueranno diverse richieste al server del MIUR. I report dei job sono salvati in `agent/kb/jobs`.
-   ```bash
+### :mailbox_with_mail: Se si vuole consultare la KB per eseguire i Job...
+1. ```bash
    cd agent/kb
+   ```
+2. (Facoltativo) Modificare `kb_creator.py`
+   ```python
+   ### Se si vuole consultare la KB per eseguire i Job..
+   if __name__ == "__main__":
+      ...
+
+      # Specificare i Job da eseguire
+      run_job1()
+
+      run_job2()
+
+      run_job3()
+
+      run_job4(geofacts_created=True)
+   ```
+3. ```bash
    python kb_creator.py
    ```
-6. Creare la Rete Bayesiana.
-   ```bash
+4. **Percorso risultati**: `agent/kb/jobs/`
+
+### :clipboard: Se si vuole apprendere i parametri della Rete Bayesiana, visualizzarli, ed eseguire delle query...
+1. ```bash
    cd agent/pgm
+   ```
+2. (Facoltativo) Modificare `bn_creator.py`
+   ```python
+   ...
+   BN_QUERIES_DEFAULT = [
+   {
+      # Specificare una query in questo formato
+      "query_desc": "P(page_template | metric=4)",
+      "variables": ["page_template"],
+      "evidence": {
+            "metric": 4,
+      },
+      ...
+   },
+   ...
+   ```
+3. ```bash
    python bn_creator.py
    ```
-     
    

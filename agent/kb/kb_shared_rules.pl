@@ -18,6 +18,7 @@ is_list_length([_ | Tail], Length) :-
 
 % l'atomo page è definito (cioè presente nella testa di una clausola) nel file kb_facts.pl
 :- discontiguous page/4.
+:- discontiguous schoolcontact/6.
 % page(schoolassoc(Url, School_ID), details(Width, Height, Load_time_ms, Template, Menu_or, Ungrouped_multim), ndom(NDOM_Nodes, NDOM_Height, NDOM_Tasks), Metric).
 
 
@@ -33,7 +34,8 @@ page_wrongly_redirects(schoolassoc(Url, School_ID)) :-
     page(schoolassoc(Url, School_ID), _, ndom(NDOM_Nodes, NDOM_Height, _), _),
     NDOM_Height =< 1,
     NDOM_Nodes =< 2.
-    
+
+
 % is_partial_report1/2
 % Vero quando il primo termine è l'istituto (id, nome e lista scuole ad esso associate)
 % a cui la scuola (secondo termine) appartiene. 
@@ -43,12 +45,14 @@ is_partial_report1(institute_with_all_schools(institute(Institute_ID, Institute_
     findall(S, institute_has_school(institute(Institute_ID, _), S), Institute_Schools_IDs).
 
 
+
+
 % %%%%%% JOB2
 
 % is_good_template/1
 % Vero quando il primo termine è una lista indicante le pagine per le quali è molto probabile
 % abbiano una buona interfaccia.
-is_good_template([1, 4, 5, 7]).
+is_good_template([1, 5, 7]).
 
 % page_needs_improvement/2
 % Vero quando il primo termine è associato a una scuola avente pagina che necessita un miglioramento grafico.
@@ -71,7 +75,7 @@ is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_
     findall(S, institute_has_school(institute(Institute_ID, _), S), Institute_Schools_IDs).
 
 
-% %%%%%% JOB3
+% %%%%%% JOB3, JOB4
 
 :- discontiguous school_is_in_place/2.
 
@@ -82,8 +86,6 @@ page_has_good_metric(schoolassoc(Url, School_ID)) :-
     page(schoolassoc(Url, School_ID), details(_, _, _, _, _, Ungrouped_multim), _, Metric),
     Metric > 3.8,
     Ungrouped_multim =< 6.
-
-
 
 
 % is_relative_frequency_for_place/2
@@ -103,7 +105,6 @@ is_relative_frequency_for_place(Place, Relative_Frequency) :-
 is_rank_of_places(Rank) :-
     findall(X, school_is_in_place(_, X), List_Places_W_Dups),
     setof(Y, member(Y, List_Places_W_Dups), List_Places_WO_Dups),
-    %member(Place, List_Places_WO_Dups),
 
     findall(place_rf(Place, Relative_Frequency), (member(Place, List_Places_WO_Dups), is_relative_frequency_for_place(Place, Relative_Frequency)), Unordered_Rank),
     predsort(place_order, Unordered_Rank, Rank_Ascendant),

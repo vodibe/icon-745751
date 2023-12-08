@@ -33,7 +33,7 @@ def create_page_facts_from_ds(ds_path):
     print("Done.")
 
 
-def run_job1(out_path=defs.job1_output_path):
+def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_output_path):
     """Procedura Job1. Vedi: report.pdf."""
 
     print("Running Job 1...")
@@ -68,7 +68,7 @@ def run_job1(out_path=defs.job1_output_path):
         query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(defs.job1_clauses_path, "w") as pl_out:
+        with open(private_clauses_path, "w") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -81,7 +81,7 @@ def run_job1(out_path=defs.job1_output_path):
     # -----
     print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
-    prolog.consult(f"./jobs/{defs.job1_clauses_path.name}")
+    prolog.consult(f"./jobs/{private_clauses_path.name}")
     query_kb = "is_partial_report1(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
     with open(out_path, "w") as pl_out:
@@ -137,7 +137,7 @@ def run_job1(out_path=defs.job1_output_path):
     print(f"Done. Output generated at {out_path}.")
 
 
-def run_job2(out_path=defs.job2_output_path):
+def run_job2(private_clauses_path=defs.job2_clauses_path, out_path=defs.job2_output_path):
     """Procedura Job2. Vedi: report.pdf."""
 
     print("Running Job 2...")
@@ -167,7 +167,7 @@ def run_job2(out_path=defs.job2_output_path):
         query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(defs.job2_clauses_path, "w") as pl_out:
+        with open(private_clauses_path, "w") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -180,7 +180,7 @@ def run_job2(out_path=defs.job2_output_path):
     # -----
     print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con sito da migliorare.
-    prolog.consult(f"./jobs/{defs.job2_clauses_path.name}")
+    prolog.consult(f"./jobs/{private_clauses_path.name}")
     query_kb = "is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
 
     with open(out_path, "w") as pl_out:
@@ -232,7 +232,7 @@ def run_job2(out_path=defs.job2_output_path):
     print(f"Done. Output generated at {out_path}.")
 
 
-def run_job3(out_path=defs.job3_output_path):
+def run_job3(private_clauses_path=defs.job3_clauses_path, out_path=defs.job3_output_path):
     """Procedura Job3. Vedi: report.pdf."""
 
     print("Running Job 3...")
@@ -240,7 +240,7 @@ def run_job3(out_path=defs.job3_output_path):
     # -----
     print("Creating necessary facts...")
     # create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, defs.job3_clauses_path)
-    prolog.consult(f"./jobs/{defs.job3_clauses_path.name}")
+    prolog.consult(f"./jobs/{private_clauses_path.name}")
 
     # -----
     print("Running query on local KB...")

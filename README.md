@@ -33,9 +33,9 @@ L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l�
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
 
 ### :books: Documentazione e Risultati
-Vedere `docs/report.pdf`. Viene riportato tutto ciò che cerchiamo di fare nel progetto. In ogni sezione si rimanda ai percorsi dove sono memorizzati i vari output.
+Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
 
-### :globe_with_meridians: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML sorgente locale...
+### :globe_with_meridians: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML...
 1. ```bash
    cd agent/ndom
    ```
@@ -55,6 +55,11 @@ Vedere `docs/report.pdf`. Viene riportato tutto ciò che cerchiamo di fare nel p
 3. ```bash
    python NaiveDOM.py
    ```
+4. **Output:** 
+   ```bash
+   {...}
+   ```
+   ![ndom1](./docs/img/03.png)
 ### :bar_chart: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
 1. Aprire la cartella del progetto con un qualsiasi IDE che supporti la visualizzazione di notebook `.ipynb` , ad es. [VS Code](https://code.visualstudio.com/). 
    ```bash
@@ -73,7 +78,7 @@ Vedere `docs/report.pdf`. Viene riportato tutto ciò che cerchiamo di fare nel p
    ```
 2. (Facoltativo) Modificare `kb_creator.py`
    ```python
-   ### Se si vuole consultare la KB per eseguire i Job..
+   ...
    if __name__ == "__main__":
       ...
 

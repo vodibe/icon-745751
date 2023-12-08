@@ -19,6 +19,36 @@ ds3_gt_no_noise_path = DIR_DATASETS / "SCUANAGRAFE202324_3_gt_no_noise.csv"  # g
 
 ds_test_path = DIR_DATASETS / "test.csv"
 
+# ----- PERCORSI
+
+# NDOM
+DIR_GRAPH_BENCHMARK = DIR_ROOT / "agent" / "ndom" / "benchmark"
+
+ndom_benchmark_full_path = DIR_GRAPH_BENCHMARK / "benchmark_full.xlsx"
+
+# KB
+DIR_KB = DIR_ROOT / "agent" / "kb"
+DIR_KB_JOBS = DIR_KB / "jobs"
+
+kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
+kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
+
+job1_clauses_path = DIR_KB_JOBS / "job1_clauses.pl"
+job1_output_path = DIR_KB_JOBS / "job1_output.pl"
+
+job2_clauses_path = DIR_KB_JOBS / "job2_clauses.pl"
+job2_output_path = DIR_KB_JOBS / "job2_output.pl"
+
+job3_clauses_path = DIR_KB_JOBS / "job3_clauses.pl"
+job3_output_path = DIR_KB_JOBS / "job3_output.txt"
+
+job4_clauses_path = DIR_KB_JOBS / "job4_clauses.pl"
+job4_output_path = DIR_KB_JOBS / "job4_output.txt"
+
+# BN
+DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
+
+
 # ----- NDOM
 # larghezza, altezza, diagonale schermo
 BROWSER_WIDTH = 1600
@@ -43,10 +73,10 @@ TASKS_DEFAULT = {
 }
 
 # algoritmi di ricerca non informati di default
-uninformed_search_algs = ["DFS", "BFS", "LCFS"]
-benchmark_search_algs_ = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
+UNINFORMED_SEARCH_ALGS_DEFAULT = ["DFS", "BFS", "LCFS"]
 
-DIR_GRAPH_BENCHMARK = DIR_ROOT / "ndom" / "benchmark"
+list_benchmark_search_algs = ["NaiveDOMSearcher", "DFS", "BFS", "LCFS"]
+
 
 # ----- MODELLI
 ds3_features_pk = ["school_id", "page_url"]
@@ -117,24 +147,6 @@ ds3_gt_feature_domains = {
 }
 
 # ----- KB
-DIR_KB = DIR_ROOT / "agent" / "kb"
-DIR_KB_JOBS = DIR_KB / "jobs"
-
-kb_shared_facts_path = DIR_KB / "kb_shared_facts.pl"
-kb_shared_rules_path = DIR_KB / "kb_shared_rules.pl"
-
-# percorsi job
-job1_clauses_path = DIR_KB_JOBS / "job1_clauses.pl"
-job1_output_path = DIR_KB_JOBS / "job1_output.pl"
-
-job2_clauses_path = DIR_KB_JOBS / "job2_clauses.pl"
-job2_output_path = DIR_KB_JOBS / "job2_output.pl"
-
-job3_clauses_path = DIR_KB_JOBS / "job3_clauses.pl"
-job3_output_path = DIR_KB_JOBS / "job3_output.txt"
-
-job4_clauses_path = DIR_KB_JOBS / "job4_clauses.pl"
-job4_output_path = DIR_KB_JOBS / "job4_output.txt"
 
 # endpoints
 
@@ -144,7 +156,6 @@ KB_MIUR_ENDPOINT1 = "https://dati.istruzione.it/opendata/SCUANAGRAFESTAT/query"
 KB_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 
 # ----- BN
-DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
 DS_DISCRETE_MAPPING_DEFAULT = {
     "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),

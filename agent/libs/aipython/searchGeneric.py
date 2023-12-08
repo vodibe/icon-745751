@@ -77,8 +77,10 @@ class Searcher(Displayable):
 
     def __init__(self, problem, algorithm="DFS"):
         """creates a searcher from a problem"""
-        if algorithm not in defs.uninformed_search_algs:
-            raise ValueError(f"Search algorithms allowed: {defs.uninformed_search_algs}")
+        if algorithm not in defs.UNINFORMED_SEARCH_ALGS_DEFAULT:
+            raise ValueError(
+                f"Search algorithms allowed: {defs.UNINFORMED_SEARCH_ALGS_DEFAULT}"
+            )
         self.algorithm = algorithm
         self.problem = problem
         self.initialize_frontier()
@@ -143,7 +145,9 @@ class Searcher(Displayable):
 
                 # -----
                 self.display(3, "Frontier:", self.frontier)
-        self.display(1, "No (more) solutions. Total of", self.num_expanded, "paths expanded.")
+        self.display(
+            1, "No (more) solutions. Total of", self.num_expanded, "paths expanded."
+        )
 
 
 class AStarSearcher(Searcher):
@@ -169,7 +173,9 @@ class AStarSearcher(Searcher):
 import agent.libs.aipython.searchProblem as searchProblem
 
 
-def test(SearchClass, problem=searchProblem.problem1, solutions=[["G", "D", "B", "C", "A"]]):
+def test(
+    SearchClass, problem=searchProblem.problem1, solutions=[["G", "D", "B", "C", "A"]]
+):
     """Unit test for aipython searching algorithms.
     SearchClass is a class that takes a problem and implements search()
     problem is a search problem

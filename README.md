@@ -56,8 +56,13 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    python NaiveDOM.py
    ```
 4. **Output:** 
-   ```bash
-   {...}
+   ```
+   Building NDOM for https://www.liceofermicanosa.edu.it/
+   Reading HTML...
+   Cleaning HTML...
+   Parsing HTML <body> tag...
+   Populating features...
+   {'page_width': 1587, 'page_height': 4145, 'NDOM_height': 7, ...}
    ```
    ![ndom1](./docs/img/03.png)
 ### :bar_chart: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
@@ -90,6 +95,8 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
       run_job3()
 
       run_job4(geofacts_created=True)
+
+      run_job5(geofacts_created=True)
    ```
 3. ```bash
    python kb_creator.py

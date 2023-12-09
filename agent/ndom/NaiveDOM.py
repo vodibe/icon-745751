@@ -457,5 +457,5 @@ if __name__ == "__main__":
     # NDOM_file1 = NaiveDOM('source1.html', from_file=True)
     NDOM_website1 = NaiveDOM("https://www.liceofermicanosa.edu.it/")
 
-    # print(NDOM_website1.get_features())
+    print(NDOM_website1.get_features())
     NDOM_website1.plot()

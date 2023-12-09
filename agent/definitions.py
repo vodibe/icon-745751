@@ -45,6 +45,9 @@ job3_output_path = DIR_KB_JOBS / "job3_output.txt"
 job4_clauses_path = DIR_KB_JOBS / "job4_clauses.pl"
 job4_output_path = DIR_KB_JOBS / "job4_output.txt"
 
+job5_clauses_path = DIR_KB_JOBS / "job5_clauses.pl"
+job5_output_path = DIR_KB_JOBS / "job5_output.txt"
+
 # BN
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 

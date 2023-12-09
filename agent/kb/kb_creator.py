@@ -1,8 +1,9 @@
 import agent.definitions as defs
 from agent.preproc.utils import _pl_str, _query_miur_kb
-from agent.kb.geofacts.geofacts import create_geofacts3_from_ds, create_geofacts4_from_ds
+from agent.kb.geofacts import create_geofacts3_from_ds, create_geofacts4_from_ds
 import csv
 from pyswip import Prolog
+import sys
 
 # istanza singleton del bridge SWI prolog - python
 prolog = Prolog()
@@ -38,26 +39,27 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
 
     print("Running Job 1...")
 
+    # step:
+    # 1) result = singola scuola con redirect errato
+    # 2) scuola -> istituto a cui fa capo
+    # 3) istituto a cui fa capo -> tutte le scuole associate all'istituto (compresa quella di partenza)
+
     # -----
     print("Creating necessary facts...")
-    # individuo le scuole che hanno siti con redirect errati
+    # 1)
     query_kb = "page_wrongly_redirects(schoolassoc(Url, School_ID))."
 
     for result in prolog.query(query_kb):
-        # step:
-        # result = singola scuola con redirect errato
-        # scuola -> istituto a cui fa capo
-        # istituto a cui fa capo -> tutte le scuole associate all'istituto (compresa quella di partenza)
-
+        # 2)
         # fmt:off
         query_rem = (
             """
             PREFIX miur: <http://www.miur.it/ns/miur#>
             Select ?CodiceIstitutoRiferimento ?DenominazioneIstitutoRiferimento ?CodiceScuola {
                 graph ?g {
+                    ?S miur:CODICESCUOLA """ + _pl_str(result["School_ID"]) + """.
                     ?S miur:CODICEISTITUTORIFERIMENTO ?CodiceIstitutoRiferimento.
                     ?S miur:DENOMINAZIONEISTITUTORIFERIMENTO ?DenominazioneIstitutoRiferimento.
-                    ?S miur:CODICESCUOLA """ + _pl_str(result["School_ID"]) + """.
                     ?C miur:CODICEISTITUTORIFERIMENTO ?CodiceIstitutoRiferimento.
                     ?C miur:CODICESCUOLA ?CodiceScuola.
                 }
@@ -68,7 +70,7 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
         query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(private_clauses_path, "w") as pl_out:
+        with open(private_clauses_path, "a") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -82,7 +84,7 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
     print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
     prolog.consult(f"./jobs/{private_clauses_path.name}")
-    query_kb = "is_partial_report1(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
+    query_kb = "is_partial_report1(schoolassoc(Url, School_ID), institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs))."
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
@@ -94,6 +96,7 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
 
             i = 1
             for school_ID in result["Institute_Schools_IDs"]:
+                # recupero contatti scuola
                 # fmt:off
                 query_rem = (
                     """
@@ -167,7 +170,7 @@ def run_job2(private_clauses_path=defs.job2_clauses_path, out_path=defs.job2_out
         query_df = _query_miur_kb(query_rem, defs.KB_MIUR_ENDPOINT1)
 
         # institute_has_school(institute('istituto', 'nomeistituto'), 'scuola').
-        with open(private_clauses_path, "w") as pl_out:
+        with open(private_clauses_path, "a") as pl_out:
             for idx, row in query_df.iterrows():
                 f = (
                     f"\ninstitute_has_school("
@@ -239,7 +242,7 @@ def run_job3(private_clauses_path=defs.job3_clauses_path, out_path=defs.job3_out
 
     # -----
     print("Creating necessary facts...")
-    # create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, defs.job3_clauses_path)
+    create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, private_clauses_path)
     prolog.consult(f"./jobs/{private_clauses_path.name}")
 
     # -----
@@ -248,12 +251,16 @@ def run_job3(private_clauses_path=defs.job3_clauses_path, out_path=defs.job3_out
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
-            pl_out.write(repr(result))
+            pl_out.write(str(result))
 
     print(f"Done. Facts generated at {out_path}.")
 
 
-def run_job4(out_path=defs.job4_output_path, geofacts_created=False):
+def run_job4(
+    private_clauses_path=defs.job4_clauses_path,
+    out_path=defs.job4_output_path,
+    geofacts_created=False,
+):
     """Procedura Job4. Vedi: report.pdf."""
 
     print("Running Job 4...")
@@ -261,8 +268,8 @@ def run_job4(out_path=defs.job4_output_path, geofacts_created=False):
     # -----
     if not geofacts_created:
         print("Creating necessary facts...")
-        create_geofacts4_from_ds(defs.ds3_gt_no_noise_path, defs.job4_clauses_path)
-    prolog.consult(f"./jobs/{defs.job4_clauses_path.name}")
+        create_geofacts4_from_ds(defs.ds3_gt_no_noise_path, private_clauses_path)
+    prolog.consult(f"./jobs/{private_clauses_path.name}")
 
     # -----
     print("Running query on local KB...")
@@ -270,23 +277,52 @@ def run_job4(out_path=defs.job4_output_path, geofacts_created=False):
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
-            pl_out.write(repr(result))
+            pl_out.write(str(result))
+
+    print(f"Done. Facts generated at {out_path}.")
+
+
+def run_job5(
+    private_clauses_path=defs.job5_clauses_path,
+    out_path=defs.job5_output_path,
+    geofacts_created=False,
+):
+    """Procedura Job5. Vedi: report.pdf."""
+
+    print("Running Job 5...")
+
+    # -----
+    if not geofacts_created:
+        print("Creating necessary facts...")
+        create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, private_clauses_path)
+
+    prolog.consult(f"./jobs/{private_clauses_path.name}")
+
+    # -----
+    print("Running query on local KB...")
+    query_kb = "most_popular_templates_for_region(Template_Rank_For_Each_Region)"
+
+    with open(out_path, "w") as pl_out:
+        for result in prolog.query(query_kb):
+            pl_out.write(repr(result["Template_Rank_For_Each_Region"]))
 
     print(f"Done. Facts generated at {out_path}.")
 
 
 if __name__ == "__main__":
     # tutti i job consultano i fatti e regole condivise
-    create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
+    # create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
 
     prolog.consult(f"./{defs.kb_shared_facts_path.name}")
     prolog.consult(f"./{defs.kb_shared_rules_path.name}")
 
     # job
-    run_job1()
+    # run_job1()
 
-    run_job2()
+    # run_job2()
 
-    run_job3()
+    # run_job3()
 
-    run_job4(geofacts_created=True)
+    # run_job4(geofacts_created=True)
+
+    run_job5(geofacts_created=True)

@@ -309,6 +309,22 @@ def run_job5(
     print(f"Done. Facts generated at {out_path}.")
 
 
+def run_job6(out_path=defs.job6_output_path):
+    """Procedura Job6. Vedi: report.pdf."""
+
+    print("Running Job 6...")
+
+    # -----
+    print("Running query on local KB...")
+    query_kb = "are_detected_outliers(Outliers)."
+
+    with open(out_path, "w") as pl_out:
+        for result in prolog.query(query_kb):
+            pl_out.write(str(result["Outliers"]))
+
+    print(f"Done. Facts generated at {out_path}.")
+
+
 if __name__ == "__main__":
     # tutti i job consultano i fatti e regole condivise
     # create_page_facts_from_ds(defs.ds3_gt_no_noise_path)
@@ -326,3 +342,5 @@ if __name__ == "__main__":
     # run_job4(geofacts_created=True)
 
     # run_job5(geofacts_created=True)
+
+    run_job6()

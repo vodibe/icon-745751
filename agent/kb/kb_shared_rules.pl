@@ -86,11 +86,16 @@ is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_
 :- multifile school_is_in_place/2.
 
 
+%page(schoolassoc(Url, School_ID), details(Width, Height, Load_time_ms, Template, Menu_or, Ungrouped_multim), ndom(NDOM_Nodes, NDOM_Height, NDOM_Tasks), Metric)
+
+
 % page_has_good_metric/1
 % Vero quando il primo termine si riferisce a una pagina con buona metrica.
 page_has_good_metric(schoolassoc(Url, School_ID)) :-
-    page(schoolassoc(Url, School_ID), _, _, Metric),
-    Metric >= 3.8.
+    page(schoolassoc(Url, School_ID), details(_, _, _, _, _, Ungrouped_multim), _, Metric),
+    Metric >= 3.7,
+    Ungrouped_multim =< 9.
+
 
 
 % is_relative_frequency_for_place/2
@@ -104,7 +109,7 @@ is_relative_frequency_for_place(Place, Relative_Frequency) :-
     is_list_length(List_All_In_Place, Denominator),
     
     % non viene gestito il caso Denominator = 0 perchè prima di eseguire questa regola vengono creati i fatti school_is_in_place.
-    Relative_Frequency is (Numerator / Denominator) * (0.005 * Denominator + 0.995).
+    Relative_Frequency is (Numerator / Denominator).
 
 % is_rank_of_places/1
 % Vero quando Rank indica una lista (ordinata in modo decrescente) di simboli di funzione place_rf
@@ -203,121 +208,4 @@ most_popular_templates_for_region(Template_Rank_For_Each_Region) :-
     %page(schoolassoc(), details, ndom, metric)
     %school_geofact(ID, city, province, region)
 
-
-
-
-% %%%%% JOB 6
-
-:- use_module(library(plstat)).
-
-%page(schoolassoc(Url, School_ID), details(Width, Height, Load_time_ms, Template, Menu_or, Ungrouped_multim), ndom(NDOM_Nodes, NDOM_Height, NDOM_Tasks), Metric).
-
-
-% value_is_outlier/3
-% Vero quando Value non è compreso nell'intervallo [Lower_Bound, Upper_Bound]
-value_is_outlier(Value, Lower_Bound, Upper_Bound) :-
-    (
-        Value =< Lower_Bound
-    ;
-        Value >= Upper_Bound
-    ).
-
-% feature_is_outlier/4
-% Vero quando il valore della feature non è ..........................
-feature_is_outlier(Value, List_Feature_Asc, P1_, P2_) :-
-
-    percentile(List_Page_Load_Time_Asc, P1_, P1),
-    percentile(List_Page_Load_Time_Asc, P2_, P2),
-    Iqr is P2 - P1,
-    Lower_Bound is P1 - (1.5 * Iqr),
-    Upper_Bound is P2 + (1.5 * Iqr),
-
-    value_is_outlier(Value, Lower_Bound, Upper_Bound).
-
-
-% page_is_outlier/2
-% Vero quando la pagina (primo argomento) ha almeno una feature avente valore outlier, tenendo conto che l'insieme
-% di tutti i valori assunti dalle pagine del ds (per ciascuna feature) sono presenti nel secondo argomento. (lista di liste)
-page_is_outlier(
-    page(schoolassoc(Url, School_ID), details(Width, Height, Load_time_ms, Template, Menu_or, Ungrouped_multim), ndom(NDOM_Nodes, NDOM_Height, [Task1, Task2, Task3, Task4, Task5, Task6, Task7, Task8]), Metric),
-    [List_Load_time_ms_Asc, List_Width_Asc, List_Height_Asc, List_NDOM_Nodes_Asc, List_Task1_Asc, List_Task2_Asc, List_Task3_Asc, List_Task4_Asc, List_Task5_Asc, List_Task6_Asc, List_Task7_Asc, List_Task8_Asc]
-) :-
-    (
-        feature_is_outlier(Load_time_ms, List_Load_time_ms_Asc, 0, 95)
-    ;
-        feature_is_outlier(Width, List_Width_Asc, 0, 95)
-    ;
-        feature_is_outlier(Height, List_Height_Asc, 0, 95)
-    ;
-        feature_is_outlier(NDOM_Nodes, List_NDOM_Nodes_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task1, List_Task1_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task2, List_Task2_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task3, List_Task3_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task4, List_Task4_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task5, List_Task5_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task6, List_Task6_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task7, List_Task7_Asc, 0, 95)
-    ;
-        feature_is_outlier(Task8, List_Task8_Asc, 0, 95)
-    ). 
-
-
-% are_detected_outliers/1
-% Vero quando Outliers è la lista di tutte le pagine outlier del dataset.
-are_detected_outliers(Outliers) :-
-
-    findall(Load_time_ms, page(_, details(_, _, Load_time_ms, _, _, _), _, _), List_Load_time_ms),
-    findall(Width, page(_, details(Width, _, _, _, _, _), _, _), List_Width),
-    findall(Height, page(_, details(_, Height, _, _, _), _, _), List_Height),
-    findall(NDOM_Nodes, page(_, _, ndom(NDOM_Nodes, _, _), _), List_NDOM_Nodes),
-    findall(Task1, page(_, _, ndom(_, _, [Task1, _, _, _, _, _, _, _]), _), List_Task1),
-    findall(Task2, page(_, _, ndom(_, _, [_, Task2, _, _, _, _, _, _]), _), List_Task2),
-    findall(Task3, page(_, _, ndom(_, _, [_, _, Task3, _, _, _, _, _]), _), List_Task3),
-    findall(Task4, page(_, _, ndom(_, _, [_, _, _, Task4, _, _, _, _]), _), List_Task4),
-    findall(Task5, page(_, _, ndom(_, _, [_, _, _, _, Task5, _, _, _]), _), List_Task5),
-    findall(Task6, page(_, _, ndom(_, _, [_, _, _, _, _, Task6, _, _]), _), List_Task6),
-    findall(Task7, page(_, _, ndom(_, _, [_, _, _, _, _, _, Task7, _]), _), List_Task7),
-    findall(Task8, page(_, _, ndom(_, _, [_, _, _, _, _, _, _, Task8]), _), List_Task8),
-
-    sort(0, @=<, List_Load_time_ms, List_Load_time_ms_Asc),
-    sort(0, @=<, List_Width, List_Width_Asc),
-    sort(0, @=<, List_Height, List_Height_Asc),
-    sort(0, @=<, List_NDOM_Nodes, List_NDOM_Nodes_Asc),
-    sort(0, @=<, List_Task1, List_Task1_Asc),
-    sort(0, @=<, List_Task2, List_Task2_Asc),
-    sort(0, @=<, List_Task3, List_Task3_Asc),
-    sort(0, @=<, List_Task4, List_Task4_Asc),
-    sort(0, @=<, List_Task5, List_Task5_Asc),
-    sort(0, @=<, List_Task6, List_Task6_Asc),
-    sort(0, @=<, List_Task7, List_Task7_Asc),
-    sort(0, @=<, List_Task8, List_Task8_Asc),
-
-    findall(
-        page(schoolassoc(Url1, School_ID1), details(Width1, Height1, Load_time_ms1, Template1, Menu_or1, Ungrouped_multim1), ndom(NDOM_Nodes1, NDOM_Height1, [Task11, Task21, Task31, Task41, Task51, Task61, Task71, Task81]), Metric1),
-        (
-            page(schoolassoc(Url1, School_ID1), details(Width1, Height1, Load_time_ms1, Template1, Menu_or1, Ungrouped_multim1), ndom(NDOM_Nodes1, NDOM_Height1, [Task11, Task21, Task31, Task41, Task51, Task61, Task71, Task81]), Metric1),
-            page_is_outlier(
-                page(schoolassoc(Url1, School_ID1), details(Width1, Height1, Load_time_ms1, Template1, Menu_or1, Ungrouped_multim1), ndom(NDOM_Nodes1, NDOM_Height1, [Task11, Task21, Task31, Task41, Task51, Task61, Task71, Task81]), Metric1),
-                [List_Load_time_ms_Asc, List_Width_Asc, List_Height_Asc, List_NDOM_Nodes_Asc, List_Task1_Asc, List_Task2_Asc, List_Task3_Asc, List_Task4_Asc, List_Task5_Asc, List_Task6_Asc, List_Task7_Asc, List_Task8_Asc]
-            )
-        ),
-        Outliers_W_Dups
-    ),
-    setof(O, member(O, Outliers_W_Dups), Outliers).
-
-
-
-
-
-
-
-
-    
-    
+  

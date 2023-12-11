@@ -24,7 +24,7 @@ df_RBayes = pd.DataFrame(np.array(dataset.copy(), dtype=int), columns=dataset.co
 
 k2 = K2Score(df_RBayes)
 hc_k2 = HillClimbSearch(df_RBayes)
-modello_k2 = hc_k2.estimate(scoring_method=k2)
+modello_k2 = hc_k2.(scoring_method=k2)
 
 
 print(modello_k2)

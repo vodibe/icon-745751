@@ -242,7 +242,7 @@ def run_job3(private_clauses_path=defs.job3_clauses_path, out_path=defs.job3_out
 
     # -----
     print("Creating necessary facts...")
-    create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, private_clauses_path)
+    # create_geofacts3_from_ds(defs.ds3_gt_no_noise_path, private_clauses_path)
     prolog.consult(f"./jobs/{private_clauses_path.name}")
 
     # -----
@@ -309,6 +309,7 @@ def run_job5(
     print(f"Done. Facts generated at {out_path}.")
 
 
+'''
 def run_job6(out_path=defs.job6_output_path):
     """Procedura Job6. Vedi: report.pdf."""
 
@@ -323,6 +324,7 @@ def run_job6(out_path=defs.job6_output_path):
             pl_out.write(str(result["Outliers"]))
 
     print(f"Done. Facts generated at {out_path}.")
+'''
 
 
 if __name__ == "__main__":
@@ -339,8 +341,6 @@ if __name__ == "__main__":
 
     # run_job3()
 
-    # run_job4(geofacts_created=True)
+    run_job4(geofacts_created=True)
 
     # run_job5(geofacts_created=True)
-
-    run_job6()

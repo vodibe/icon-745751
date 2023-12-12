@@ -6,6 +6,7 @@ from pandas import DataFrame
 
 from pgmpy.models import BayesianNetwork
 from pgmpy.estimators import MaximumLikelihoodEstimator, BayesianEstimator
+from pgmpy.inference import VariableElimination
 from pgmpy.readwrite import BIFWriter
 
 
@@ -23,12 +24,6 @@ BN_EDGES_DEFAULT = [
     ("page_ungrouped_multim", "page_height"),
     ("page_height", "NDOM_nodes"),
     ("page_height", "NDOM_height"),
-    ("NDOM_nodes", "task1"),
-    ("NDOM_nodes", "task2"),
-    ("NDOM_nodes", "task3"),
-    ("NDOM_height", "task1"),
-    ("NDOM_height", "task2"),
-    ("NDOM_height", "task3"),
     ("page_menu_or", "metric"),
     ("page_ungrouped_multim", "metric"),
     ("page_height", "metric"),
@@ -88,25 +83,6 @@ BN_QUERIES_DEFAULT = [
             "page_template": 4,
         },
     },
-    # -----
-    {
-        "query_desc": "P(page_template | task1=2, task2=2, task3=2)",
-        "variables": ["page_template"],
-        "evidence": {
-            "task1": 2,
-            "task2": 2,
-            "task3": 2,
-        },
-    },
-    {
-        "query_desc": "P(page_template | task1=1, task2=1, task3=1)",
-        "variables": ["page_template"],
-        "evidence": {
-            "task1": 1,
-            "task2": 1,
-            "task3": 1,
-        },
-    },
 ]
 
 """
@@ -128,11 +104,11 @@ prior_type: BDeu (Bayesian Dirichlet equivalent uniform)
 prior_type: K2 is a shorthand for dirichlet + setting every pseudo_count to 1,
 regardless of the cardinality of the variable.
 """
-
-BAYESIAN_ESTIMATOR_PARAMS = [
+# fmt:off
+BN_MAP_ESTIMATOR_PARAMS = [
     {
         "node": "page_template",
-        "prior_type": "K2",
+        "prior_type": "K2"
         # "pseudo_counts": [
         #    [1, 1, 1, 1, 1, 1, 1, 1, 1]
         # ]
@@ -141,32 +117,66 @@ BAYESIAN_ESTIMATOR_PARAMS = [
         "node": "page_menu_or",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # nessuno
-            [4, 2, 2, 2, 4, 4, 4, 4, 2],  # solo orizzontale
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # solo verticale
-            [1, 4, 4, 4, 1, 1, 1, 1, 2],  # entrambi
-        ],
+            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 0 nessuno
+            [4, 2, 2, 2, 4, 4, 4, 4, 2],  # 1 solo orizzontale
+            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 2 solo verticale
+            [1, 4, 4, 4, 1, 1, 1, 1, 2],  # 3 entrambi
+        ]
     },
     {
         "node": "page_ungrouped_multim",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 1 (0-5)
-            [4, 2, 2, 2, 4, 4, 4, 4, 2],  # 2 (6-10)
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 3 (11-20)
-            [1, 4, 4, 4, 1, 1, 1, 1, 2],  # 4 (21+)
-        ],
+            [3, 2, 4, 3, 4, 2, 4, 1, 2],  # 1 (0-5)
+            [2, 4, 3, 3, 2, 3, 2, 3, 2],  # 2 (6-10)
+            [1, 3, 1, 2, 1, 3, 1, 4, 2],  # 3 (11-20)
+            [1, 1, 1, 1, 1, 1, 1, 4, 2],  # 4 (21+)
+        ]
     },
-    """
-    values=[
-            # 11     12   21     22   31    32     41   42    51     52   61    62    71    72    81    82    91     92
-            [0.45, 0.70, 0.22, 0.65, 0.22, 0.65, 0.22, 0.65, 0.60, 0.85, 0.30, 0.50, 0.42, 0.78, 0.08, 0.08, 0.2, 0.3],
-            [0.45, 0.20, 0.55, 0.25, 0.55, 0.25, 0.55, 0.25, 0.40, 0.15, 0.50, 0.48, 0.48, 0.21, 0.42, 0.50, 0.2, 0.3],
-            [0.05, 0.07, 0.22, 0.05, 0.22, 0.05, 0.22, 0.05, 0.00, 0.00, 0.15, 0.01, 0.05, 0.01, 0.42, 0.40, 0.3, 0.2],
-            [0.05, 0.03, 0.10, 0.05, 0.10, 0.05, 0.10, 0.05, 0.00, 0.00, 0.05, 0.01, 0.05, 0.00, 0.08, 0.02, 0.3, 0.2]
-        ],
-        """,
+    {
+        "node": "page_height",
+        "prior_type": "dirichlet",
+        "pseudo_counts": [
+            # 1 blocco = page_template, page_ungrouped_multim
+            [1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   2, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   2, 2, 2, 2],  # 1 (0-2000)
+            [2, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   3, 3, 3, 2,   1, 1, 1, 1,   2, 2, 3, 3,   2, 2, 2, 2,   2, 3, 4, 4,   2, 2, 2, 2],  # 2 (2001-4000)
+            [3, 4, 4, 4,   2, 3, 4, 4,   2, 3, 4, 4,   2, 3, 3, 4,   3, 3, 3, 3,   2, 2, 3, 3,   3, 3, 4, 4,   4, 4, 4, 4,   2, 2, 2, 2],  # 3 (4001-6000)
+            [2, 2, 3, 4,   2, 3, 3, 4,   2, 3, 3, 4,   2, 2, 3, 4,   2, 2, 2, 3,   1, 2, 2, 3,   3, 3, 3, 4,   4, 4, 4, 4,   2, 2, 2, 2],  # 4 (6001+)
+        ]
+    },
+    {
+        "node": "metric",
+        "prior_type": "dirichlet",
+        "pseudo_counts": [
+            # 1 blocco = page_height, page_menu_or, page_ungrouped_multim
+            # 101   #104   #111          #121          #131            #201                                                         #301                                                          #401
+            [2, 2, 3, 4,   1, 1, 3, 3,   1, 1, 3, 3,   1, 1, 2, 3,     2, 3, 4, 4,   1, 2, 3, 3,   1, 3, 3, 3,   1, 2, 2, 3,        3, 3, 4, 4,   1, 2, 3, 4,   1, 3, 3, 3,   1, 2, 2, 3,         3, 3, 4, 4,   1, 2, 3, 4,   1, 3, 3, 3,   1, 2, 2, 3],  # 1
+            [2, 4, 2, 4,   2, 3, 2, 4,   2, 3, 2, 4,   2, 3, 3, 3,     2, 4, 3, 4,   2, 3, 3, 4,   2, 3, 2, 4,   2, 3, 3, 3,        3, 4, 3, 4,   2, 3, 4, 4,   2, 3, 2, 4,   2, 3, 3, 3,         3, 4, 3, 4,   2, 3, 4, 4,   2, 3, 2, 4,   2, 3, 3, 3],  # 2
+            [3, 2, 2, 2,   4, 3, 3, 3,   4, 3, 3, 3,   4, 3, 3, 3,     3, 2, 2, 2,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2,        1, 2, 1, 1,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2,         1, 2, 1, 1,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2],  # 3
+            [1, 1, 1, 1,   4, 3, 1, 1,   4, 3, 1, 1,   4, 3, 1, 1,     1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   4, 3, 1, 1,        1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   3, 3, 1, 1,         1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   3, 3, 1, 1],  # 4
+        ]
+    },
+    {
+        "node": "NDOM_nodes",
+        "prior_type": "dirichlet",
+        "pseudo_counts": [
+            [4, 2, 1, 1],  # 1
+            [3, 3, 2, 1],  # 2
+            [1, 2, 2, 2],  # 3
+            [1, 2, 3, 4],  # 4
+        ]
+    },
+    {
+        "node": "NDOM_height",
+        "prior_type": "dirichlet",
+        "pseudo_counts": [
+            [3, 2, 1, 1],  # 1
+            [1, 2, 3, 2],  # 2
+            [1, 1, 3, 3],  # 3
+        ]
+    },
 ]
+# fmt:on
 
 
 def get_features_types(feature_domains: dict):
@@ -230,8 +240,54 @@ def discretize_dataset(ds: DataFrame, feature_domains: dict, mapping: dict):
             ds[feature_d] = ds[feature_d].astype(np.int64)  # np.int64
 
 
+def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_out_path):
+    # crea bn
+    print(f"Creating BN structure (estimator type = {estimator_type})...")
+    bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT)
+
+    print("Learning BN parameters...")
+    if estimator_type == "MLE":
+        # https://pgmpy.org/examples/Learning%20Parameters%20in%20Discrete%20Bayesian%20Networks.html
+        # https://pgmpy.org/param_estimator/mle.html
+        bn.fit(data=ds, estimator=MaximumLikelihoodEstimator, state_names=BN_STATE_NAMES)
+
+    elif estimator_type == "MAP":
+        # apprendimento con stimatore bayesiano
+        # https://pgmpy.org/param_estimator/bayesian_est.html
+        bayesian_estimator = BayesianEstimator(
+            model=bn, data=ds, state_names=BN_STATE_NAMES
+        )
+        for var_args in BN_MAP_ESTIMATOR_PARAMS:
+            cpt = bayesian_estimator.estimate_cpd(**var_args)
+            bn.add_cpds(cpt)
+
+    else:
+        raise ValueError("Incorrect estimator type. Allowed: 'MLE', 'MAP'.")
+
+    if bn.check_model():
+        print("Saving...")
+        bif_writer = BIFWriter(bn)
+        bif_writer.write_bif(bn_out_path)
+
+    # query
+    print("Querying with VE infer engine...")
+    infer_engine_ex = VariableElimination(bn)
+
+    with open(query_out_path, "w") as query_out:
+        i = 1
+        for query_args in BN_QUERIES_DEFAULT:
+            # mostra la descrizione e rimuovila dal dizionario degli argomenti della query
+            query_desc = query_args.pop("query_desc", None)
+            query_out.write(f"\nQuery #{i}: {query_desc}")
+
+            query_obj = infer_engine_ex.query(**query_args)
+            query_out.write("\n")
+            query_out.write(str(query_obj))
+
+            i = i + 1
+
+
 if __name__ == "__main__":
-    # operazioni su dataset
     # leggi dataset
     print("Reading dataset...")
     ds = pd.read_csv(defs.ds3_gt_no_noise_path)
@@ -253,64 +309,28 @@ if __name__ == "__main__":
         mapping=defs.DS_DISCRETE_MAPPING_DEFAULT,
     )
 
-    # crea bn
-    print("Creating BN structure...")
-    bn = BayesianNetwork(ebunch=BN_EDGES_DEFAULT)
-
-    # ----- apprendimento parametri (cpd) della bn con mle
-    print("Learning BN parameters (MLE estimator)...")
-    bn.fit(data=ds, estimator=MaximumLikelihoodEstimator, state_names=BN_STATE_NAMES)
-    bn.name = "bn_w_estimator_MLE.bif"
-
-    # controlla bn
-    if bn.check_model():
-        print("Saving...")
-        bif_writer = BIFWriter(bn)
-        bif_writer.write_bif(defs.DIR_BIF / bn.name)
-
-    # ----- apprendimento con stimatore bayesiano
-    bayesian_estimator = BayesianEstimator(bn, data=ds)
-
-    bayesian_estimator.estimate_cpd()
-
-    # bayesiano
-
-    # (https://pgmpy.org/examples/Learning%20Parameters%20in%20Discrete%20Bayesian%20Networks.html)
-
-    # https://pgmpy.org/param_estimator/mle.html
-
-    # https://pgmpy.org/param_estimator/bayesian_est.html
-
-    """
-    bn_inf_engine = BayesianModelSampling(bn)
-
-    evidence = [State(var="diff", state=0)]
-    sample = bn_inf_engine.rejection_sample(
-        evidence=evidence, size=2, return_type="dataframe"
+    # crea bn e fai le query
+    create_bn_and_query(
+        ds=ds,
+        estimator_type="MLE",
+        bn_out_path=defs.bn_mle_path,
+        query_out_path=defs.bn_mle_query_path,
     )
 
-    """
+    create_bn_and_query(
+        ds=ds,
+        estimator_type="MAP",
+        bn_out_path=defs.bn_map_path,
+        query_out_path=defs.bn_map_query_path,
+    )
 
 
 """
-
-
-if __name__ == "__main__":
-    bn = create_bn(estimator_id="BDeu")
-
-    # query
-    infer_engine_ex = VariableElimination(bn)
-
-    i = 1
-    for query_args in BN_QUERIES_DEFAULT:
-        # mostra la descrizione e rimuovila dal dizionario degli argomenti della query
-        query_desc = query_args.pop("query_desc", None)
-        print(f"- Query #{i}: {query_desc}")
-
-        # inferenza esatta
-        query_obj = infer_engine_ex.query(**query_args)
-        print(query_obj)
-
-        i = i + 1
-
+    values=[
+            # 11     12   21     22   31    32     41   42    51     52   61    62    71    72    81    82    91     92
+            [0.45, 0.70, 0.22, 0.65, 0.22, 0.65, 0.22, 0.65, 0.60, 0.85, 0.30, 0.50, 0.42, 0.78, 0.08, 0.08, 0.2, 0.3],
+            [0.45, 0.20, 0.55, 0.25, 0.55, 0.25, 0.55, 0.25, 0.40, 0.15, 0.50, 0.48, 0.48, 0.21, 0.42, 0.50, 0.2, 0.3],
+            [0.05, 0.07, 0.22, 0.05, 0.22, 0.05, 0.22, 0.05, 0.00, 0.00, 0.15, 0.01, 0.05, 0.01, 0.42, 0.40, 0.3, 0.2],
+            [0.05, 0.03, 0.10, 0.05, 0.10, 0.05, 0.10, 0.05, 0.00, 0.00, 0.05, 0.01, 0.05, 0.00, 0.08, 0.02, 0.3, 0.2]
+        ],
 """

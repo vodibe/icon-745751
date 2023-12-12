@@ -54,6 +54,12 @@ job6_output_path = DIR_KB_JOBS / "job6_output.txt"
 # BN
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
+bn_mle_path = DIR_BIF / "bn_MLE.bif"
+bn_map_path = DIR_BIF / "bn_MAP.bif"
+
+bn_mle_query_path = DIR_BIF / "bn_MLE_query.txt"
+bn_map_query_path = DIR_BIF / "bn_MAP_query.txt"
+
 
 # ----- NDOM
 # larghezza, altezza, diagonale schermo

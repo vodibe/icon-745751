@@ -1,4 +1,5 @@
 
+
 Query #1: P(page_template | metric=4)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -21,6 +22,7 @@ Query #1: P(page_template | metric=4)
 +------------------+----------------------+
 | page_template(9) |               0.1877 |
 +------------------+----------------------+
+
 Query #2: P(page_template | metric=3)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -43,6 +45,7 @@ Query #2: P(page_template | metric=3)
 +------------------+----------------------+
 | page_template(9) |               0.2291 |
 +------------------+----------------------+
+
 Query #3: P(page_template | metric=2)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -65,6 +68,7 @@ Query #3: P(page_template | metric=2)
 +------------------+----------------------+
 | page_template(9) |               0.4000 |
 +------------------+----------------------+
+
 Query #4: P(page_template | page_ungrouped_multim=1)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -87,6 +91,7 @@ Query #4: P(page_template | page_ungrouped_multim=1)
 +------------------+----------------------+
 | page_template(9) |               0.1774 |
 +------------------+----------------------+
+
 Query #5: P(page_template | page_ungrouped_multim=2)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -109,6 +114,7 @@ Query #5: P(page_template | page_ungrouped_multim=2)
 +------------------+----------------------+
 | page_template(9) |               0.1779 |
 +------------------+----------------------+
+
 Query #6: P(page_template | page_ungrouped_multim=3)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
@@ -131,6 +137,7 @@ Query #6: P(page_template | page_ungrouped_multim=3)
 +------------------+----------------------+
 | page_template(9) |               0.2315 |
 +------------------+----------------------+
+
 Query #7: P(NDOM_nodes, NDOM_height | page_template=4)
 +---------------+----------------+-------------------------------+
 | NDOM_nodes    | NDOM_height    |   phi(NDOM_nodes,NDOM_height) |

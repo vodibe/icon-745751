@@ -54,11 +54,11 @@ job6_output_path = DIR_KB_JOBS / "job6_output.txt"
 # BN
 DIR_BIF = DIR_ROOT / "agent" / "pgm" / "bif"
 
-bn_mle_path = DIR_BIF / "bn_MLE4.bif"
-bn_map_path = DIR_BIF / "bn_MAP4.bif"
+bn_mle_path = DIR_BIF / "bn_MLE3.bif"
+bn_map_path = DIR_BIF / "bn_MAP3.bif"
 
-bn_mle_query_path = DIR_BIF / "bn_MLE_query4.txt"
-bn_map_query_path = DIR_BIF / "bn_MAP_query4.txt"
+bn_mle_query_path = DIR_BIF / "bn_MLE_query3.txt"
+bn_map_query_path = DIR_BIF / "bn_MAP_query3.txt"
 
 
 # ----- NDOM
@@ -169,14 +169,27 @@ KB_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 
 # ----- BN
 
+bn_features_excluded = ds3_features_excluded + [
+    "page_load_time_ms",
+    "page_width",
+    "task1",
+    "task2",
+    "task3",
+    "task4",
+    "task5",
+    "task6",
+    "task7",
+    "task8",
+]
+
 DS_DISCRETE_MAPPING_DEFAULT = {
-    "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, 9, np.inf], [1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    "page_template": ([1, 2, 3, 4, 5, 6, 7, 8, np.inf], [1, 2, 3, 4, 5, 6, 7, 8]),  # 9
     "page_menu_or": ([0, 1, 2, 3, np.inf], [0, 1, 2, 3]),
-    "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),
+    "page_ungrouped_multim": ([0, 6, 11, 21, np.inf], [1, 2, 3, 4]),  #######
     "metric": ([1, 2, 3, 4, np.inf], [1, 2, 3, 4]),
     "page_load_time_ms": ([0, 1501, 3001, np.inf], [1, 2, 3]),
     "page_width": ([0, 1800, np.inf], [1, 2]),
-    "page_height": ([0, 2001, 4001, 6001, np.inf], [1, 2, 3, 4]),
+    "page_height": ([0, 2601, 5201, 7201, np.inf], [1, 2, 3, 4]),  ##########
     "NDOM_nodes": ([0, 501, 1001, 1501, np.inf], [1, 2, 3, 4]),
     "NDOM_height": ([0, 5, 14, np.inf], [1, 2, 3]),
     "task1": ([0, 5, 10, 20, np.inf], [1, 2, 3, 4]),

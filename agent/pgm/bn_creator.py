@@ -6,6 +6,7 @@ from pandas import DataFrame
 
 from pgmpy.models import BayesianNetwork
 from pgmpy.estimators import MaximumLikelihoodEstimator, BayesianEstimator
+from pgmpy.metrics import log_likelihood_score
 from pgmpy.inference import VariableElimination
 from pgmpy.readwrite import BIFWriter
 
@@ -108,71 +109,79 @@ regardless of the cardinality of the variable.
 BN_MAP_ESTIMATOR_PARAMS = [
     {
         "node": "page_template",
-        "prior_type": "K2"
-        # "pseudo_counts": [
-        #    [1, 1, 1, 1, 1, 1, 1, 1, 1]
-        # ]
+        "prior_type": "dirichlet",
+        "pseudo_counts": [
+           [60],
+           [60],
+           [60],
+           [60],
+           [60],
+           [60],
+           [60],
+           [60],
+           [60],
+        ]
     },
     {
         "node": "page_menu_or",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 0 nessuno
-            [4, 2, 2, 2, 4, 4, 4, 4, 2],  # 1 solo orizzontale
-            [1, 1, 1, 1, 1, 1, 1, 1, 2],  # 2 solo verticale
-            [1, 4, 4, 4, 1, 1, 1, 1, 2],  # 3 entrambi
+            [60, 60, 60, 60, 60, 60, 60, 60, 152],  # 0 nessuno
+            [320, 152, 152, 152, 320, 320, 320, 320, 152],  # 60 solo orizzontale
+            [60, 60, 60, 60, 60, 60, 60, 60, 152],  # 152 solo verticale
+            [60, 320, 320, 320, 60, 60, 60, 60, 152],  # 240 entrambi
         ]
     },
     {
         "node": "page_ungrouped_multim",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [3, 2, 4, 3, 4, 2, 4, 1, 2],  # 1 (0-5)
-            [2, 4, 3, 3, 2, 3, 2, 3, 2],  # 2 (6-10)
-            [1, 3, 1, 2, 1, 3, 1, 4, 2],  # 3 (11-20)
-            [1, 1, 1, 1, 1, 1, 1, 4, 2],  # 4 (21+)
+            [240, 152, 320, 240, 320, 152, 320, 60, 152],  # 60 (0-5)
+            [152, 320, 240, 240, 152, 240, 152, 240, 152],  # 152 (60-60)
+            [60, 240, 60, 152, 60, 240, 60, 320, 152],  # 240 (11-20)
+            [60, 60, 60, 60, 60, 60, 60, 320, 152],  # 320 (21+)
         ]
     },
     {
         "node": "page_height",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            # 1 blocco = page_template, page_ungrouped_multim
-            [1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   2, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   1, 1, 1, 1,   2, 2, 2, 2],  # 1 (0-2000)
-            [2, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   3, 3, 3, 2,   1, 1, 1, 1,   2, 2, 3, 3,   2, 2, 2, 2,   2, 3, 4, 4,   2, 2, 2, 2],  # 2 (2001-4000)
-            [3, 4, 4, 4,   2, 3, 4, 4,   2, 3, 4, 4,   2, 3, 3, 4,   3, 3, 3, 3,   2, 2, 3, 3,   3, 3, 4, 4,   4, 4, 4, 4,   2, 2, 2, 2],  # 3 (4001-6000)
-            [2, 2, 3, 4,   2, 3, 3, 4,   2, 3, 3, 4,   2, 2, 3, 4,   2, 2, 2, 3,   1, 2, 2, 3,   3, 3, 3, 4,   4, 4, 4, 4,   2, 2, 2, 2],  # 4 (6001+)
+            # 60 blocco = page_template, page_ungrouped_multim
+            [60, 60, 60, 60,   60, 60, 60, 60,   60, 60, 60, 60,   152, 60, 60, 60,   60, 60, 60, 60,   60, 60, 60, 60,   60, 60, 60, 60,   60, 60, 60, 60,   152, 152, 152, 152],  # 60 (0-2000)
+            [152, 152, 152, 152,   152, 152, 152, 152,   152, 152, 152, 152,   240, 240, 240, 152,   60, 60, 60, 60,   152, 152, 240, 240,   152, 152, 152, 152,   152, 240, 320, 320,   152, 152, 152, 152],  # 152 (2001-4000)
+            [240, 320, 320, 320,   152, 240, 320, 320,   152, 240, 320, 320,   152, 240, 240, 320,   240, 240, 240, 240,   152, 152, 240, 240,   240, 240, 320, 320,   320, 320, 320, 320,   152, 152, 152, 152],  # 240 (4001-6000)
+            [152, 152, 240, 320,   152, 240, 240, 320,   152, 240, 240, 320,   152, 152, 240, 320,   152, 152, 152, 240,   60, 152, 152, 240,   240, 240, 240, 320,   320, 320, 320, 320,   152, 152, 152, 152],  # 320 (6001+)
         ]
     },
     {
         "node": "metric",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            # 1 blocco = page_height, page_menu_or, page_ungrouped_multim
+            # 60 blocco = page_height, page_menu_or, page_ungrouped_multim
             # 101   #104   #111          #121          #131            #201                                                         #301                                                          #401
-            [2, 2, 3, 4,   1, 1, 3, 3,   1, 1, 3, 3,   1, 1, 2, 3,     2, 3, 4, 4,   1, 2, 3, 3,   1, 3, 3, 3,   1, 2, 2, 3,        3, 3, 4, 4,   1, 2, 3, 4,   1, 3, 3, 3,   1, 2, 2, 3,         3, 3, 4, 4,   1, 2, 3, 4,   1, 3, 3, 3,   1, 2, 2, 3],  # 1
-            [2, 4, 2, 4,   2, 3, 2, 4,   2, 3, 2, 4,   2, 3, 3, 3,     2, 4, 3, 4,   2, 3, 3, 4,   2, 3, 2, 4,   2, 3, 3, 3,        3, 4, 3, 4,   2, 3, 4, 4,   2, 3, 2, 4,   2, 3, 3, 3,         3, 4, 3, 4,   2, 3, 4, 4,   2, 3, 2, 4,   2, 3, 3, 3],  # 2
-            [3, 2, 2, 2,   4, 3, 3, 3,   4, 3, 3, 3,   4, 3, 3, 3,     3, 2, 2, 2,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2,        1, 2, 1, 1,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2,         1, 2, 1, 1,   4, 3, 3, 3,   4, 3, 3, 2,   4, 2, 3, 2],  # 3
-            [1, 1, 1, 1,   4, 3, 1, 1,   4, 3, 1, 1,   4, 3, 1, 1,     1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   4, 3, 1, 1,        1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   3, 3, 1, 1,         1, 1, 1, 1,   3, 3, 1, 1,   3, 2, 1, 1,   3, 3, 1, 1],  # 4
+            [152, 152, 240, 320,   60, 60, 240, 240,   60, 60, 240, 240,   60, 60, 152, 240,     152, 240, 320, 320,   60, 152, 240, 240,   60, 240, 240, 240,   60, 152, 152, 240,        240, 240, 320, 320,   60, 152, 240, 320,   60, 240, 240, 240,   60, 152, 152, 240,         240, 240, 320, 320,   60, 152, 240, 320,   60, 240, 240, 240,   60, 152, 152, 240],  # 60
+            [152, 320, 152, 320,   152, 240, 152, 320,   152, 240, 152, 320,   152, 240, 240, 240,     152, 320, 240, 320,   152, 240, 240, 320,   152, 240, 152, 320,   152, 240, 240, 240,        240, 320, 240, 320,   152, 240, 320, 320,   152, 240, 152, 320,   152, 240, 240, 240,         240, 320, 240, 320,   152, 240, 320, 320,   152, 240, 152, 320,   152, 240, 240, 240],  # 152
+            [240, 152, 152, 152,   320, 240, 240, 240,   320, 240, 240, 240,   320, 240, 240, 240,     240, 152, 152, 152,   320, 240, 240, 240,   320, 240, 240, 152,   320, 152, 240, 152,        60, 152, 60, 60,   320, 240, 240, 240,   320, 240, 240, 152,   320, 152, 240, 152,         60, 152, 60, 60,   320, 240, 240, 240,   320, 240, 240, 152,   320, 152, 240, 152],  # 240
+            [60, 60, 60, 60,   320, 240, 60, 60,   320, 240, 60, 60,   320, 240, 60, 60,     60, 60, 60, 60,   240, 240, 60, 60,   240, 152, 60, 60,   320, 240, 60, 60,        60, 60, 60, 60,   240, 240, 60, 60,   240, 152, 60, 60,   240, 240, 60, 60,         60, 60, 60, 60,   240, 240, 60, 60,   240, 152, 60, 60,   240, 240, 60, 60],  # 320
         ]
     },
     {
         "node": "NDOM_nodes",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [4, 2, 1, 1],  # 1
-            [3, 3, 2, 1],  # 2
-            [1, 2, 2, 2],  # 3
-            [1, 2, 3, 4],  # 4
+            [320, 152, 60, 60],  # 60
+            [240, 240, 152, 60],  # 152
+            [60, 152, 152, 152],  # 240
+            [60, 152, 240, 320],  # 320
         ]
     },
     {
         "node": "NDOM_height",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [3, 2, 1, 1],  # 1
-            [1, 2, 3, 2],  # 2
-            [1, 1, 3, 3],  # 3
+            [240, 152, 60, 60],  # 60
+            [60, 152, 240, 152],  # 152
+            [60, 60, 240, 240],  # 240
         ]
     },
 ]
@@ -269,6 +278,10 @@ def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_o
         bif_writer = BIFWriter(bn)
         bif_writer.write_bif(bn_out_path)
 
+    simulated_data = bn.simulate(int(1e4))
+    score_ll = log_likelihood_score(bn, simulated_data)
+    print(f"Log likelihood: {score_ll}")
+
     # query
     print("Querying with VE infer engine...")
     infer_engine_ex = VariableElimination(bn)
@@ -278,11 +291,14 @@ def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_o
         for query_args in BN_QUERIES_DEFAULT:
             # mostra la descrizione e rimuovila dal dizionario degli argomenti della query
             query_desc = query_args.pop("query_desc", None)
-            query_out.write(f"\nQuery #{i}: {query_desc}")
+            query_out.write(f"\n\nQuery #{i}: {query_desc}")
 
             query_obj = infer_engine_ex.query(**query_args)
             query_out.write("\n")
             query_out.write(str(query_obj))
+
+            # riaggiungo query_desc
+            query_args["query_desc"] = query_desc
 
             i = i + 1
 
@@ -294,6 +310,9 @@ if __name__ == "__main__":
     bn_features_excluded = defs.ds3_features_excluded + [
         "page_load_time_ms",
         "page_width",
+        "task1",
+        "task2",
+        "task3",
         "task4",
         "task5",
         "task6",
@@ -308,6 +327,8 @@ if __name__ == "__main__":
         feature_domains=defs.ds3_gt_feature_domains,
         mapping=defs.DS_DISCRETE_MAPPING_DEFAULT,
     )
+
+    # ds.to_csv("./testino.csv", sep=",", index=False)
 
     # crea bn e fai le query
     create_bn_and_query(

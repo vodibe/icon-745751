@@ -35,7 +35,7 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
 ## Esecuzione
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
 
-### :one: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML...
+### ▶ Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML...
 1. ```bash
    cd agent/ndom
    ```
@@ -64,8 +64,8 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
    Populating features...
    {'page_width': 1587, 'page_height': 4145, 'NDOM_height': 7, ...}
    ```
-   ![ndom1](./docs/img/ndom_out.png)
-### :two: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
+   ![ndom1](./docs/img/ndom_out.PNG)
+### ▶ Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
 1. Aprire la cartella del progetto con un qualsiasi IDE che supporti la visualizzazione di notebook `.ipynb` , ad es. [VS Code](https://code.visualstudio.com/). 
    ```bash
    cd path/to/icon-745751/
@@ -77,7 +77,7 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
 3. Aprire `agent/models/nb_supervised_learning.ipynb`.
 4. Eseguire in ordine tutte le celle di codice.
 
-### :three: Se si vuole consultare la KB per eseguire i Job...
+### ▶ Se si vuole consultare la KB per eseguire i Job...
 1. ```bash
    cd agent/kb
    ```
@@ -103,7 +103,7 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
    ```
 4. **Percorso risultati**: `agent/kb/jobs/`
 
-### :four: Se si vuole apprendere i parametri della Rete Bayesiana, visualizzarli, ed eseguire delle query...
+### ▶ Se si vuole apprendere i parametri della Rete Bayesiana, visualizzarli, ed eseguire delle query...
 1. ```bash
    cd agent/pgm
    ```

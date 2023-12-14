@@ -3,6 +3,9 @@
 ## Idea del progetto
 L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l’applicazione di alcuni metodi di Ingegneria della Conoscenza su un dominio di interesse, in questo caso l’usabilità di una pagina web. Questo richiede che prima si vada a circoscrivere un ambito di riferimento, che nel nostro caso, è l’insieme delle Homepage delle scuole superiori pubbliche italiane (aggiornate a settembre 2023).
 
+## Documentazione e Risultati
+Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
+
 ## Download
 1. Download [Python](https://www.python.org/downloads/) e [SWI-Prolog](https://www.swi-prolog.org/Download.html).
 2. Clonare la repo.
@@ -32,10 +35,7 @@ L’idea di fondo da cui si è partiti per lo sviluppo di questo progetto è l�
 ## Esecuzione
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
 
-### :books: Documentazione e Risultati
-Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
-
-### :globe_with_meridians: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML...
+### :one: Se si vuole creare e visualizzare un NDOM di un sito web o di un file HTML...
 1. ```bash
    cd agent/ndom
    ```
@@ -45,7 +45,7 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
       # sito web -> NDOM
       myNDOM = NaiveDOM("https://www.liceofermicanosa.edu.it/")
       # sorgente locale -> NDOM
-      myNDOM = NaiveDOM(location="mysource.html", from_file=True)
+      # myNDOM = NaiveDOM(location="mysource.html", from_file=True)
 
       # leggiamo le features estratte
       print(myNDOM.get_features())
@@ -65,7 +65,7 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    {'page_width': 1587, 'page_height': 4145, 'NDOM_height': 7, ...}
    ```
    ![ndom1](./docs/img/03.png)
-### :bar_chart: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
+### :two: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
 1. Aprire la cartella del progetto con un qualsiasi IDE che supporti la visualizzazione di notebook `.ipynb` , ad es. [VS Code](https://code.visualstudio.com/). 
    ```bash
    cd path/to/icon-745751/
@@ -77,7 +77,7 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
 3. Aprire `agent/models/nb_supervised_learning.ipynb`.
 4. Eseguire in ordine tutte le celle di codice.
 
-### :mailbox_with_mail: Se si vuole consultare la KB per eseguire i Job...
+### :three: Se si vuole consultare la KB per eseguire i Job...
 1. ```bash
    cd agent/kb
    ```
@@ -103,7 +103,7 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    ```
 4. **Percorso risultati**: `agent/kb/jobs/`
 
-### :clipboard: Se si vuole apprendere i parametri della Rete Bayesiana, visualizzarli, ed eseguire delle query...
+### :four: Se si vuole apprendere i parametri della Rete Bayesiana, visualizzarli, ed eseguire delle query...
 1. ```bash
    cd agent/pgm
    ```

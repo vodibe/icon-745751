@@ -34,24 +34,78 @@ BN_EDGES_DEFAULT = [
 BN_QUERIES_DEFAULT = [
     # -----
     {
-        "query_desc": "P(page_template | metric=4)",
+        "query_desc": "P(page_template | NDOM_nodes=1, NDOM_height=1, metric=4)",
+        "variables": ["page_template"],
+        "evidence": {"NDOM_nodes": 1, "NDOM_height": 1, "metric": 4},
+    },
+    # .... peggiori
+    {
+        "query_desc": "P(page_template | NDOM_nodes=4)",
         "variables": ["page_template"],
         "evidence": {
-            "metric": 4,
+            "NDOM_nodes": 4,
         },
     },
     {
-        "query_desc": "P(page_template | metric=3)",
+        "query_desc": "P(page_template | NDOM_height=2, metric=2)",
         "variables": ["page_template"],
+        "evidence": {"NDOM_height": 2, "metric": 2},
+    },
+    # -----
+    {
+        "query_desc": "P(metric | page_template=1)",
+        "variables": ["metric"],
         "evidence": {
-            "metric": 3,
+            "page_template": 1,
         },
     },
     {
-        "query_desc": "P(page_template | metric=2)",
-        "variables": ["page_template"],
+        "query_desc": "P(metric | page_template=2)",
+        "variables": ["metric"],
         "evidence": {
-            "metric": 2,
+            "page_template": 2,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=3)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 3,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=4)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 4,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=5)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 5,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=6)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 6,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=7)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 7,
+        },
+    },
+    {
+        "query_desc": "P(metric | page_template=8)",
+        "variables": ["metric"],
+        "evidence": {
+            "page_template": 8,
         },
     },
     # -----
@@ -76,21 +130,6 @@ BN_QUERIES_DEFAULT = [
             "page_ungrouped_multim": 4,
         },
     },
-    # -----
-    {
-        "query_desc": "P(NDOM_nodes, NDOM_height | page_template=2)",
-        "variables": ["NDOM_nodes", "NDOM_height"],
-        "evidence": {
-            "page_template": 1,
-        },
-    },
-    {
-        "query_desc": "P(NDOM_nodes, NDOM_height | page_template=7)",
-        "variables": ["NDOM_nodes", "NDOM_height"],
-        "evidence": {
-            "page_template": 7,
-        },
-    },
 ]
 
 """
@@ -113,39 +152,40 @@ prior_type: K2 is a shorthand for dirichlet + setting every pseudo_count to 1,
 regardless of the cardinality of the variable.
 """
 # fmt:off
-BN_MAP_ESTIMATOR_PARAMS = [
+BN_MAP_PRIORS = [
     {
         "node": "page_template",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-           [2],
-           [2],
-           [2],
-           [2],
-           [2],
-           [2],
-           [2],
-           [2],
+           [2], # template 1
+           [2], # 2
+           [2], # 3
+           [2], # 4
+           [2], # 5
+           [2], # 6
+           [2], # 7
+           [2], # 8
         ]
+        
     },
     {
         "node": "page_menu_or",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [2, 2, 2, 2, 2, 2, 2, 2],  # 0 nessuno
-            [18, 5, 5, 5, 18, 18, 18, 18],  # 2 solo orizzontale
-            [2, 2, 2, 2, 2, 2, 2, 2],  # 5 solo verticale
-            [2, 18, 18, 18, 2, 2, 2, 2],  # 10 entrambi
+            [ 2,  2,  2,  2,  2,  2,  2,  2],       # 0:nessuno
+            [11,  5,  5,  5, 11, 11, 11, 11],  # 1:solo orizzontale
+            [ 2,  2,  2,  2,  2,  2,  2,  2],       # 2:solo verticale
+            [ 2, 11, 11, 11,  2,  2,  2,  2],    # 3:entrambi
         ]
     },
     {
         "node": "page_ungrouped_multim",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [10, 5, 18, 10, 18, 5, 18, 2],  # 2 (0-5)
-            [5, 18, 10, 10, 5, 10, 5, 10],  # 5 (6-10)
-            [2, 10, 2, 5, 2, 10, 2, 18],  # 10 (11-20)
-            [2, 2, 5, 5, 2, 2, 2, 18],  # 18 (21+)
+            [8,  5, 11,  8, 11,  5, 11,  2],  # 1:(0-5)
+            [5, 11,  8,  8,  5,  8,  5,  8],    # 2:(6-10)
+            [2,  8,  2,  5,  2,  8,  2, 11],    # 3:(11-20)
+            [2,  2,  5,  5,  2,  2,  2, 11],    # 4:(21+)
         ]
     },
     {
@@ -153,10 +193,10 @@ BN_MAP_ESTIMATOR_PARAMS = [
         "prior_type": "dirichlet",
         "pseudo_counts": [
             # 2 blocco = page_template, page_ungrouped_multim
-            [5, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   10, 2, 2, 2,   5, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2],  # 2 (0-2000)
-            [5, 5, 5, 5,   5, 5, 5, 5,   5, 5, 5, 5,   5, 10, 10, 5,   5, 2, 2, 2,   5, 5, 10, 10,   5, 5, 5, 5,   5, 10, 18, 18],  # 5 (2001-4000)
-            [10, 18, 10, 18,   5, 10, 18, 18,   5, 10, 18, 18,   5, 10, 10, 18,   10, 10, 10, 10,   5, 5, 10, 10,   10, 10, 18, 18,   18, 18, 18, 18],  # 10 (4001-6000)
-            [5, 5, 10, 18,   5, 10, 10, 18,   5, 10, 10, 18,   5, 5, 10, 18,   2, 5, 5, 10,   2, 5, 5, 10,   10, 10, 10, 18,   18, 18, 18, 18],  # 18 (6001+)
+            [5, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   8, 2, 2, 2,   5, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2,   2, 2, 2, 2],               # 1:(0-2600)
+            [5, 5, 5, 5,   5, 5, 5, 5,   5, 5, 5, 5,   5, 8, 8, 5,   5, 2, 2, 2,   5, 5, 8, 8,   5, 5, 5, 5,   5, 8, 11, 11],             # 2:(2601-5200)
+            [8, 11, 8, 11,   5, 8, 11, 11,   5, 8, 11, 11,   5, 8, 8, 11,   8, 8, 8, 8,   5, 5, 8, 8,   8, 8, 11, 11,   11, 11, 11, 11],  # 3:(5201-7200)
+            [5, 5, 8, 11,   5, 8, 8, 11,   5, 8, 8, 11,   5, 5, 8, 11,   2, 5, 5, 8,   2, 5, 5, 8,   8, 8, 8, 11,   11, 11, 11, 11],      # 4:(7201+)
         ]
     },
     {
@@ -165,36 +205,35 @@ BN_MAP_ESTIMATOR_PARAMS = [
         "pseudo_counts": [
             # 2 blocco = page_height, page_menu_or, page_ungrouped_multim
             # 101   #104   #111          #121          #131            #201                                                         #301                                                          #401
-            [2, 5, 5, 10,   2, 2, 2, 10,   2, 2, 2, 10,   2, 2, 2, 10,     2, 5, 5, 10,   2, 2, 2, 10,   2, 2, 2, 10,   2, 2, 2, 10,        5, 10, 18, 18,   2, 5, 10, 10,   2, 5, 5, 10,   2, 5, 5, 10,         5, 10, 18, 18,   2, 5, 10, 18,   2, 5, 5, 18,   2, 5, 5, 18],  # 2
+            [2, 5, 5, 8,   2, 2, 2, 8,   2, 2, 2, 8,   2, 2, 2, 8,     2, 5, 5, 8,   2, 2, 2, 8,   2, 2, 2, 8,   2, 2, 2, 8,        5, 8, 11, 11,   2, 5, 8, 8,   2, 5, 5, 8,   2, 5, 5, 8,         5, 8, 11, 11,   2, 5, 8, 11,   2, 5, 5, 11,   2, 5, 5, 11],  # 1:[1-2)
                     
             
-            [5, 10, 18, 10,   5, 5, 10, 18,   5, 10, 10, 18,   5, 10, 10, 10,     5, 10, 18, 10,   5, 5, 10, 18,   5, 10, 10, 18,   5, 10, 10, 10,        10, 10, 10, 18,   5, 10, 18, 18,   5, 10, 10, 18,   5, 10, 10, 18,         10, 10, 10, 18,   5, 10, 18, 18,   5, 10, 10, 18,   5, 10, 10, 18],  # 5
+            [5, 8, 11, 8,   5, 5, 8, 11,   5, 8, 8, 11,   5, 8, 8, 8,     5, 8, 11, 8,   5, 5, 8, 11,   5, 8, 8, 11,   5, 8, 8, 8,        8, 8, 8, 11,   5, 8, 11, 11,   5, 8, 8, 11,   5, 8, 8, 11,         8, 8, 8, 11,   5, 8, 11, 11,   5, 8, 8, 11,   5, 8, 8, 11],  # 2:[2-3)
             
                      
-            [10, 18, 10, 10,   10, 18, 18, 10,   10, 18, 18, 10,   10, 18, 18, 10,     10, 18, 10, 10,   10, 18, 18, 10,   10, 18, 18, 10,   10, 18, 18, 10,        10, 18, 10, 10,   10, 10, 5, 5,   10, 10, 10, 5,   10, 10, 10, 5,         10, 18, 10, 10,   10, 10, 5, 5,   10, 10, 10, 5,   10, 10, 10, 5],  # 10
+            [8, 11, 8, 8,   8, 11, 11, 8,   8, 11, 11, 8,   8, 11, 11, 8,     8, 11, 8, 8,   8, 11, 11, 8,   8, 11, 11, 8,   8, 11, 11, 8,        8, 11, 8, 8,   8, 8, 5, 5,   8, 8, 8, 5,   8, 8, 8, 5,         8, 11, 8, 8,   8, 8, 5, 5,   8, 8, 8, 5,   8, 8, 8, 5],  # 3:[3-4)
             
             
-            
-            [2, 2, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,     2, 2, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,        2, 2, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,         2, 2, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2,   18, 10, 2, 2],  # 18
+            [2, 2, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,     2, 2, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,        2, 2, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,         2, 2, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2,   11, 8, 2, 2],  # 4:[4-5]
         ]
     },
     {
         "node": "NDOM_nodes",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [18, 10, 2, 2],  # 2
-            [10, 18, 10, 5],  # 5
-            [5, 5, 18, 10],  # 10
-            [2, 2, 5, 18],  # 18
+            [11, 8, 2, 2],  # 1:(0-500)
+            [8, 11, 8, 5],  # 2:(501-1000)
+            [5, 5, 11, 8],  # 3:(1001-1500)
+            [2, 2, 5, 11],  # 4:(1501+)
         ]
     },
     {
         "node": "NDOM_height",
         "prior_type": "dirichlet",
         "pseudo_counts": [
-            [10, 10, 10, 5],  # 2
-            [2, 5, 10, 10],  # 5
-            [2, 2, 2, 5],  # 10
+            [8, 8, 8, 5],  # 1:(0-4)
+            [2, 5, 8, 8],  # 2:(5-13)
+            [2, 2, 2, 5],  # 3:(14+)
         ]
     },
 ]
@@ -279,7 +318,7 @@ def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_o
         bayesian_estimator = BayesianEstimator(
             model=bn, data=ds, state_names=BN_STATE_NAMES
         )
-        for var_args in BN_MAP_ESTIMATOR_PARAMS:
+        for var_args in BN_MAP_PRIORS:
             cpt = bayesian_estimator.estimate_cpd(**var_args)
             bn.add_cpds(cpt)
 
@@ -320,8 +359,9 @@ if __name__ == "__main__":
     # leggi dataset
     print("Reading dataset...")
     ds = pd.read_csv(defs.ds3_gt_no_noise_path)
+
     ds = ds.drop(defs.bn_features_excluded, axis=1)
-    ds = ds[ds["page_template"] != 9]
+    ds = ds[ds["page_template"] != defs.PAGE_TEMPLATE_MAX_VALUE]
 
     discretize_dataset(
         ds=ds,

@@ -1,48 +1,27 @@
 
 
-Query #1: P(page_template | NDOM_nodes=1, NDOM_height=1)
+Query #1: P(page_template | NDOM_nodes=1, NDOM_height=1, metric=4)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+
-| page_template(1) |               0.0229 |
+| page_template(1) |               0.0276 |
 +------------------+----------------------+
-| page_template(2) |               0.0502 |
+| page_template(2) |               0.0432 |
 +------------------+----------------------+
-| page_template(3) |               0.0476 |
+| page_template(3) |               0.0460 |
 +------------------+----------------------+
-| page_template(4) |               0.2555 |
+| page_template(4) |               0.3372 |
 +------------------+----------------------+
-| page_template(5) |               0.1812 |
+| page_template(5) |               0.2394 |
 +------------------+----------------------+
-| page_template(6) |               0.1931 |
+| page_template(6) |               0.1663 |
 +------------------+----------------------+
-| page_template(7) |               0.1174 |
+| page_template(7) |               0.0950 |
 +------------------+----------------------+
-| page_template(8) |               0.1321 |
-+------------------+----------------------+
-
-Query #2: P(page_template | NDOM_nodes=2, NDOM_height=1)
-+------------------+----------------------+
-| page_template    |   phi(page_template) |
-+==================+======================+
-| page_template(1) |               0.0417 |
-+------------------+----------------------+
-| page_template(2) |               0.0402 |
-+------------------+----------------------+
-| page_template(3) |               0.0321 |
-+------------------+----------------------+
-| page_template(4) |               0.1571 |
-+------------------+----------------------+
-| page_template(5) |               0.2358 |
-+------------------+----------------------+
-| page_template(6) |               0.1318 |
-+------------------+----------------------+
-| page_template(7) |               0.0939 |
-+------------------+----------------------+
-| page_template(8) |               0.2674 |
+| page_template(8) |               0.0453 |
 +------------------+----------------------+
 
-Query #3: P(page_template | NDOM_nodes=4)
+Query #2: P(page_template | NDOM_nodes=4)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+
@@ -63,28 +42,28 @@ Query #3: P(page_template | NDOM_nodes=4)
 | page_template(8) |               0.3611 |
 +------------------+----------------------+
 
-Query #4: P(page_template | NDOM_height=3)
+Query #3: P(page_template | NDOM_height=2, metric=2)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+
-| page_template(1) |                  nan |
+| page_template(1) |               0.1239 |
 +------------------+----------------------+
-| page_template(2) |                  nan |
+| page_template(2) |               0.0075 |
 +------------------+----------------------+
-| page_template(3) |                  nan |
+| page_template(3) |               0.0283 |
 +------------------+----------------------+
-| page_template(4) |                  nan |
+| page_template(4) |               0.0497 |
 +------------------+----------------------+
-| page_template(5) |                  nan |
+| page_template(5) |               0.0101 |
 +------------------+----------------------+
-| page_template(6) |                  nan |
+| page_template(6) |               0.0566 |
 +------------------+----------------------+
-| page_template(7) |                  nan |
+| page_template(7) |               0.0858 |
 +------------------+----------------------+
-| page_template(8) |                  nan |
+| page_template(8) |               0.6383 |
 +------------------+----------------------+
 
-Query #5: P(metric | page_template=1)
+Query #4: P(metric | page_template=1)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -97,7 +76,7 @@ Query #5: P(metric | page_template=1)
 | metric(4) |        0.5281 |
 +-----------+---------------+
 
-Query #6: P(metric | page_template=2)
+Query #5: P(metric | page_template=2)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -110,7 +89,7 @@ Query #6: P(metric | page_template=2)
 | metric(4) |        0.4117 |
 +-----------+---------------+
 
-Query #7: P(metric | page_template=3)
+Query #6: P(metric | page_template=3)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -123,7 +102,7 @@ Query #7: P(metric | page_template=3)
 | metric(4) |        0.5227 |
 +-----------+---------------+
 
-Query #8: P(metric | page_template=4)
+Query #7: P(metric | page_template=4)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -136,7 +115,7 @@ Query #8: P(metric | page_template=4)
 | metric(4) |        0.7524 |
 +-----------+---------------+
 
-Query #9: P(metric | page_template=5)
+Query #8: P(metric | page_template=5)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -149,7 +128,7 @@ Query #9: P(metric | page_template=5)
 | metric(4) |        0.8420 |
 +-----------+---------------+
 
-Query #10: P(metric | page_template=6)
+Query #9: P(metric | page_template=6)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -162,7 +141,7 @@ Query #10: P(metric | page_template=6)
 | metric(4) |        0.3646 |
 +-----------+---------------+
 
-Query #11: P(metric | page_template=7)
+Query #10: P(metric | page_template=7)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -175,7 +154,7 @@ Query #11: P(metric | page_template=7)
 | metric(4) |        0.5739 |
 +-----------+---------------+
 
-Query #12: P(metric | page_template=8)
+Query #11: P(metric | page_template=8)
 +-----------+---------------+
 | metric    |   phi(metric) |
 +===========+===============+
@@ -188,7 +167,7 @@ Query #12: P(metric | page_template=8)
 | metric(4) |        0.1834 |
 +-----------+---------------+
 
-Query #13: P(page_template | page_ungrouped_multim=1)
+Query #12: P(page_template | page_ungrouped_multim=1)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+
@@ -209,7 +188,7 @@ Query #13: P(page_template | page_ungrouped_multim=1)
 | page_template(8) |               0.0801 |
 +------------------+----------------------+
 
-Query #14: P(page_template | page_ungrouped_multim=3)
+Query #13: P(page_template | page_ungrouped_multim=3)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+
@@ -230,7 +209,7 @@ Query #14: P(page_template | page_ungrouped_multim=3)
 | page_template(8) |               0.6486 |
 +------------------+----------------------+
 
-Query #15: P(page_template | page_ungrouped_multim=4)
+Query #14: P(page_template | page_ungrouped_multim=4)
 +------------------+----------------------+
 | page_template    |   phi(page_template) |
 +==================+======================+

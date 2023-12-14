@@ -64,7 +64,7 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
    Populating features...
    {'page_width': 1587, 'page_height': 4145, 'NDOM_height': 7, ...}
    ```
-   ![ndom1](./docs/img/03.png)
+   ![ndom1](./docs/img/ndom_out.png)
 ### :two: Se si vuole costruire dei modelli di apprendimento per l'emulazione del GT...
 1. Aprire la cartella del progetto con un qualsiasi IDE che supporti la visualizzazione di notebook `.ipynb` , ad es. [VS Code](https://code.visualstudio.com/). 
    ```bash

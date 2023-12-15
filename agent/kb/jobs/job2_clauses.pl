@@ -33,10 +33,6 @@ institute_has_school(institute('CRIS00800D', '"ANTONIO STRADIVARI"'), 'CRTF00801
 institute_has_school(institute('CRIS00800D', '"ANTONIO STRADIVARI"'), 'CRSL00801R').
 institute_has_school(institute('CRIS00800D', '"ANTONIO STRADIVARI"'), 'CRIS00800D').
 institute_has_school(institute('CRIS00800D', '"ANTONIO STRADIVARI"'), 'CRRI008015').
-institute_has_school(institute('BSIS031005', '"ANDREA MANTEGNA" - BRESCIA'), 'BSRH03151P').
-institute_has_school(institute('BSIS031005', '"ANDREA MANTEGNA" - BRESCIA'), 'BSIS031005').
-institute_has_school(institute('BSIS031005', '"ANDREA MANTEGNA" - BRESCIA'), 'BSTD03101B').
-institute_has_school(institute('BSIS031005', '"ANDREA MANTEGNA" - BRESCIA'), 'BSRH031019').
 institute_has_school(institute('CTRH03000C', 'I.P.S.S.E.O.A. KAROL WOJTYLA CATANIA'), 'CTRH03050T').
 institute_has_school(institute('CTRH03000C', 'I.P.S.S.E.O.A. KAROL WOJTYLA CATANIA'), 'CTRH03005N').
 institute_has_school(institute('CTRH03000C', 'I.P.S.S.E.O.A. KAROL WOJTYLA CATANIA'), 'CTRH03000C').

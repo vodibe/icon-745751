@@ -55,7 +55,7 @@ is_partial_report1(schoolassoc(Url, School_ID), institute_with_all_schools(insti
 % is_good_template/1
 % Vero quando il primo termine è una lista indicante le pagine per le quali è molto probabile
 % abbiano una buona interfaccia.
-is_good_template([1, 5, 7]).
+is_good_template([1, 4, 5, 7]).
 
 % page_needs_improvement/2
 % Vero quando il primo termine è associato a una scuola avente pagina che necessita un miglioramento grafico.
@@ -207,5 +207,35 @@ most_popular_templates_for_region(Template_Rank_For_Each_Region) :-
 
     %page(schoolassoc(), details, ndom, metric)
     %school_geofact(ID, city, province, region)
+
+
+% %%%%% JOB 6
+
+% are_best_metrics/2
+% Vero quando Best_Metrics è una lista delle migliori N=Top punteggi registrati.
+are_best_metrics(Best_Metrics, Top) :-
+
+    findall(Metric, page(_, _, _, Metric), Metrics),
+    setof(M, member(M, Metrics), Metrics_WO_Dups),
+    sort(0, @>=, Metrics_WO_Dups,  Metrics_Desc),
+
+    findall(X, (nth1(I, Metrics_Desc, X), I =< Top), Best_Metrics).
+
+
+% are_best_metrics/2
+% Vero quando List_best_Pages_url è una lista contenente gli url delle pagine con un punteggio
+% che rientra tra i top N=Top punteggi registrati.
+are_best_pages_url(List_Best_Pages_Url, Top) :-
+    are_best_metrics(Best_Metrics, Top),
+    findall(
+        Url,
+        (page(schoolassoc(Url, _), _, _, Metric), member(Metric, Best_Metrics)),
+        List_Best_Pages_Url
+    ).
+
+
+
+
+
 
   

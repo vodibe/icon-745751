@@ -47,7 +47,7 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
     # -----
     print("Creating necessary facts...")
     # 1)
-    query_kb = "page_wrongly_redirects(schoolassoc(Url, School_ID))."
+    query_kb = "page_wrongly_redirects(schoolassoc(Url, School_ID))"
 
     for result in prolog.query(query_kb):
         # 2)
@@ -84,7 +84,7 @@ def run_job1(private_clauses_path=defs.job1_clauses_path, out_path=defs.job1_out
     print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con redirect errato.
     prolog.consult(f"./jobs/{private_clauses_path.name}")
-    query_kb = "is_partial_report1(schoolassoc(Url, School_ID), institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs))."
+    query_kb = "is_partial_report1(schoolassoc(Url, School_ID), institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs))"
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
@@ -148,7 +148,7 @@ def run_job2(private_clauses_path=defs.job2_clauses_path, out_path=defs.job2_out
     # -----
     print("Creating necessary facts...")
     # individuo le scuole che hanno siti da migliorare
-    query_kb = "page_needs_improvement(schoolassoc(Url, School_ID))."
+    query_kb = "page_needs_improvement(schoolassoc(Url, School_ID))"
 
     for result in prolog.query(query_kb):
         # fmt:off
@@ -184,7 +184,7 @@ def run_job2(private_clauses_path=defs.job2_clauses_path, out_path=defs.job2_out
     print("Running query on local KB...")
     # individua gli istituti a cui fanno capo le scuole con sito da migliorare.
     prolog.consult(f"./jobs/{private_clauses_path.name}")
-    query_kb = "is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))."
+    query_kb = "is_partial_report2(institute_with_all_schools(institute(Institute_ID, Institute_Name), Institute_Schools_IDs), schoolassoc(Url, School_ID))"
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
@@ -309,7 +309,6 @@ def run_job5(
     print(f"Done. Facts generated at {out_path}.")
 
 
-'''
 def run_job6(out_path=defs.job6_output_path):
     """Procedura Job6. Vedi: report.pdf."""
 
@@ -317,14 +316,13 @@ def run_job6(out_path=defs.job6_output_path):
 
     # -----
     print("Running query on local KB...")
-    query_kb = "are_detected_outliers(Outliers)."
+    query_kb = "are_best_pages_url(List_Best_Pages_Url, 3)"
 
     with open(out_path, "w") as pl_out:
         for result in prolog.query(query_kb):
-            pl_out.write(str(result["Outliers"]))
+            pl_out.write(repr(result["List_Best_Pages_Url"]))
 
     print(f"Done. Facts generated at {out_path}.")
-'''
 
 
 if __name__ == "__main__":
@@ -341,6 +339,8 @@ if __name__ == "__main__":
 
     # run_job3()
 
-    run_job4(geofacts_created=True)
+    # run_job4(geofacts_created=True)
 
     # run_job5(geofacts_created=True)
+
+    # run_job6()

@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/ontologies/ambito-scuola"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/ontologies/ambito-scuola"
+     versionIRI="http://www.semanticweb.org/ontologies/ambito-scuola/1.0">
+    <Prefix name="" IRI="http://www.semanticweb.org/ontologies/ambito-scuola/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution/geographical-distribution.rdf</Import>
+    <Import>https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/provinces/provinces.rdf</Import>
+    <Import>https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/regions/regions.rdf</Import>
+    <Import>https://w3id.org/italia/onto/CLV/1.0</Import>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/creator"/>
+        <Literal xml:lang="it">vodibe</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/description"/>
+        <Literal xml:lang="it">Ricostruzione dell&apos;ontologia che governa l&apos;ambito scolastico italiano. Parte del progetto &quot;Metodi di Ingegneria della Conoscenza applicati alle homepage delle scuole superiori italiane&quot;.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/title"/>
+        <Literal xml:lang="it">ambito-scuola</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <Literal>https://github.com/vodibe/icon-745751</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.0</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#AnnoScolastico"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CaratteristicaScuola"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IstitutoScolastico"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Scuola"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#anno_scolastico_inizia"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#anno_scolastico_termina"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ANN._A_EDUCANDATO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ANN._A_ISTITUTO_ARTE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ANNESSO_A_CONVITTO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ANNESSO_A_ISTITUTO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CONVITTO_ANNESSO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CO_IST._OSPEDALIERO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ambito-scuola"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#as_2023_2024"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AnnoScolastico"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnnoScolastico"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#anno_scolastico_inizia"/>
+            <Datatype abbreviatedIRI="xsd:date"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AnnoScolastico"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#anno_scolastico_termina"/>
+            <Datatype abbreviatedIRI="xsd:date"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CaratteristicaScuola"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Characteristic"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IstitutoScolastico"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
+            <Class IRI="#IstitutoScolastico"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
+            <Class IRI="#AnnoScolastico"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
+            <Class IRI="#AnnoScolastico"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#AnnoScolastico"/>
+        <Class IRI="https://w3id.org/italia/onto/CLV/AddressInTime"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#ANN._A_EDUCANDATO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#ANN._A_ISTITUTO_ARTE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#ANNESSO_A_CONVITTO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#ANNESSO_A_ISTITUTO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CONVITTO_ANNESSO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="https://w3id.org/italia/onto/ADMS/SemanticAsset"/>
+        <NamedIndividual IRI="#ambito-scuola"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AnnoScolastico"/>
+        <NamedIndividual IRI="#as_2023_2024"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="https://w3id.org/italia/data/project/ANNCSU"/>
+    </ClassAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
+        <Class IRI="#Scuola"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
+        <Class IRI="#Scuola"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
+        <Class IRI="#IstitutoScolastico"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
+        <Class IRI="#AnnoScolastico"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#anno_scolastico_inizia"/>
+        <Class IRI="#AnnoScolastico"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#anno_scolastico_termina"/>
+        <Class IRI="#AnnoScolastico"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#anno_scolastico_inizia"/>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#anno_scolastico_termina"/>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#AnnoScolastico</IRI>
+        <Literal xml:lang="it">Anno scolastico.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#AnnoScolastico</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#AnnoScolastico</IRI>
+        <Literal xml:lang="it">Anno scolastico</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CaratteristicaScuola</IRI>
+        <Literal xml:lang="it">Descrizione della caratteristica della scuola.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#CaratteristicaScuola</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#CaratteristicaScuola</IRI>
+        <Literal xml:lang="it">Caratteristica Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#CaratteristicaScuola</IRI>
+        <Literal xml:lang="it">https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#IstitutoScolastico</IRI>
+        <Literal xml:lang="it">Struttura scolastica che comprende uno o più scuole (plessi).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#IstitutoScolastico</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#IstitutoScolastico</IRI>
+        <Literal xml:lang="it">Istituto scolastico</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Scuola</IRI>
+        <Literal xml:lang="it">Plesso scolastico.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#Scuola</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Scuola</IRI>
+        <Literal xml:lang="it">Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#anno_scolastico_inizia</IRI>
+        <Literal xml:lang="it">Assegna una data indicativa di inizio delle lezioni.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#anno_scolastico_inizia</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#anno_scolastico_inizia</IRI>
+        <Literal xml:lang="it">anno scolastico inizia</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#anno_scolastico_termina</IRI>
+        <Literal xml:lang="it">Assegna una data indicativa di termine delle lezioni.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#anno_scolastico_termina</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#anno_scolastico_termina</IRI>
+        <Literal xml:lang="it">anno scolastico termina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#è_scuola_appartenente_a_istituto_scolastico</IRI>
+        <Literal xml:lang="it">Indica l&apos;istituto scolastico a cui la scuola appartiene.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#è_scuola_appartenente_a_istituto_scolastico</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#è_scuola_appartenente_a_istituto_scolastico</IRI>
+        <Literal xml:lang="it">è scuola appartenente a istituto scolastico</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#è_scuola_registrata_per_anno_scolastico</IRI>
+        <Literal xml:lang="it">Indica l&apos;ultimo anno scolastico al quale la scuola è registrata</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#è_scuola_registrata_per_anno_scolastico</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#è_scuola_registrata_per_anno_scolastico</IRI>
+        <Literal xml:lang="it">è scuola registrata per anno scolastico</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

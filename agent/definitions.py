@@ -60,6 +60,8 @@ bn_map_path = DIR_BIF / "bn_MAP.bif"
 bn_mle_query_path = DIR_BIF / "bn_MLE_query.txt"
 bn_map_query_path = DIR_BIF / "bn_MAP_query.txt"
 
+bn_ll_path = DIR_BIF / "bn_scores.txt"
+
 
 # ----- NDOM
 # larghezza, altezza, diagonale schermo

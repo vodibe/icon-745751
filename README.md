@@ -5,7 +5,7 @@ L’idea di fondo da cui si è partiti è l’applicazione di alcuni metodi di I
 su un dominio di interesse, l’usabilità di una pagina web. Si va prima a circoscrivere un ambito di riferimento,
 che nel nostro caso, è l’insieme delle Homepage delle scuole superiori pubbliche italiane.
 
-## Aggiornamento dataset `ds3_gt`: 11/2023
+Aggiornamento dataset `ds3_gt`: 11/2023
 
 ## Documentazione e Risultati
 Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
@@ -101,6 +101,8 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
       run_job4(geofacts_created=True)
 
       run_job5(geofacts_created=True)
+
+      run_job6()
    ```
 3. ```bash
    python kb_creator.py

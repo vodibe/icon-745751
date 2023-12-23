@@ -320,7 +320,8 @@ def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_o
 
     simulated_data = bn.simulate(int(1e4))
     score_ll = log_likelihood_score(bn, simulated_data)
-    print(f"Log likelihood: {score_ll}")
+    with open(defs.bn_ll_path, "a") as bn_ll:
+        bn_ll.write(f"\nBN_{estimator_type}:\n\tLog likelihood: {score_ll}\n")
 
     # query
     print("Querying...")

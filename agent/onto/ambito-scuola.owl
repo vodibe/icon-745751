@@ -50,41 +50,329 @@
         <Class IRI="#Scuola"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#HaSedeOmnicomprensivo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ha_caratteristica_scuola"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#anno_scolastico_inizia"/>
+        <DataProperty IRI="#AnnoScolasticoInizia"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#anno_scolastico_termina"/>
+        <DataProperty IRI="#AnnoScolasticoTermina"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#ANN._A_EDUCANDATO"/>
+        <DataProperty IRI="#CodiceComune"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#ANN._A_ISTITUTO_ARTE"/>
+        <DataProperty IRI="#DenominazioneIstitutoRiferimento"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#ANNESSO_A_CONVITTO"/>
+        <DataProperty IRI="#DenominazioneScuola"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#ANNESSO_A_ISTITUTO"/>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#CONVITTO_ANNESSO"/>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#CO_IST._OSPEDALIERO"/>
+        <DataProperty IRI="#HaIndirizzoEmail"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#HaIndirizzoPEC"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#HaSitoWeb"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#NomeAnnoScolastico"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#èSedeDirettivo"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AS_2023_2024"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_ANNESSO_A_CONVITTO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_ANNESSO_A_ISTITUTO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_ANN_A_EDUCANDATO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_ANN_A_ISTITUTO_ARTE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_CONVITTO_ANNESSO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_CONVITTO_NAZIONALE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_CO_IST_OSPEDALIERO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_CPIA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_DI_CONFINE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_DI_MONTAGNA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_EDUCANDATO_FEMMINILE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_ISOLANO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_NORMALE"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_PERCORSO_II_LIVELLO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_PER_CIECHI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_PER_SORDOMUTI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SCUOLA_ANNESSA"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SLOVENO"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SPECIALE_PER_CIECHI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SPEC_PER_CARCERARI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SPEC_PER_SORDOMUTI"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CS_SPERIMENTALE_PER_DM"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DGCASIS"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_02"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_03"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_04"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_05"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_06"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_07"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_08"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_09"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_10"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_11"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_12"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_13"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_14"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_15"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_16"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_17"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_18"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_19"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_20"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_21"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_22"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_23"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_24"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_25"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_26"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_27"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_28"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_29"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_30"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_31"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_32"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_33"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_34"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_35"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_36"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_37"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_38"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_39"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TGIS_40"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#ambito-scuola"/>
     </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#as_2023_2024"/>
-    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#CaratteristicaScuola"/>
+        <ObjectIntersectionOf>
+            <Class IRI="https://w3id.org/italia/onto/l0/Characteristic"/>
+            <ObjectOneOf>
+                <NamedIndividual IRI="#CS_ANNESSO_A_CONVITTO"/>
+                <NamedIndividual IRI="#CS_ANNESSO_A_ISTITUTO"/>
+                <NamedIndividual IRI="#CS_ANN_A_EDUCANDATO"/>
+                <NamedIndividual IRI="#CS_ANN_A_ISTITUTO_ARTE"/>
+                <NamedIndividual IRI="#CS_CONVITTO_ANNESSO"/>
+                <NamedIndividual IRI="#CS_CONVITTO_NAZIONALE"/>
+                <NamedIndividual IRI="#CS_CO_IST_OSPEDALIERO"/>
+                <NamedIndividual IRI="#CS_CPIA"/>
+                <NamedIndividual IRI="#CS_DI_CONFINE"/>
+                <NamedIndividual IRI="#CS_DI_MONTAGNA"/>
+                <NamedIndividual IRI="#CS_EDUCANDATO_FEMMINILE"/>
+                <NamedIndividual IRI="#CS_ISOLANO"/>
+                <NamedIndividual IRI="#CS_NORMALE"/>
+                <NamedIndividual IRI="#CS_PERCORSO_II_LIVELLO"/>
+                <NamedIndividual IRI="#CS_PER_CIECHI"/>
+                <NamedIndividual IRI="#CS_PER_SORDOMUTI"/>
+                <NamedIndividual IRI="#CS_SCUOLA_ANNESSA"/>
+                <NamedIndividual IRI="#CS_SLOVENO"/>
+                <NamedIndividual IRI="#CS_SPECIALE_PER_CIECHI"/>
+                <NamedIndividual IRI="#CS_SPEC_PER_CARCERARI"/>
+                <NamedIndividual IRI="#CS_SPEC_PER_SORDOMUTI"/>
+                <NamedIndividual IRI="#CS_SPERIMENTALE_PER_DM"/>
+            </ObjectOneOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <ObjectIntersectionOf>
+            <Class IRI="https://w3id.org/italia/onto/l0/Characteristic"/>
+            <ObjectOneOf>
+                <NamedIndividual IRI="#TGIS_01"/>
+                <NamedIndividual IRI="#TGIS_02"/>
+                <NamedIndividual IRI="#TGIS_03"/>
+                <NamedIndividual IRI="#TGIS_04"/>
+                <NamedIndividual IRI="#TGIS_05"/>
+                <NamedIndividual IRI="#TGIS_06"/>
+                <NamedIndividual IRI="#TGIS_07"/>
+                <NamedIndividual IRI="#TGIS_08"/>
+                <NamedIndividual IRI="#TGIS_09"/>
+                <NamedIndividual IRI="#TGIS_10"/>
+                <NamedIndividual IRI="#TGIS_11"/>
+                <NamedIndividual IRI="#TGIS_12"/>
+                <NamedIndividual IRI="#TGIS_13"/>
+                <NamedIndividual IRI="#TGIS_14"/>
+                <NamedIndividual IRI="#TGIS_15"/>
+                <NamedIndividual IRI="#TGIS_16"/>
+                <NamedIndividual IRI="#TGIS_17"/>
+                <NamedIndividual IRI="#TGIS_18"/>
+                <NamedIndividual IRI="#TGIS_19"/>
+                <NamedIndividual IRI="#TGIS_20"/>
+                <NamedIndividual IRI="#TGIS_21"/>
+                <NamedIndividual IRI="#TGIS_22"/>
+                <NamedIndividual IRI="#TGIS_23"/>
+                <NamedIndividual IRI="#TGIS_24"/>
+                <NamedIndividual IRI="#TGIS_25"/>
+                <NamedIndividual IRI="#TGIS_26"/>
+                <NamedIndividual IRI="#TGIS_27"/>
+                <NamedIndividual IRI="#TGIS_28"/>
+                <NamedIndividual IRI="#TGIS_29"/>
+                <NamedIndividual IRI="#TGIS_30"/>
+                <NamedIndividual IRI="#TGIS_31"/>
+                <NamedIndividual IRI="#TGIS_32"/>
+                <NamedIndividual IRI="#TGIS_33"/>
+                <NamedIndividual IRI="#TGIS_34"/>
+                <NamedIndividual IRI="#TGIS_35"/>
+                <NamedIndividual IRI="#TGIS_36"/>
+                <NamedIndividual IRI="#TGIS_37"/>
+                <NamedIndividual IRI="#TGIS_38"/>
+                <NamedIndividual IRI="#TGIS_39"/>
+                <NamedIndividual IRI="#TGIS_40"/>
+            </ObjectOneOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
     <SubClassOf>
         <Class IRI="#AnnoScolastico"/>
         <Class IRI="https://w3id.org/italia/onto/l0/EventOrSituation"/>
@@ -92,28 +380,62 @@
     <SubClassOf>
         <Class IRI="#AnnoScolastico"/>
         <DataExactCardinality cardinality="1">
-            <DataProperty IRI="#anno_scolastico_inizia"/>
-            <Datatype abbreviatedIRI="xsd:date"/>
+            <DataProperty IRI="#NomeAnnoScolastico"/>
         </DataExactCardinality>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#AnnoScolastico"/>
-        <DataExactCardinality cardinality="1">
-            <DataProperty IRI="#anno_scolastico_termina"/>
+        <DataMaxCardinality cardinality="1">
+            <DataProperty IRI="#AnnoScolasticoInizia"/>
             <Datatype abbreviatedIRI="xsd:date"/>
-        </DataExactCardinality>
+        </DataMaxCardinality>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#CaratteristicaScuola"/>
-        <Class IRI="https://w3id.org/italia/onto/l0/Characteristic"/>
+        <Class IRI="#AnnoScolastico"/>
+        <DataMaxCardinality cardinality="1">
+            <DataProperty IRI="#AnnoScolasticoTermina"/>
+            <Datatype abbreviatedIRI="xsd:date"/>
+        </DataMaxCardinality>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#IstitutoScolastico"/>
         <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#IstitutoScolastico"/>
+        <ObjectIntersectionOf>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                <Class IRI="https://w3id.org/italia/onto/CLV/Identifier"/>
+            </ObjectExactCardinality>
+            <DataHasValue>
+                <DataProperty IRI="https://w3id.org/italia/onto/CLV/identifierType"/>
+                <Literal>CodiceIstitutoRiferimento</Literal>
+            </DataHasValue>
+        </ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IstitutoScolastico"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#DenominazioneIstitutoRiferimento"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#Scuola"/>
         <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectIntersectionOf>
+            <ObjectExactCardinality cardinality="1">
+                <ObjectProperty IRI="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                <Class IRI="https://w3id.org/italia/onto/CLV/Identifier"/>
+            </ObjectExactCardinality>
+            <DataHasValue>
+                <DataProperty IRI="https://w3id.org/italia/onto/CLV/identifierType"/>
+                <Literal>CodiceScuola</Literal>
+            </DataHasValue>
+        </ObjectIntersectionOf>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Scuola"/>
@@ -130,6 +452,58 @@
         </ObjectExactCardinality>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectExactCardinality cardinality="1">
+            <ObjectProperty IRI="https://w3id.org/italia/onto/CLV/hasPrimaryAddress"/>
+            <Class IRI="https://w3id.org/italia/onto/CLV/Address"/>
+        </ObjectExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="#HaSedeOmnicomprensivo"/>
+            <Class IRI="#Scuola"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="#ha_caratteristica_scuola"/>
+            <Class IRI="#CaratteristicaScuola"/>
+        </ObjectMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#DenominazioneScuola"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <DataExactCardinality cardinality="1">
+            <DataProperty IRI="#èSedeDirettivo"/>
+            <Datatype abbreviatedIRI="xsd:boolean"/>
+        </DataExactCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <DataMaxCardinality cardinality="1">
+            <DataProperty IRI="#HaIndirizzoEmail"/>
+        </DataMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <DataMaxCardinality cardinality="1">
+            <DataProperty IRI="#HaIndirizzoPEC"/>
+        </DataMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Scuola"/>
+        <DataMaxCardinality cardinality="1">
+            <DataProperty IRI="#HaSitoWeb"/>
+        </DataMaxCardinality>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="https://w3id.org/italia/onto/l0/EventOrSituation"/>
         <ObjectExactCardinality cardinality="1">
             <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
@@ -141,37 +515,598 @@
         <Class IRI="https://w3id.org/italia/onto/CLV/AddressInTime"/>
     </DisjointClasses>
     <ClassAssertion>
-        <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="#ANN._A_EDUCANDATO"/>
+        <Class IRI="#AnnoScolastico"/>
+        <NamedIndividual IRI="#AS_2023_2024"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="#ANN._A_ISTITUTO_ARTE"/>
+        <NamedIndividual IRI="#CS_ANNESSO_A_CONVITTO"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="#ANNESSO_A_CONVITTO"/>
+        <NamedIndividual IRI="#CS_ANNESSO_A_ISTITUTO"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="#ANNESSO_A_ISTITUTO"/>
+        <NamedIndividual IRI="#CS_ANN_A_EDUCANDATO"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="#CONVITTO_ANNESSO"/>
+        <NamedIndividual IRI="#CS_ANN_A_ISTITUTO_ARTE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CONVITTO_ANNESSO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CONVITTO_NAZIONALE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CO_IST_OSPEDALIERO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CPIA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_DI_CONFINE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_DI_MONTAGNA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_EDUCANDATO_FEMMINILE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ISOLANO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_NORMALE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PERCORSO_II_LIVELLO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PER_CIECHI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PER_SORDOMUTI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SCUOLA_ANNESSA"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SLOVENO"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPECIALE_PER_CIECHI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPEC_PER_CARCERARI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPEC_PER_SORDOMUTI"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPERIMENTALE_PER_DM"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://dati.gov.it/onto/dcatapit#Organization"/>
+        <NamedIndividual IRI="#DGCASIS"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_01"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_02"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_03"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_04"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_05"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_06"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_07"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_08"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_09"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_10"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_11"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_12"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_13"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_14"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_15"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_16"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_17"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_18"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_19"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_20"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_21"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_22"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_23"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_24"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_25"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_26"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_27"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_28"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_29"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_30"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_31"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_32"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_33"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_34"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_35"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_36"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_37"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_38"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_39"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_40"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="https://w3id.org/italia/onto/ADMS/SemanticAsset"/>
         <NamedIndividual IRI="#ambito-scuola"/>
     </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#AnnoScolastico"/>
-        <NamedIndividual IRI="#as_2023_2024"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#CaratteristicaScuola"/>
-        <NamedIndividual IRI="https://w3id.org/italia/data/project/ANNCSU"/>
-    </ClassAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#AnnoScolasticoInizia"/>
+        <NamedIndividual IRI="#AS_2023_2024"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2023-09-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#AnnoScolasticoTermina"/>
+        <NamedIndividual IRI="#AS_2023_2024"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2024-07-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#NomeAnnoScolastico"/>
+        <NamedIndividual IRI="#AS_2023_2024"/>
+        <Literal datatypeIRI="http://www.w3.org/2000/01/rdf-schema#Literal">202324</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ANNESSO_A_CONVITTO"/>
+        <Literal xml:lang="it">ANNESSO A CONVITTO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ANNESSO_A_ISTITUTO"/>
+        <Literal xml:lang="it">ANNESSO A ISTITUTO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ANN_A_EDUCANDATO"/>
+        <Literal xml:lang="it">ANN. A EDUCANDATO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ANN_A_ISTITUTO_ARTE"/>
+        <Literal xml:lang="it">ANN. A ISTITUTO ARTE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CONVITTO_ANNESSO"/>
+        <Literal xml:lang="it">CONVITTO ANNESSO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CONVITTO_NAZIONALE"/>
+        <Literal xml:lang="it">CONVITTO NAZIONALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CO_IST_OSPEDALIERO"/>
+        <Literal xml:lang="it">C\O IST. OSPEDALIERO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_CPIA"/>
+        <Literal xml:lang="it">CPIA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_DI_CONFINE"/>
+        <Literal xml:lang="it">DI CONFINE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_DI_MONTAGNA"/>
+        <Literal xml:lang="it">DI MONTAGNA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_EDUCANDATO_FEMMINILE"/>
+        <Literal xml:lang="it">EDUCANDATO FEMMINILE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_ISOLANO"/>
+        <Literal xml:lang="it">ISOLANO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_NORMALE"/>
+        <Literal xml:lang="it">NORMALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PERCORSO_II_LIVELLO"/>
+        <Literal xml:lang="it">PERCORSO II LIVELLO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PER_CIECHI"/>
+        <Literal xml:lang="it">PER CIECHI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_PER_SORDOMUTI"/>
+        <Literal xml:lang="it">PER SORDOMUTI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SCUOLA_ANNESSA"/>
+        <Literal xml:lang="it">SCUOLA ANNESSA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SLOVENO"/>
+        <Literal xml:lang="it">SLOVENO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPECIALE_PER_CIECHI"/>
+        <Literal xml:lang="it">SPECIALE PER CIECHI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPEC_PER_CARCERARI"/>
+        <Literal xml:lang="it">SPEC. PER CARCERARI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPEC_PER_SORDOMUTI"/>
+        <Literal xml:lang="it">SPEC. PER SORDOMUTI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <NamedIndividual IRI="#CS_SPERIMENTALE_PER_DM"/>
+        <Literal xml:lang="it">SPERIMENTALE PER DM</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_01"/>
+        <Literal xml:lang="it">CENTRO TERRITORIALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_02"/>
+        <Literal xml:lang="it">CONVITTO ANNESSO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_03"/>
+        <Literal xml:lang="it">CONVITTO NAZIONALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_04"/>
+        <Literal xml:lang="it">EDUCANDATO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_05"/>
+        <Literal xml:lang="it">IST PROF ALBERGHIERO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_06"/>
+        <Literal xml:lang="it">IST PROF CINEMATOGRAFIA E TELEVISIONE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_07"/>
+        <Literal xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_08"/>
+        <Literal xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO PER CIECHI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_09"/>
+        <Literal xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO PER SORDOMUTI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_10"/>
+        <Literal xml:lang="it">IST PROF INDUSTRIA E ATTIVITA&apos; MARINARE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_11"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI ALBERGHIERI E RISTORAZIONE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_12"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI COMM TUR E DELLA PUBB</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_13"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI COMMERCIALI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_14"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI COMMERCIALI E TURISTICI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_15"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI PUBBLICITARI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_16"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI SOCIALI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_17"/>
+        <Literal xml:lang="it">IST PROF PER I SERVIZI TURISTICI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_18"/>
+        <Literal xml:lang="it">IST PROF PER L&apos;AGRICOLTURA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_19"/>
+        <Literal xml:lang="it">IST PROF PER L&apos;AGRICOLTURA E L&apos;AMBIENTE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_20"/>
+        <Literal xml:lang="it">IST TEC COMMERCIALE E PER GEOMETRI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_21"/>
+        <Literal xml:lang="it">IST TECNICO ECONOMICO E TECNOLOGICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_22"/>
+        <Literal xml:lang="it">ISTITUTO COMPRENSIVO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_23"/>
+        <Literal xml:lang="it">ISTITUTO D&apos;ARTE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_24"/>
+        <Literal xml:lang="it">ISTITUTO MAGISTRALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_25"/>
+        <Literal xml:lang="it">ISTITUTO SUPERIORE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_26"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO AERONAUTICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_27"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO AGRARIO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_28"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO COMMERCIALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_29"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO INDUSTRIALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_30"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO NAUTICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_31"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO PER ATTIVITA&apos; SOCIALI (GIA&apos; ITF)</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_32"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO PER GEOMETRI</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_33"/>
+        <Literal xml:lang="it">ISTITUTO TECNICO PER IL TURISMO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_34"/>
+        <Literal xml:lang="it">LICEO ARTISTICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_35"/>
+        <Literal xml:lang="it">LICEO CLASSICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_36"/>
+        <Literal xml:lang="it">LICEO SCIENTIFICO</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_37"/>
+        <Literal xml:lang="it">SCUOLA INFANZIA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_38"/>
+        <Literal xml:lang="it">SCUOLA MAGISTRALE</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_39"/>
+        <Literal xml:lang="it">SCUOLA PRIMARIA</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <NamedIndividual IRI="#TGIS_40"/>
+        <Literal xml:lang="it">SCUOLA PRIMO GRADO</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#HaSedeOmnicomprensivo"/>
+        <Class IRI="#Scuola"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ha_caratteristica_scuola"/>
+        <Class IRI="#Scuola"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
         <Class IRI="#Scuola"/>
@@ -180,6 +1115,14 @@
         <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
         <Class IRI="#Scuola"/>
     </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#HaSedeOmnicomprensivo"/>
+        <Class IRI="#Scuola"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ha_caratteristica_scuola"/>
+        <Class IRI="#CaratteristicaScuola"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#è_scuola_appartenente_a_istituto_scolastico"/>
         <Class IRI="#IstitutoScolastico"/>
@@ -188,21 +1131,125 @@
         <ObjectProperty IRI="#è_scuola_registrata_per_anno_scolastico"/>
         <Class IRI="#AnnoScolastico"/>
     </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#CodiceComune"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/identifier"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#DenominazioneIstitutoRiferimento"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/name"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#DenominazioneScuola"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/name"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/name"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/name"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#NomeAnnoScolastico"/>
+        <DataProperty IRI="https://w3id.org/italia/onto/l0/name"/>
+    </SubDataPropertyOf>
     <DataPropertyDomain>
-        <DataProperty IRI="#anno_scolastico_inizia"/>
+        <DataProperty IRI="#AnnoScolasticoInizia"/>
         <Class IRI="#AnnoScolastico"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#anno_scolastico_termina"/>
+        <DataProperty IRI="#AnnoScolasticoTermina"/>
         <Class IRI="#AnnoScolastico"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#CodiceComune"/>
+        <Class IRI="https://w3id.org/italia/onto/CLV/City"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#DenominazioneIstitutoRiferimento"/>
+        <Class IRI="#IstitutoScolastico"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#DenominazioneScuola"/>
+        <Class IRI="#Scuola"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <Class IRI="#CaratteristicaScuola"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <Class IRI="#TipologiaGradoIstruzioneScuola"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#HaIndirizzoEmail"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#HaIndirizzoPEC"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#HaSitoWeb"/>
+        <Class IRI="https://w3id.org/italia/onto/l0/Agent"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#NomeAnnoScolastico"/>
+        <Class IRI="#AnnoScolastico"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#èSedeDirettivo"/>
+        <Class IRI="#Scuola"/>
     </DataPropertyDomain>
     <DataPropertyRange>
-        <DataProperty IRI="#anno_scolastico_inizia"/>
+        <DataProperty IRI="#AnnoScolasticoInizia"/>
         <Datatype abbreviatedIRI="xsd:date"/>
     </DataPropertyRange>
     <DataPropertyRange>
-        <DataProperty IRI="#anno_scolastico_termina"/>
+        <DataProperty IRI="#AnnoScolasticoTermina"/>
         <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#CodiceComune"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#DenominazioneIstitutoRiferimento"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#DenominazioneScuola"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#DescrizioneCaratteristicaScuola"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#DescrizioneTipologiaGradoIstruzioneScuola"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#HaIndirizzoEmail"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#HaIndirizzoPEC"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#HaSitoWeb"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#NomeAnnoScolastico"/>
+        <Datatype abbreviatedIRI="rdfs:Literal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#èSedeDirettivo"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -221,8 +1268,38 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#AnnoScolasticoInizia</IRI>
+        <Literal xml:lang="it">Assegna una data indicativa di inizio delle lezioni.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#AnnoScolasticoInizia</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#AnnoScolasticoInizia</IRI>
+        <Literal xml:lang="it">anno scolastico inizia</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#AnnoScolasticoTermina</IRI>
+        <Literal xml:lang="it">Assegna una data indicativa di termine delle lezioni.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#AnnoScolasticoTermina</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#AnnoScolasticoTermina</IRI>
+        <Literal xml:lang="it">anno scolastico termina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#CaratteristicaScuola</IRI>
-        <Literal xml:lang="it">Descrizione della caratteristica della scuola.</Literal>
+        <Literal xml:lang="it">Caratteristica della scuola.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
@@ -237,7 +1314,172 @@
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
         <IRI>#CaratteristicaScuola</IRI>
+        <Literal>https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CodiceComune</IRI>
+        <Literal xml:lang="it">Codice catastale del comune.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#CodiceComune</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#CodiceComune</IRI>
+        <Literal xml:lang="it">Codice Comune</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#DGCASIS</IRI>
+        <Literal xml:lang="it">Direzione generale per i sistemi informativi e la statistica</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DGCASIS</IRI>
+        <Literal xml:lang="it">https://www.miur.gov.it/dgsis</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DenominazioneIstitutoRiferimento</IRI>
+        <Literal xml:lang="it">Denominazione dell&apos;istituto.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#DenominazioneIstitutoRiferimento</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#DenominazioneIstitutoRiferimento</IRI>
+        <Literal xml:lang="it">Denominazione Istituto Riferimento</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DenominazioneIstitutoRiferimento</IRI>
+        <Literal>https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DenominazioneScuola</IRI>
+        <Literal xml:lang="it">Nome della scuola.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#DenominazioneScuola</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#DenominazioneScuola</IRI>
+        <Literal xml:lang="it">Denominazione Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DenominazioneScuola</IRI>
+        <Literal>https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DescrizioneCaratteristicaScuola</IRI>
+        <Literal xml:lang="it">Descrizione della caratteristica della scuola.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#DescrizioneCaratteristicaScuola</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#DescrizioneCaratteristicaScuola</IRI>
+        <Literal xml:lang="it">Descrizione Caratteristica Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DescrizioneCaratteristicaScuola</IRI>
         <Literal xml:lang="it">https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#DescrizioneTipologiaGradoIstruzioneScuola</IRI>
+        <Literal xml:lang="it">Descrizione Tipologia grado Istruzione Scuola.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#DescrizioneTipologiaGradoIstruzioneScuola</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#DescrizioneTipologiaGradoIstruzioneScuola</IRI>
+        <Literal xml:lang="it">Descrizione Tipologia Grado Istruzione Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DescrizioneTipologiaGradoIstruzioneScuola</IRI>
+        <Literal>https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#HaIndirizzoEmail</IRI>
+        <Literal xml:lang="it">Indica se l&apos;agente dispone di un indirizzo email.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#HaIndirizzoEmail</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#HaIndirizzoEmail</IRI>
+        <Literal xml:lang="it">ha indirizzo email</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#HaIndirizzoPEC</IRI>
+        <Literal xml:lang="it">Indica se l&apos;agente dispone di un indirizzo PEC.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#HaIndirizzoPEC</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#HaIndirizzoPEC</IRI>
+        <Literal xml:lang="it">ha indirizzo PEC</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#HaSedeOmnicomprensivo</IRI>
+        <Literal xml:lang="it">Se valorizzato con &apos;Non disponibile&apos; indica che la scuola non fa parte di un Omnicomprensivo. Se valorizzato contiene il codie scuole dell&apos;istituto che e&apos; a capo dell&apos;Omnicomprensivo. Un Omnicomprensivo e&apos; un&apos;istituzione scolastica che comprende scuole o istituti di gradi di istruzione diversi</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#HaSedeOmnicomprensivo</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#HaSedeOmnicomprensivo</IRI>
+        <Literal xml:lang="it">ha sede omnicomprensivo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#HaSitoWeb</IRI>
+        <Literal xml:lang="it">Indica se l&apos;agente dispone di un sito web.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#HaSitoWeb</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#HaSitoWeb</IRI>
+        <Literal xml:lang="it">ha sito web</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
@@ -256,6 +1498,21 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#NomeAnnoScolastico</IRI>
+        <Literal xml:lang="it">Nome dell&apos;anno scolastico, ad es. &quot;202324&quot;.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#NomeAnnoScolastico</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#NomeAnnoScolastico</IRI>
+        <Literal xml:lang="it">Nome Anno Scolastico</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
         <IRI>#Scuola</IRI>
         <Literal xml:lang="it">Plesso scolastico.</Literal>
     </AnnotationAssertion>
@@ -271,33 +1528,53 @@
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#anno_scolastico_inizia</IRI>
-        <Literal xml:lang="it">Assegna una data indicativa di inizio delle lezioni.</Literal>
+        <IRI>#TipologiaGradoIstruzioneScuola</IRI>
+        <Literal xml:lang="it">Tipologia Grado Istruzione Scuola.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
-        <IRI>#anno_scolastico_inizia</IRI>
+        <IRI>#TipologiaGradoIstruzioneScuola</IRI>
         <IRI>#ambito-scuola</IRI>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#anno_scolastico_inizia</IRI>
-        <Literal xml:lang="it">anno scolastico inizia</Literal>
+        <IRI>#TipologiaGradoIstruzioneScuola</IRI>
+        <Literal xml:lang="it">Tipologia Grado Istruzione Scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#TipologiaGradoIstruzioneScuola</IRI>
+        <Literal>https://dati.istruzione.it/opendata/opendata/catalogo/elements1/leaf/?area=Scuole&amp;datasetId=DS0400SCUANAGRAFESTAT</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#anno_scolastico_termina</IRI>
-        <Literal xml:lang="it">Assegna una data indicativa di termine delle lezioni.</Literal>
+        <IRI>#ha_caratteristica_scuola</IRI>
+        <Literal xml:lang="it">Associa a una scuola al più una descrizione caratteristica.</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
-        <IRI>#anno_scolastico_termina</IRI>
+        <IRI>#ha_caratteristica_scuola</IRI>
         <IRI>#ambito-scuola</IRI>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#anno_scolastico_termina</IRI>
-        <Literal xml:lang="it">anno scolastico termina</Literal>
+        <IRI>#ha_caratteristica_scuola</IRI>
+        <Literal xml:lang="it">ha caratteristica scuola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#èSedeDirettivo</IRI>
+        <Literal xml:lang="it">Indica se la scuola è sede del direttivo (ufficio direzione e segreteria).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:isDefinedBy"/>
+        <IRI>#èSedeDirettivo</IRI>
+        <IRI>#ambito-scuola</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#èSedeDirettivo</IRI>
+        <Literal xml:lang="it">è sede direttivo</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty abbreviatedIRI="rdfs:comment"/>

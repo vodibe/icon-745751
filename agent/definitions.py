@@ -62,6 +62,10 @@ bn_map_query_path = DIR_BIF / "bn_MAP_query.txt"
 
 bn_ll_path = DIR_BIF / "bn_scores.txt"
 
+# ONTOLOGIA
+DIR_ONTO = DIR_ROOT / "agent" / "onto"
+
+onto_path = DIR_ONTO / "ambito-scuola.owl"
 
 # ----- NDOM
 # larghezza, altezza, diagonale schermo

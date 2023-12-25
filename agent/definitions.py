@@ -65,7 +65,11 @@ bn_ll_path = DIR_BIF / "bn_scores.txt"
 # ONTOLOGIA
 DIR_ONTO = DIR_ROOT / "agent" / "onto"
 
-onto_path = DIR_ONTO / "ambito-scuola.owl"
+imported_onto_paths = [
+    DIR_ONTO / "imported",
+    DIR_ONTO / "imported" / "dizionari_controllati",
+]
+my_onto_path = DIR_ONTO / "ambito_scuola1_v1_RDF_TRIPLES.owl"
 
 # ----- NDOM
 # larghezza, altezza, diagonale schermo

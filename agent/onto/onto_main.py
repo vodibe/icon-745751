@@ -1,8 +1,10 @@
 import agent.definitions as defs
-
-import owlready2
+from owlready2 import *
 
 if __name__ == "__main__":
-    o = owlready2.get_ontology(str(defs.onto_path))
+    for imported_onto_path in defs.imported_onto_paths:
+        onto_path.append(str(imported_onto_path) + "\\")
 
-    print(list(o.classes()), "\n")
+    o = get_ontology(str(defs.my_onto_path)).load(only_local=True)
+
+    print(type(o))

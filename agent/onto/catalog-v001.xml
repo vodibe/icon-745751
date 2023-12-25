@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-    <uri id="User Entered Import Resolution" name="https://w3id.org/italia/onto/CLV/1.0" uri="imported/CLV-AP_IT.rdf"/>
+    <uri id="Imports Wizard Entry" name="https://w3id.org/italia/onto/CLV/1.0" uri="imported/CLV-AP_IT.rdf"/>
+    <uri id="Imports Wizard Entry" name="https://w3id.org/italia/onto/l0/0.8" uri="imported/l0.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1703436522785" name="http://www.semanticweb.org/ontologies/ambito-scuola" uri="ambito-scuola.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1703499771604" name="http://www.semanticweb.org/user/ontologies/2023/11/untitled-ontology-48/" uri="ambito_scuola1_v1_RDF_TRIPLES.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1703499771604" name="https://w3id.org/italia/onto/l0/" uri="imported/l0.owl"/>
     </group>
 </catalog>

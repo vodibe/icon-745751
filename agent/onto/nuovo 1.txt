@@ -21,6 +21,8 @@ PROVINCIA                                         BARI                          
 INDIRIZZOEMAILSCUOLA                              BATD09000L@istruzione.it                BATD09000L@istruzione.it
 INDIRIZZOPECSCUOLA                                batd09000l@pec.istruzione.it            Non Disponibile
 SITOWEBSCUOLA                                     www.itctannoia.gov.it                   www.itctannoia.gov.it
+
+
 SEDESCOLASTICA                                    NO                                      NO
 
 

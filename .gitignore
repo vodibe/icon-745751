@@ -9,6 +9,9 @@
 # Link utili per lo sviluppo
 /docs/misc/_dev
 
+# Appunti ICON
+/docs/ICON*.docx
+
 # Escludi alcuni moduli di aipython
 /agent/libs/aipython/*
 !/agent/libs/aipython/searchGeneric.py

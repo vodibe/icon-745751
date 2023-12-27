@@ -63,13 +63,13 @@ bn_map_query_path = DIR_BIF / "bn_MAP_query.txt"
 bn_ll_path = DIR_BIF / "bn_scores.txt"
 
 # ONTOLOGIA
-DIR_ONTO = DIR_ROOT / "agent" / "onto"
+DIR_ONTO = DIR_ROOT / "agent" / "ontology_a"
 
 imported_onto_paths = [
     DIR_ONTO / "imported",
-    DIR_ONTO / "imported" / "dizionari_controllati",
+    DIR_ONTO / "imported" / "controlled_dicts",
 ]
-my_onto_path = DIR_ONTO / "ambito_scuola1_v1_RDF_TRIPLES.owl"
+my_onto_path = DIR_ONTO / "CLV-AP_IT____.rdf"
 
 # ----- NDOM
 # larghezza, altezza, diagonale schermo

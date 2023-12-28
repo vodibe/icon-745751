@@ -623,7 +623,6 @@
     <!-- https://w3id.org/italia/onto/CLV/hasIdentifier -->
 
     <owl:ObjectProperty rdf:about="https://w3id.org/italia/onto/CLV/hasIdentifier">
-        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/CLV/SpatialObject"/>
         <rdfs:range rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
         <rdfs:comment xml:lang="it">Questa proprietà collega un oggetto spaziale alla classe identificativo che rappresenta uno o più identificativi associabili a un oggetto spaziale. La proprietà è ereditata da tutte le sotto classi di oggetto spaziale. Esempi di identificativi sono il codice istat, l&apos;identificativo di un indirizzo secondo le specifiche inspire, il codice assegnato dal comune, ecc.</rdfs:comment>
         <rdfs:comment xml:lang="en">This property allows one to specify an identifier for the spatial object. The property is inherited by all the subclasses of spatial object.</rdfs:comment>

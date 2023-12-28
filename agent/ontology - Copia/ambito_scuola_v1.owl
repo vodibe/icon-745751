@@ -1,0 +1,2070 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#"
+     xml:base="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola"
+     xmlns:l0="https://w3id.org/italia/onto/l0/"
+     xmlns:ns="http://www.w3.org/2006/vcard/ns#"
+     xmlns:CLV="https://w3id.org/italia/onto/CLV/"
+     xmlns:NDC="https://w3id.org/italia/onto/NDC/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:ADMS="https://w3id.org/italia/onto/ADMS/"
+     xmlns:adms="http://www.w3.org/ns/adms#"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:xkos="http://rdf-vocabulary.ddialliance.org/xkos#"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:terms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola">
+        <owl:versionIRI rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola/1"/>
+        <owl:imports rdf:resource="https://w3id.org/italia/onto/CLV/1.0"/>
+        <owl:imports rdf:resource="https://w3id.org/italia/onto/l0/0.8"/>
+        <terms:description xml:lang="it">Ontologia che governa i concetti in ambito scolastico, validi nel paese Italia. Parte del progetto &quot;Metodi di Ingegneria della Conoscenza applicati alle homepage delle scuole superiori italiane&quot;.</terms:description>
+        <terms:title xml:lang="it">ambito_scuola</terms:title>
+        <rdfs:seeAlso>https://github.com/vodibe/icon-745751</rdfs:seeAlso>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/conformsTo -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/conformsTo"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/type -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/type"/>
+    
+
+
+    <!-- http://rdf-vocabulary.ddialliance.org/xkos#numberOfLevels -->
+
+    <owl:AnnotationProperty rdf:about="http://rdf-vocabulary.ddialliance.org/xkos#numberOfLevels"/>
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#hasTopConcept -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#hasTopConcept"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#inScheme -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#inScheme"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#notation -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#notation"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#prefLabel -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#prefLabel"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#representationTechnique -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/adms#representationTechnique"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#distribution -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/dcat#distribution"/>
+    
+
+
+    <!-- https://w3id.org/italia/onto/NDC/keyConcept -->
+
+    <owl:AnnotationProperty rdf:about="https://w3id.org/italia/onto/NDC/keyConcept"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CaratteristicaScuola -->
+
+    <rdfs:Datatype rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CaratteristicaScuola">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ANN. A EDUCANDATO</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ANN. A ISTITUTO ARTE</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ANNESSO A CONVITTO</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ANNESSO A ISTITUTO</rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">C/O IST. OSPEDALIERO</rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO ANNESSO</rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO NAZIONALE</rdf:first>
+                                                                        <rdf:rest>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CPIA</rdf:first>
+                                                                                <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">DI CONFINE</rdf:first>
+                                                                                        <rdf:rest>
+                                                                                            <rdf:Description>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">DI MONTAGNA</rdf:first>
+                                                                                                <rdf:rest>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">EDUCANDATO FEMMINILE</rdf:first>
+                                                                                                        <rdf:rest>
+                                                                                                            <rdf:Description>
+                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISOLANO</rdf:first>
+                                                                                                                <rdf:rest>
+                                                                                                                    <rdf:Description>
+                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">PER CIECHI</rdf:first>
+                                                                                                                        <rdf:rest>
+                                                                                                                            <rdf:Description>
+                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">PER SORDOMUTI</rdf:first>
+                                                                                                                                <rdf:rest>
+                                                                                                                                    <rdf:Description>
+                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">PERCORSO II LIVELLO</rdf:first>
+                                                                                                                                        <rdf:rest>
+                                                                                                                                            <rdf:Description>
+                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA ANNESSA</rdf:first>
+                                                                                                                                                <rdf:rest>
+                                                                                                                                                    <rdf:Description>
+                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SLOVENO</rdf:first>
+                                                                                                                                                        <rdf:rest>
+                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SPEC. PER CARCERARI</rdf:first>
+                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SPEC. PER SORDOMUTI</rdf:first>
+                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SPECIALE PER CIECHI</rdf:first>
+                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SPERIMENTALE PER DM</rdf:first>
+                                                                                                                                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                </rdf:rest>
+                                                                                                                                                            </rdf:Description>
+                                                                                                                                                        </rdf:rest>
+                                                                                                                                                    </rdf:Description>
+                                                                                                                                                </rdf:rest>
+                                                                                                                                            </rdf:Description>
+                                                                                                                                        </rdf:rest>
+                                                                                                                                    </rdf:Description>
+                                                                                                                                </rdf:rest>
+                                                                                                                            </rdf:Description>
+                                                                                                                        </rdf:rest>
+                                                                                                                    </rdf:Description>
+                                                                                                                </rdf:rest>
+                                                                                                            </rdf:Description>
+                                                                                                        </rdf:rest>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:rest>
+                                                                                            </rdf:Description>
+                                                                                        </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                </rdf:rest>
+                                                                            </rdf:Description>
+                                                                        </rdf:rest>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzioneScuola -->
+
+    <rdfs:Datatype rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzioneScuola">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CENTRO TERRITORIALE</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO ANNESSO</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO NAZIONALE</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">EDUCANDATO</rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF ALBERGHIERO</rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF CINEMATOGRAFIA E TELEVISIONE</rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO</rdf:first>
+                                                                        <rdf:rest>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO PER CIECHI</rdf:first>
+                                                                                <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO PER SORDOMUTI</rdf:first>
+                                                                                        <rdf:rest>
+                                                                                            <rdf:Description>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ATTIVITA&apos; MARINARE</rdf:first>
+                                                                                                <rdf:rest>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI ALBERGHIERI E RISTORAZIONE</rdf:first>
+                                                                                                        <rdf:rest>
+                                                                                                            <rdf:Description>
+                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMM TUR E DELLA PUBB</rdf:first>
+                                                                                                                <rdf:rest>
+                                                                                                                    <rdf:Description>
+                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMMERCIALI</rdf:first>
+                                                                                                                        <rdf:rest>
+                                                                                                                            <rdf:Description>
+                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMMERCIALI E TURISTICI</rdf:first>
+                                                                                                                                <rdf:rest>
+                                                                                                                                    <rdf:Description>
+                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI PUBBLICITARI</rdf:first>
+                                                                                                                                        <rdf:rest>
+                                                                                                                                            <rdf:Description>
+                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI SOCIALI</rdf:first>
+                                                                                                                                                <rdf:rest>
+                                                                                                                                                    <rdf:Description>
+                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI TURISTICI</rdf:first>
+                                                                                                                                                        <rdf:rest>
+                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER L&apos;AGRICOLTURA</rdf:first>
+                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER L&apos;AGRICOLTURA E L&apos;AMBIENTE</rdf:first>
+                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST TEC COMMERCIALE E PER GEOMETRI</rdf:first>
+                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST TECNICO ECONOMICO E TECNOLOGICO</rdf:first>
+                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO COMPRENSIVO</rdf:first>
+                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO D&apos;ARTE</rdf:first>
+                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO MAGISTRALE</rdf:first>
+                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO SUPERIORE</rdf:first>
+                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO AERONAUTICO</rdf:first>
+                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO AGRARIO</rdf:first>
+                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO COMMERCIALE</rdf:first>
+                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO INDUSTRIALE</rdf:first>
+                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO NAUTICO</rdf:first>
+                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER ATTIVITA&apos; SOCIALI (GIA&apos; ITF)</rdf:first>
+                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER GEOMETRI</rdf:first>
+                                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER IL TURISMO</rdf:first>
+                                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO ARTISTICO</rdf:first>
+                                                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO CLASSICO</rdf:first>
+                                                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO SCIENTIFICO</rdf:first>
+                                                                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA INFANZIA</rdf:first>
+                                                                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA MAGISTRALE</rdf:first>
+                                                                                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA PRIMARIA</rdf:first>
+                                                                                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA PRIMO GRADO</rdf:first>
+                                                                                                                                                                                                                                                                                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                </rdf:rest>
+                                                                                                                                                            </rdf:Description>
+                                                                                                                                                        </rdf:rest>
+                                                                                                                                                    </rdf:Description>
+                                                                                                                                                </rdf:rest>
+                                                                                                                                            </rdf:Description>
+                                                                                                                                        </rdf:rest>
+                                                                                                                                    </rdf:Description>
+                                                                                                                                </rdf:rest>
+                                                                                                                            </rdf:Description>
+                                                                                                                        </rdf:rest>
+                                                                                                                    </rdf:Description>
+                                                                                                                </rdf:rest>
+                                                                                                            </rdf:Description>
+                                                                                                        </rdf:rest>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:rest>
+                                                                                            </rdf:Description>
+                                                                                        </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                </rdf:rest>
+                                                                            </rdf:Description>
+                                                                        </rdf:rest>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+        <rdfs:label xml:lang="it">ha grado istruzione</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoGestisce -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoGestisce">
+        <owl:inverseOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaGestitaDa"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:label xml:lang="it">istituto gestisce</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaCodice -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaCodice">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:range rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <rdfs:label xml:lang="it">istituto ha codice</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaSedeDirettivoIn -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaSedeDirettivoIn">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoGestisce"/>
+        <owl:inverseOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSedeDirettivoPer"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:label xml:lang="it">istituto ha sede direttivo in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaGestitaDa -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaGestitaDa">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:label xml:lang="it">è scuola gestita da</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaRegistrataPerAnnoScolastico -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaRegistrataPerAnnoScolastico">
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico"/>
+        <rdfs:label xml:lang="it">è scuola registrata per as</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSedeDirettivoPer -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSedeDirettivoPer">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaGestitaDa"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:label xml:lang="it">è scuola sede di direttivo per</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://w3id.org/italia/onto/CLV/hasIdentifier -->
+
+    <rdf:Description rdf:about="https://w3id.org/italia/onto/CLV/hasIdentifier">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Istituzione"/>
+                    <rdf:Description rdf:about="https://w3id.org/italia/onto/CLV/SpatialObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AvvieneIlGiorno -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AvvieneIlGiorno">
+        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:label xml:lang="it">avviene il giorno</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CodiceCatastaleComune -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CodiceCatastaleComune">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/italia/onto/l0/identifier"/>
+        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:label xml:lang="it">Codice Catastale Comune</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#DescrizioneCaratteristicaScuola -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#DescrizioneCaratteristicaScuola">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CaratteristicaScuola"/>
+        <rdfs:label xml:lang="it">ha descrizione caratteristica scuola</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoEmail -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoEmail">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èContattabileAllaRisorsa"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:label xml:lang="it">ha indirizzo email</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoPEC -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoPEC">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èContattabileAllaRisorsa"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:label xml:lang="it">ha indirizzo PEC</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaSitoWeb -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaSitoWeb">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èContattabileAllaRisorsa"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:label xml:lang="it">ha sito web</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IniziaIlGiorno -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IniziaIlGiorno">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AvvieneIlGiorno"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:label xml:lang="it">inizia il giorno</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaNome -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaNome">
+        <rdfs:subPropertyOf rdf:resource="https://w3id.org/italia/onto/l0/name"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:label xml:lang="it">istituto ha nome</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TerminaIlGiorno -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TerminaIlGiorno">
+        <rdfs:subPropertyOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AvvieneIlGiorno"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:label xml:lang="it">termina il giorno</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èContattabileAllaRisorsa -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èContattabileAllaRisorsa">
+        <rdfs:label xml:lang="it">è contattabile alla risorsa</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èOmnicomprensivo -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èOmnicomprensivo">
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:label xml:lang="it">è omnicomprensivo</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èSedeScolastica -->
+
+    <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èSedeScolastica">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:label xml:lang="it">è sede scolastica</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://w3id.org/italia/onto/l0/name -->
+
+    <rdf:Description rdf:about="https://w3id.org/italia/onto/l0/name">
+        <rdfs:label xml:lang="it">ha nome</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dati.gov.it/onto/dcatapit#Dataset -->
+
+    <owl:Class rdf:about="http://dati.gov.it/onto/dcatapit#Dataset"/>
+    
+
+
+    <!-- http://dati.gov.it/onto/dcatapit#Distribution -->
+
+    <owl:Class rdf:about="http://dati.gov.it/onto/dcatapit#Distribution"/>
+    
+
+
+    <!-- http://dati.gov.it/onto/dcatapit#Standard -->
+
+    <owl:Class rdf:about="http://dati.gov.it/onto/dcatapit#Standard"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/Standard -->
+
+    <owl:Class rdf:about="http://purl.org/dc/terms/Standard"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#ConceptScheme -->
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#Asset -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/adms#Asset"/>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IniziaIlGiorno"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TerminaIlGiorno"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca"/>
+        <owl:disjointWith rdf:resource="https://w3id.org/italia/onto/CLV/AddressInTime"/>
+        <rdfs:comment xml:lang="it">Intervallo di tempo durante il quale una scuola eroga gli insegnamenti agli studenti iscritti ad essa.</rdfs:comment>
+        <rdfs:label xml:lang="it">Anno Scolastico</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GaraStudentesca">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/italia/onto/l0/EventOrSituation"/>
+        <owl:disjointWith rdf:resource="https://w3id.org/italia/onto/CLV/AddressInTime"/>
+        <rdfs:label xml:lang="it">Gara Studentesca</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/italia/onto/l0/Characteristic"/>
+        <rdfs:label xml:lang="it">Grado Istruzione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoComprensivo -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoComprensivo">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:hasValue rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_COMPRENSIVO"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Istituto Comprensivo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Istituzione"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaCodice"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoHaNome"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:label xml:lang="it">Istituto Scolastico</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Istituzione -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Istituzione">
+        <rdfs:subClassOf rdf:resource="https://w3id.org/italia/onto/l0/Agent"/>
+        <rdfs:label xml:lang="it">Istituzione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoComprensivo"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaInfanzia"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaPrimaria"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria1Grado"/>
+                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria2Grado"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Istituzione"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaGestitaDa"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaRegistrataPerAnnoScolastico"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/italia/onto/CLV/hasPrimaryAddress"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://w3id.org/italia/onto/CLV/Address"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#èSedeScolastica"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://w3id.org/italia/onto/l0/name"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#DescrizioneCaratteristicaScuola"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#CaratteristicaScuola"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoEmail"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaIndirizzoPEC"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaSitoWeb"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Scuola</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaInfanzia -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaInfanzia">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:hasValue rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_INFANZIA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Scuola Infanzia</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaPrimaria -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaPrimaria">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:hasValue rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMARIA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Scuola Primaria</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria1Grado -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria1Grado">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:hasValue rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMO_GRADO"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Scuola Secondaria 1 Grado</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria2Grado -->
+
+    <owl:Class rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria2Grado">
+        <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#Scuola"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#HaGradoIstruzione"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CENTRO_TERRITORIALE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_ANNESSO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_NAZIONALE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_EDUCANDATO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_D_ARTE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_MAGISTRALE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_SUPERIORE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AERONAUTICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AGRARIO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_COMMERCIALE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_INDUSTRIALE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_NAUTICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_ATTIVITA_SOCIALI_GIA_ITF"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_GEOMETRI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_IL_TURISMO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_ALBERGHIERO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_CINEMATOGRAFIA_E_TELEVISIONE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_CIECHI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_SORDOMUTI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ATTIVITA_MARINARE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_ALBERGHIERI_E_RISTORAZIONE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI_E_TURISTICI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMM_TUR_E_DELLA_PUBB"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_PUBBLICITARI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_SOCIALI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_TURISTICI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA_E_L_AMBIENTE"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TECNICO_ECONOMICO_E_TECNOLOGICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TEC_COMMERCIALE_E_PER_GEOMETRI"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_ARTISTICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_CLASSICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_SCIENTIFICO"/>
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_MAGISTRALE"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="it">Scuola Secondaria 2 Grado</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://spcdata.digitpa.gov.it/Amministrazione/agid -->
+
+    <rdf:Description rdf:about="http://spcdata.digitpa.gov.it/Amministrazione/agid">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <terms:identifier>agid</terms:identifier>
+        <foaf:name xml:lang="it">Agenzia per l&apos;Italia Digitale</foaf:name>
+        <foaf:name xml:lang="en">Italian Digital Agency</foaf:name>
+    </rdf:Description>
+    
+
+
+    <!-- http://spcdata.digitpa.gov.it/Amministrazione/istat -->
+
+    <owl:NamedIndividual rdf:about="http://spcdata.digitpa.gov.it/Amministrazione/istat">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <terms:identifier>istat</terms:identifier>
+        <foaf:name xml:lang="it">Istituto Nazionale di Statistica</foaf:name>
+        <foaf:name xml:lang="en">Italian National Institute of Statistics</foaf:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AS_2023_2024 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AS_2023_2024">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AnnoScolastico"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_AS_202324"/>
+        <IniziaIlGiorno rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2023-09-01</IniziaIlGiorno>
+        <TerminaIlGiorno rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2024-07-01</TerminaIlGiorno>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_AS_202324 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_AS_202324">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">ANNOSCOLASTICO</CLV:identifierType>
+        <l0:identifier rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">202324</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_COMUNE_CORATO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_COMUNE_CORATO">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CodiceCatastaleComune rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">C983</CodiceCatastaleComune>
+        <CLV:identifierType xml:lang="it">CODICECOMUNE</CLV:identifierType>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_PROVINCIA_BA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_PROVINCIA_BA">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Sigla Provincia</CLV:identifierType>
+        <l0:identifier xml:lang="it">BA</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_REGIONE_13 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_REGIONE_13">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Codice Regione</CLV:identifierType>
+        <l0:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0001">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">CODICESCUOLA</CLV:identifierType>
+        <l0:identifier rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">BAAA88002E</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0002 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0002">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">CODICESCUOLA</CLV:identifierType>
+        <l0:identifier rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">BAIC88000L</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COMUNE_CORATO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COMUNE_CORATO">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/City"/>
+        <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_COMUNE_CORATO"/>
+        <l0:name xml:lang="it">CORATO</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CENTRO_TERRITORIALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CENTRO_TERRITORIALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_ANNESSO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_ANNESSO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_NAZIONALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_CONVITTO_NAZIONALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_EDUCANDATO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_EDUCANDATO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_COMPRENSIVO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_COMPRENSIVO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_D_ARTE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_D_ARTE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_MAGISTRALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_MAGISTRALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_SUPERIORE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_SUPERIORE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AERONAUTICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AERONAUTICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AGRARIO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_AGRARIO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_COMMERCIALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_COMMERCIALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_INDUSTRIALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_INDUSTRIALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_NAUTICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_NAUTICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_ATTIVITA_SOCIALI_GIA_ITF -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_ATTIVITA_SOCIALI_GIA_ITF">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_GEOMETRI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_GEOMETRI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_IL_TURISMO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_ISTITUTO_TECNICO_PER_IL_TURISMO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_ALBERGHIERO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_ALBERGHIERO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_CINEMATOGRAFIA_E_TELEVISIONE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_CINEMATOGRAFIA_E_TELEVISIONE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_CIECHI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_CIECHI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_SORDOMUTI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_SORDOMUTI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ATTIVITA_MARINARE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_INDUSTRIA_E_ATTIVITA_MARINARE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_ALBERGHIERI_E_RISTORAZIONE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_ALBERGHIERI_E_RISTORAZIONE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI_E_TURISTICI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI_E_TURISTICI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMM_TUR_E_DELLA_PUBB -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_COMM_TUR_E_DELLA_PUBB">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_PUBBLICITARI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_PUBBLICITARI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_SOCIALI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_SOCIALI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_TURISTICI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_I_SERVIZI_TURISTICI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA_E_L_AMBIENTE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_PROF_PER_L_AGRICOLTURA_E_L_AMBIENTE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TECNICO_ECONOMICO_E_TECNOLOGICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TECNICO_ECONOMICO_E_TECNOLOGICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TEC_COMMERCIALE_E_PER_GEOMETRI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_IST_TEC_COMMERCIALE_E_PER_GEOMETRI">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_ARTISTICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_ARTISTICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_CLASSICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_CLASSICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_SCIENTIFICO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_LICEO_SCIENTIFICO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_INFANZIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_INFANZIA">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_MAGISTRALE -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_MAGISTRALE">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMARIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMARIA">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMO_GRADO -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GI_SCUOLA_PRIMO_GRADO">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#GradoIstruzione"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0001">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Address"/>
+        <CLV:hasCity rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COMUNE_CORATO"/>
+        <CLV:hasCountry rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#STATO_ITALIA"/>
+        <CLV:hasNumber rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0001"/>
+        <CLV:hasProvince rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI"/>
+        <CLV:hasRegion rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#REGIONE_PUGLIA"/>
+        <CLV:hasStreetToponym rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0001"/>
+        <CLV:postCode rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">70033</CLV:postCode>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0002 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0002">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Address"/>
+        <CLV:hasCity rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COMUNE_CORATO"/>
+        <CLV:hasCountry rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#STATO_ITALIA"/>
+        <CLV:hasNumber rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0002"/>
+        <CLV:hasProvince rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI"/>
+        <CLV:hasRegion rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#REGIONE_PUGLIA"/>
+        <CLV:hasStreetToponym rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0002"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ISTITUTO_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ISTITUTO_0001">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoScolastico"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0001">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/CivicNumbering"/>
+        <CLV:streetNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#int">19</CLV:streetNumber>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0002 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#NUMCIVICA_0002">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/CivicNumbering"/>
+        <CLV:peculiarity rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">A</CLV:peculiarity>
+        <CLV:streetNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#int">100</CLV:streetNumber>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Province"/>
+        <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#REGIONE_PUGLIA"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_PROVINCIA_BA"/>
+        <CLV:acronym xml:lang="it">BA</CLV:acronym>
+        <l0:name xml:lang="it">BARI</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#REGIONE_PUGLIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#REGIONE_PUGLIA">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Region"/>
+        <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#STATO_ITALIA"/>
+        <CLV:hasDirectLowerRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#PROVINCIA_BARI"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_REGIONE_13"/>
+        <l0:name xml:lang="it">Puglia</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#SCUOLA_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#SCUOLA_0001">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaInfanzia"/>
+        <ScuolaGestitaDa rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ISTITUTO_0001"/>
+        <ScuolaRegistrataPerAnnoScolastico rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AS_2023_2024"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0001"/>
+        <CLV:hasPrimaryAddress rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0001"/>
+        <HaIndirizzoEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">BAIC88000L@istruzione.it</HaIndirizzoEmail>
+        <HaSitoWeb rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">www.cifarellisantarella.edu.it</HaSitoWeb>
+        <èSedeScolastica rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</èSedeScolastica>
+        <l0:name xml:lang="it">EX MADONNA PELLEGRINA</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#SCUOLA_0002 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#SCUOLA_0002">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoComprensivo"/>
+        <ScuolaRegistrataPerAnnoScolastico rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#AS_2023_2024"/>
+        <ScuolaSedeDirettivoPer rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ISTITUTO_0001"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#COD_SCUOLA_0002"/>
+        <CLV:hasPrimaryAddress rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#INDIRIZZO_0002"/>
+        <HaIndirizzoEmail rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">BAIC88000L@istruzione.it</HaIndirizzoEmail>
+        <HaIndirizzoPEC rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">baic88000l@pec.istruzione.it</HaIndirizzoPEC>
+        <èSedeScolastica rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</èSedeScolastica>
+        <l0:name xml:lang="it">I.C. &quot;CIFARELLI - SANTARELLA&quot;</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#STATO_ITALIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#STATO_ITALIA">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Country"/>
+        <l0:name xml:lang="it">Italia</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0001 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0001">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/StreetToponym"/>
+        <CLV:officialStreetName xml:lang="it">SANTA LUCIA</CLV:officialStreetName>
+        <CLV:toponymQualifier xml:lang="it">VIA</CLV:toponymQualifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0002 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#TOPONIMO_0002">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/StreetToponym"/>
+        <CLV:officialStreetName xml:lang="it">ALDO MORO</CLV:officialStreetName>
+        <CLV:toponymQualifier xml:lang="it">VIA</CLV:toponymQualifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Dataset"/>
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/adms#Asset"/>
+        <terms:accrualPeriodicity rdf:resource="http://publications.europa.eu/resource/authority/frequency/IRREG"/>
+        <terms:conformsTo rdf:resource="https://w3id.org/italia/data/resource/Standard/SKOS"/>
+        <terms:creator rdf:resource="http://spcdata.digitpa.gov.it/Amministrazione/agid"/>
+        <terms:creator rdf:resource="https://w3id.org/italia/data/resource/Amministrazione/td_PCM"/>
+        <terms:description xml:lang="en">Controlled Vocabulary for describing Italy&apos;s Geographical Distributions</terms:description>
+        <terms:description xml:lang="it">Vocabolario controllato delle ripartizioni geografiche d&apos;Italia</terms:description>
+        <terms:identifier>https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution</terms:identifier>
+        <terms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2018-06-19</terms:issued>
+        <terms:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+        <terms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-04-03</terms:modified>
+        <terms:publisher rdf:resource="http://spcdata.digitpa.gov.it/Amministrazione/agid"/>
+        <terms:rightsHolder rdf:resource="http://spcdata.digitpa.gov.it/Amministrazione/istat"/>
+        <terms:title xml:lang="en">Controlled Vocabulary for Italian Geographical Distributions</terms:title>
+        <terms:title xml:lang="it">Vocabolario Controllato delle ripartizioni geografiche d&apos;Italia</terms:title>
+        <terms:type rdf:resource="http://purl.org/adms/assettype/CodeList"/>
+        <xkos:numberOfLevels>1</xkos:numberOfLevels>
+        <rdfs:isDefinedBy rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <owl:versionInfo xml:lang="it">2.0 - aggiornato URI del vocabolario e i suoi contenuti</owl:versionInfo>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/1"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/2"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/3"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/4"/>
+        <skos:hasTopConcept rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/5"/>
+        <adms:representationTechnique rdf:resource="http://purl.org/adms/representationtechnique/SKOS"/>
+        <dcat:contactPoint rdf:resource="https://w3id.org/italia/data/resource/ContactPoint/voc_AgID"/>
+        <dcat:distribution rdf:resource="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_JSON_LD"/>
+        <dcat:distribution rdf:resource="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_Turtle"/>
+        <dcat:distribution rdf:resource="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_XML"/>
+        <dcat:keyword xml:lang="en">Geographical Distributions</dcat:keyword>
+        <dcat:keyword xml:lang="it">Ripartizioni Geografiche</dcat:keyword>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/REGI"/>
+        <NDC:keyConcept>geographical-distribution</NDC:keyConcept>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/1 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/1">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/AdminUnitComponent"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Feature"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/GeographicalDistribution"/>
+        <CLV:hasIdentifier rdf:resource="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/1"/>
+        <l0:name xml:lang="it">Nord-ovest</l0:name>
+        <skos:inScheme rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <skos:notation>1</skos:notation>
+        <skos:prefLabel xml:lang="it">Nord-ovest</skos:prefLabel>
+        <CLV:hasRankOrder>1</CLV:hasRankOrder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/2 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/2">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/AdminUnitComponent"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Feature"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/GeographicalDistribution"/>
+        <CLV:hasIdentifier rdf:resource="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/2"/>
+        <l0:name xml:lang="it">Nord-est</l0:name>
+        <skos:inScheme rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <skos:notation>2</skos:notation>
+        <skos:prefLabel xml:lang="it">Nord-est</skos:prefLabel>
+        <CLV:hasRankOrder>1</CLV:hasRankOrder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/3 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/3">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/AdminUnitComponent"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Feature"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/GeographicalDistribution"/>
+        <CLV:hasIdentifier rdf:resource="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/3"/>
+        <l0:name xml:lang="it">Centro</l0:name>
+        <skos:inScheme rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <skos:notation>3</skos:notation>
+        <skos:prefLabel xml:lang="it">Centro</skos:prefLabel>
+        <CLV:hasRankOrder>1</CLV:hasRankOrder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/4 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/4">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/AdminUnitComponent"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Feature"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/GeographicalDistribution"/>
+        <CLV:hasIdentifier rdf:resource="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/4"/>
+        <l0:name xml:lang="it">Sud</l0:name>
+        <skos:inScheme rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <skos:notation>4</skos:notation>
+        <skos:prefLabel xml:lang="it">Sud</skos:prefLabel>
+        <CLV:hasRankOrder>1</CLV:hasRankOrder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/5 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution/5">
+        <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/AdminUnitComponent"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Feature"/>
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/GeographicalDistribution"/>
+        <CLV:hasIdentifier rdf:resource="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/5"/>
+        <l0:name xml:lang="it">Isole</l0:name>
+        <skos:inScheme rdf:resource="https://w3id.org/italia/controlled-vocabulary/territorial-classifications/geographical-distribution"/>
+        <skos:notation>5</skos:notation>
+        <skos:prefLabel xml:lang="it">Isole</skos:prefLabel>
+        <CLV:hasRankOrder>1</CLV:hasRankOrder>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/1 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/1">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Identificativo della ripartizione geografica</CLV:identifierType>
+        <l0:identifier>1</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/2 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/2">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Identificativo della ripartizione geografica</CLV:identifierType>
+        <l0:identifier>2</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/3 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/3">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Identificativo della ripartizione geografica</CLV:identifierType>
+        <l0:identifier>3</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/4 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/4">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Identificativo della ripartizione geografica</CLV:identifierType>
+        <l0:identifier>4</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/5 -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/identifiers/geographical-distribution-identifiers/5">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">Identificativo della ripartizione geografica</CLV:identifierType>
+        <l0:identifier>5</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/Amministrazione/td_PCM -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/Amministrazione/td_PCM">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Agent"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <terms:identifier>PCM</terms:identifier>
+        <foaf:name xml:lang="en">Digital Transformation Team</foaf:name>
+        <foaf:name xml:lang="it">Team per la Trasformazione Digitale</foaf:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/ContactPoint/voc_AgID -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/ContactPoint/voc_AgID">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Organization"/>
+        <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
+        <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Organization"/>
+        <ns:fn>banche dati e open data</ns:fn>
+        <ns:hasEmail rdf:resource="mailto:info@dati.gov.it"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/Distribution/geographical-distribution_JSON_LD -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_JSON_LD">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+        <terms:description xml:lang="it">Questa è la distribuzione RDF/Turtle del dataset Linked Open Data del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:description>
+        <terms:description xml:lang="en">This is the distribution in RDF/turtle of the Linked Open Dataset of the Italian geographical distributions controlled vocabulary </terms:description>
+        <terms:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/JSON_LD"/>
+        <terms:license rdf:resource="https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"/>
+        <terms:title xml:lang="it">Distribuzione RDF/Turtle del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:title>
+        <terms:title xml:lang="en">RDF/Turtle distribution of the Italian geographical distributions controlled vocabulary</terms:title>
+        <dcat:accessURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution"/>
+        <dcat:downloadURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution/geographical-distribution.jsonld"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_Turtle -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_Turtle">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+        <terms:description xml:lang="it">Questa è la distribuzione RDF/Turtle del dataset Linked Open Data del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:description>
+        <terms:description xml:lang="en">This is the distribution in RDF/turtle of the Linked Open Dataset of the Italian geographical distributions controlled vocabulary </terms:description>
+        <terms:format rdf:resource="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE"/>
+        <terms:license rdf:resource="https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"/>
+        <terms:title xml:lang="it">Distribuzione RDF/Turtle del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:title>
+        <terms:title xml:lang="en">RDF/Turtle distribution of the Italian geographical distributions controlled vocabulary</terms:title>
+        <dcat:accessURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution"/>
+        <dcat:downloadURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution/geographical-distribution.ttl"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_XML -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/Distribution/geographical-distribution_RDF_XML">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Distribution"/>
+        <terms:description xml:lang="it">Questa è la distribuzione RDF/Turtle del dataset Linked Open Data del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:description>
+        <terms:description xml:lang="en">This is the distribution in RDF/turtle of the Linked Open Dataset of the Italian geographical distributions controlled vocabulary </terms:description>
+        <terms:license rdf:resource="https://w3id.org/italia/controlled-vocabulary/licences/A21_CCBY40"/>
+        <terms:title xml:lang="it">Distribuzione RDF/Turtle del vocabolario controllato sulle ripartizioni geografiche d&apos;Italia</terms:title>
+        <terms:title xml:lang="it">Distribuzione RDF/XML del vocabolario controllato sulle regioni d&apos;Italia</terms:title>
+        <terms:title xml:lang="en">RDF/Turtle distribution of the Italian geographical distributions controlled vocabulary</terms:title>
+        <terms:title xml:lang="en">RDF/XML distribution of the Italian geographical-distribution controlled vocabulary</terms:title>
+        <dcat:accessURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution"/>
+        <dcat:downloadURL rdf:resource="https://raw.githubusercontent.com/italia/daf-ontologie-vocabolari-controllati/master/VocabolariControllati/territorial-classifications/geographical-distribution/geographical-distribution.rdf"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/italia/data/resource/Standard/SKOS -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/italia/data/resource/Standard/SKOS">
+        <rdf:type rdf:resource="http://dati.gov.it/onto/dcatapit#Standard"/>
+        <rdf:type rdf:resource="http://purl.org/dc/terms/Standard"/>
+        <terms:description>The Simple Knowledge Organization System (SKOS) is a common data model for sharing and linking knowledge organization systems via the Web</terms:description>
+        <terms:identifier>SKOS</terms:identifier>
+        <terms:title>Simple Knowledge Organization System - SKOS</terms:title>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#IstitutoComprensivo"/>
+            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaInfanzia"/>
+            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaPrimaria"/>
+            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria1Grado"/>
+            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSecondaria2Grado"/>
+        </owl:members>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#s">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#i">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#id">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>S1</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#ScuolaSedeDirettivoPer"/>
+                        <swrl:argument1 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#s"/>
+                        <swrl:argument2 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#i"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                                <swrl:argument1 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#s"/>
+                                <swrl:argument2 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#id"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="https://w3id.org/italia/onto/CLV/hasIdentifier"/>
+                        <swrl:argument1 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#i"/>
+                        <swrl:argument2 rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambito_scuola#id"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

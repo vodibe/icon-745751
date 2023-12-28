@@ -1,0 +1,2 @@
+https://raw.githubusercontent.com/protegeproject/autoupdate/master/update-info/5.0.0/plugins.repository
+https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties

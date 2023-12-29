@@ -1,0 +1,82 @@
+PREFIX o: <https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#>
+PREFIX l0: <https://w3id.org/italia/onto/l0/>
+PREFIX ns: <http://www.w3.org/2006/vcard/ns#>
+PREFIX CLV: <https://w3id.org/italia/onto/CLV/>
+PREFIX NDC: <https://w3id.org/italia/onto/NDC/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ADMS: <https://w3id.org/italia/onto/ADMS/>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX swrl: <http://www.w3.org/2003/11/swrl#>
+PREFIX xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#>
+PREFIX swrlb: <http://www.w3.org/2003/11/swrlb#>
+PREFIX terms: <http://purl.org/dc/terms/>
+
+SELECT 	
+	?ANNOSCOLASTICO
+	?AREAGEOGRAFICA
+	?REGIONE
+	?PROVINCIA
+	
+	
+	?CODICESCUOLA
+	?DENOMINAZIONESCUOLA
+	
+	?CAPSCUOLA
+	?CODICECOMUNESCUOLA
+	?DESCRIZIONECOMUNE
+	
+	?DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA
+WHERE {
+	# anno scolastico
+	?as rdf:type o:AnnoScolastico;
+	      o:IniziaIlGiorno ?asDataInizio.
+	
+	 # scuola
+	?s rdf:type o:Scuola;
+	    o:ScuolaRegistrataPerAnnoScolastico ?as;
+	    CLV:hasPrimaryAddress ?sIndirizzo;
+	    l0:name ?DENOMINAZIONESCUOLA;
+	    CLV:hasIdentifier ?sID.
+	
+	?sID l0:identifier ?CODICESCUOLA.
+	
+	# informazioni geografiche
+	?sIndirizzo CLV:postCode ?CAPSCUOLA;
+	                  CLV:hasCity ?sComune.
+	?sComune l0:name ?DESCRIZIONECOMUNE;
+	                  CLV:hasIdentifier ?sComuneID;
+	                  CLV:hasDirectHigherRank ?sProvincia.
+	                  
+	?sComuneID #CLV:identifierType ?CODICECOMUNELABEL;
+	                     o:CodiceCatastaleComune ?CODICECOMUNESCUOLA.
+	
+	?sProvincia l0:name ?PROVINCIA;
+	                  CLV:hasDirectHigherRank ?sRegione.
+	
+	?sRegione l0:name ?REGIONE;
+	                 CLV:hasGeographicalDistribution ?sRipGeo.
+	 
+	 ?sRipGeo l0:name ?AREAGEOGRAFICA.
+	 
+	 # info scuola
+	
+	                     
+	
+	# provincia
+	    
+	OPTIONAL {
+		?x rdfs:label ?lab
+	}
+	FILTER (year(?asDataInizio) = 2023)
+}
+ORDER BY ?label
+

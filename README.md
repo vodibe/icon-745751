@@ -11,7 +11,7 @@ Aggiornamento dataset `ds3_gt`: 11/2023
 Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
 
 ## Download
-1. Download [Python](https://www.python.org/downloads/) e [SWI-Prolog](https://www.swi-prolog.org/Download.html).
+1. Download [Python](https://www.python.org/downloads/), [SWI-Prolog](https://www.swi-prolog.org/Download.html), [Protégé](https://protege.stanford.edu/).
 2. Clonare la repo.
    ```bash
    git clone https://github.com/vodibe/icon-745751.git
@@ -27,14 +27,20 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    venv\Scripts\Activate # Windows
    source venv/bin/activate # Linux
    ```
-6. Installare pacchetto del progetto nell'ambiente virtuale. 
+5. Installare pacchetto del progetto nell'ambiente virtuale. 
    ```bash
    pip install -e .
    ```
-7. Installare dipendenze.
+6. Installare dipendenze.
    ```bash
    pip install -r requirements.txt
    ```
+7. Installare i Plug-In Protégé:
+   1. Aprire Protégé.
+   2. *File* > *Check for plugins...* > Snap SPARQL Query > Install
+   3. Riavviare Protégé.
+   4. *File* > *Preferences...* > Plugins > Plugin registry > Sostituire con ```https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties``` > OK > *File* > *Check for plugins...* >
+   5. f
    
 ## Esecuzione
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
@@ -132,4 +138,8 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
    python bn_creator.py
    ```
 4. **Percorso risultati**: `agent/pgm/bif/`
+
+### Se si vuole esplorare l'ontologia, aggiungere individui o sottoporre query DL o SPARQL...
+1. Aprire Protègè.
+2. *File* > *Open* > Selezionare `agent/ontology/ambitoscuola_v1.owl`
    

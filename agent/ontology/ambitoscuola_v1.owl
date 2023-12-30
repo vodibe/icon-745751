@@ -1568,7 +1568,6 @@
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#PROVINCIA_BARI">
         <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Province"/>
         <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#REGIONE_PUGLIA"/>
-        <CLV:acronym xml:lang="it">BA</CLV:acronym>
         <l0:name xml:lang="it">BARI</l0:name>
     </owl:NamedIndividual>
     

@@ -1,3 +1,0 @@
-'Istituto Scolastico' and 'istituto gestisce' max 1 Scuola
-
-Scuola and ('è contattabile alla risorsa' some)

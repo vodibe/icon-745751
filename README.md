@@ -35,12 +35,17 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    ```bash
    pip install -r requirements.txt
    ```
-7. Installare i Plug-In Protégé:
+7. Installare i Plugins di Protégé:
    1. Aprire Protégé.
-   2. *File* > *Check for plugins...* > Snap SPARQL Query > Install
+   2. *File* > *Check for plugins...* > **Snap SPARQL Query** > *Install*
    3. Riavviare Protégé.
-   4. *File* > *Preferences...* > Plugins > Plugin registry > Sostituire con ```https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties``` > OK > *File* > *Check for plugins...* >
-   5. f
+   4. *File* > *Preferences...* > *Plugins* > *Plugin registry*
+   5. Sostituire con
+   ```https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties``` 
+   6. *Ok*
+   7. *File* > *Check for plugins...* > **Pellet Reasoner** > *Install*
+   8. Riavviare Protégé.
+   9. *File* > *Preferences...* > *Plugins* > *Plugins registry* > *Reset to default registry location*.
    
 ## Esecuzione
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
@@ -142,4 +147,6 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
 ### Se si vuole esplorare l'ontologia, aggiungere individui o sottoporre query DL o SPARQL...
 1. Aprire Protègè.
 2. *File* > *Open* > Selezionare `agent/ontology/ambitoscuola_v1.owl`
+3. *Reasoner* > *Pellet* > *Start reasoner*
+![protege](./docs/img/protege.PNG)
    

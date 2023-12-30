@@ -260,259 +260,6 @@
     
 
 
-    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzioneScuola -->
-
-    <rdfs:Datatype rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzioneScuola">
-        <rdfs:seeAlso>https://dati.istruzione.it/opendata/approfondimenti/dizionario/</rdfs:seeAlso>
-        <owl:equivalentClass>
-            <rdfs:Datatype>
-                <owl:oneOf>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CENTRO TERRITORIALE</rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO ANNESSO</rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">CONVITTO NAZIONALE</rdf:first>
-                                        <rdf:rest>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">EDUCANDATO</rdf:first>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF ALBERGHIERO</rdf:first>
-                                                        <rdf:rest>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF CINEMATOGRAFIA E TELEVISIONE</rdf:first>
-                                                                <rdf:rest>
-                                                                    <rdf:Description>
-                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO</rdf:first>
-                                                                        <rdf:rest>
-                                                                            <rdf:Description>
-                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO PER CIECHI</rdf:first>
-                                                                                <rdf:rest>
-                                                                                    <rdf:Description>
-                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ARTIGIANATO PER SORDOMUTI</rdf:first>
-                                                                                        <rdf:rest>
-                                                                                            <rdf:Description>
-                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF INDUSTRIA E ATTIVITA&apos; MARINARE</rdf:first>
-                                                                                                <rdf:rest>
-                                                                                                    <rdf:Description>
-                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI ALBERGHIERI E RISTORAZIONE</rdf:first>
-                                                                                                        <rdf:rest>
-                                                                                                            <rdf:Description>
-                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMM TUR E DELLA PUBB</rdf:first>
-                                                                                                                <rdf:rest>
-                                                                                                                    <rdf:Description>
-                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMMERCIALI</rdf:first>
-                                                                                                                        <rdf:rest>
-                                                                                                                            <rdf:Description>
-                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI COMMERCIALI E TURISTICI</rdf:first>
-                                                                                                                                <rdf:rest>
-                                                                                                                                    <rdf:Description>
-                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI PUBBLICITARI</rdf:first>
-                                                                                                                                        <rdf:rest>
-                                                                                                                                            <rdf:Description>
-                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI SOCIALI</rdf:first>
-                                                                                                                                                <rdf:rest>
-                                                                                                                                                    <rdf:Description>
-                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER I SERVIZI TURISTICI</rdf:first>
-                                                                                                                                                        <rdf:rest>
-                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER L&apos;AGRICOLTURA</rdf:first>
-                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST PROF PER L&apos;AGRICOLTURA E L&apos;AMBIENTE</rdf:first>
-                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST TEC COMMERCIALE E PER GEOMETRI</rdf:first>
-                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">IST TECNICO ECONOMICO E TECNOLOGICO</rdf:first>
-                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO COMPRENSIVO</rdf:first>
-                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO D&apos;ARTE</rdf:first>
-                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO MAGISTRALE</rdf:first>
-                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO SUPERIORE</rdf:first>
-                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO AERONAUTICO</rdf:first>
-                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO AGRARIO</rdf:first>
-                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO COMMERCIALE</rdf:first>
-                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO INDUSTRIALE</rdf:first>
-                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO NAUTICO</rdf:first>
-                                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER ATTIVITA&apos; SOCIALI (GIA&apos; ITF)</rdf:first>
-                                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER GEOMETRI</rdf:first>
-                                                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">ISTITUTO TECNICO PER IL TURISMO</rdf:first>
-                                                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO ARTISTICO</rdf:first>
-                                                                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO CLASSICO</rdf:first>
-                                                                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">LICEO SCIENTIFICO</rdf:first>
-                                                                                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA INFANZIA</rdf:first>
-                                                                                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA MAGISTRALE</rdf:first>
-                                                                                                                                                                                                                                                                                                                                <rdf:rest>
-                                                                                                                                                                                                                                                                                                                                    <rdf:Description>
-                                                                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                                                        <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA PRIMARIA</rdf:first>
-                                                                                                                                                                                                                                                                                                                                        <rdf:rest>
-                                                                                                                                                                                                                                                                                                                                            <rdf:Description>
-                                                                                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                                                                                                                                                                                                                                                                                                <rdf:first rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">SCUOLA PRIMO GRADO</rdf:first>
-                                                                                                                                                                                                                                                                                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                                </rdf:rest>
-                                                                                                                                                                            </rdf:Description>
-                                                                                                                                                                        </rdf:rest>
-                                                                                                                                                                    </rdf:Description>
-                                                                                                                                                                </rdf:rest>
-                                                                                                                                                            </rdf:Description>
-                                                                                                                                                        </rdf:rest>
-                                                                                                                                                    </rdf:Description>
-                                                                                                                                                </rdf:rest>
-                                                                                                                                            </rdf:Description>
-                                                                                                                                        </rdf:rest>
-                                                                                                                                    </rdf:Description>
-                                                                                                                                </rdf:rest>
-                                                                                                                            </rdf:Description>
-                                                                                                                        </rdf:rest>
-                                                                                                                    </rdf:Description>
-                                                                                                                </rdf:rest>
-                                                                                                            </rdf:Description>
-                                                                                                        </rdf:rest>
-                                                                                                    </rdf:Description>
-                                                                                                </rdf:rest>
-                                                                                            </rdf:Description>
-                                                                                        </rdf:rest>
-                                                                                    </rdf:Description>
-                                                                                </rdf:rest>
-                                                                            </rdf:Description>
-                                                                        </rdf:rest>
-                                                                    </rdf:Description>
-                                                                </rdf:rest>
-                                                            </rdf:Description>
-                                                        </rdf:rest>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </rdf:rest>
-                                    </rdf:Description>
-                                </rdf:rest>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </owl:oneOf>
-            </rdfs:Datatype>
-        </owl:equivalentClass>
-    </rdfs:Datatype>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1359,6 +1106,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_CENTRO_TERRITORIALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">CENTRO TERRITORIALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1367,6 +1115,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_CONVITTO_ANNESSO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">CONVITTO ANNESSO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1375,6 +1124,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_CONVITTO_NAZIONALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">CONVITTO NAZIONALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1383,6 +1133,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_EDUCANDATO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">EDUCANDATO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1391,6 +1142,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_COMPRENSIVO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO COMPRENSIVO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1399,6 +1151,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_D_ARTE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO D&apos;ARTE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1407,6 +1160,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_MAGISTRALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO MAGISTRALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1415,6 +1169,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_SUPERIORE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO SUPERIORE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1423,6 +1178,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_AERONAUTICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO AERONAUTICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1431,6 +1187,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_AGRARIO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO AGRARIO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1439,6 +1196,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_COMMERCIALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO COMMERCIALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1447,6 +1205,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_INDUSTRIALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO INDUSTRIALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1455,6 +1214,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_NAUTICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO NAUTICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1463,6 +1223,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_PER_ATTIVITA_SOCIALI_GIA_ITF">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO PER ATTIVITA&apos; SOCIALI (GIA&apos; ITF)</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1471,6 +1232,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_PER_GEOMETRI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO PER GEOMETRI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1479,6 +1241,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_ISTITUTO_TECNICO_PER_IL_TURISMO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">ISTITUTO TECNICO PER IL TURISMO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1487,6 +1250,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_ALBERGHIERO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF ALBERGHIERO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1495,6 +1259,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_CINEMATOGRAFIA_E_TELEVISIONE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF CINEMATOGRAFIA E TELEVISIONE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1503,6 +1268,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1511,6 +1277,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_CIECHI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO PER CIECHI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1519,6 +1286,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_INDUSTRIA_E_ARTIGIANATO_PER_SORDOMUTI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF INDUSTRIA E ARTIGIANATO PER SORDOMUTI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1527,6 +1295,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_INDUSTRIA_E_ATTIVITA_MARINARE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF INDUSTRIA E ATTIVITA&apos; MARINARE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1535,6 +1304,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_ALBERGHIERI_E_RISTORAZIONE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI ALBERGHIERI E RISTORAZIONE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1543,6 +1313,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI COMMERCIALI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1551,6 +1322,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_COMMERCIALI_E_TURISTICI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI COMMERCIALI E TURISTICI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1559,6 +1331,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_COMM_TUR_E_DELLA_PUBB">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI COMM TUR E DELLA PUBB</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1567,6 +1340,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_PUBBLICITARI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI PUBBLICITARI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1575,6 +1349,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_SOCIALI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI SOCIALI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1583,6 +1358,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_I_SERVIZI_TURISTICI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER I SERVIZI TURISTICI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1591,6 +1367,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_L_AGRICOLTURA">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER L&apos;AGRICOLTURA</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1599,6 +1376,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_PROF_PER_L_AGRICOLTURA_E_L_AMBIENTE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST PROF PER L&apos;AGRICOLTURA E L&apos;AMBIENTE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1607,6 +1385,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_TECNICO_ECONOMICO_E_TECNOLOGICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST TECNICO ECONOMICO E TECNOLOGICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1615,6 +1394,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_IST_TEC_COMMERCIALE_E_PER_GEOMETRI">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">IST TEC COMMERCIALE E PER GEOMETRI</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1623,6 +1403,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_LICEO_ARTISTICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">LICEO ARTISTICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1631,6 +1412,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_LICEO_CLASSICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">LICEO CLASSICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1639,6 +1421,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_LICEO_SCIENTIFICO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">LICEO SCIENTIFICO</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1647,6 +1430,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_SCUOLA_INFANZIA">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">SCUOLA INFANZIA</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1655,6 +1439,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_SCUOLA_MAGISTRALE">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">SCUOLA MAGISTRALE</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1663,6 +1448,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_SCUOLA_PRIMARIA">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">SCUOLA PRIMARIA</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1671,6 +1457,7 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_SCUOLA_PRIMO_GRADO">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GradoIstruzione"/>
+        <l0:name xml:lang="it">SCUOLA PRIMO GRADO</l0:name>
     </owl:NamedIndividual>
     
 

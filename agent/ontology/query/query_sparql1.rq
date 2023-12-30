@@ -1,0 +1,167 @@
+PREFIX o: <https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#>
+PREFIX l0: <https://w3id.org/italia/onto/l0/>
+PREFIX ns: <http://www.w3.org/2006/vcard/ns#>
+PREFIX CLV: <https://w3id.org/italia/onto/CLV/>
+PREFIX NDC: <https://w3id.org/italia/onto/NDC/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX ADMS: <https://w3id.org/italia/onto/ADMS/>
+PREFIX adms: <http://www.w3.org/ns/adms#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX swrl: <http://www.w3.org/2003/11/swrl#>
+PREFIX xkos: <http://rdf-vocabulary.ddialliance.org/xkos#>
+PREFIX swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#>
+PREFIX swrlb: <http://www.w3.org/2003/11/swrlb#>
+PREFIX terms: <http://purl.org/dc/terms/>
+
+# avviare il reasoner Pellet prima di sottoporre la query.
+SELECT 
+	?ANNOSCOLASTICO
+	?AREAGEOGRAFICA
+	?REGIONE
+	?PROVINCIA
+	?CODICEISTITUTORIFERIMENTO
+	?DENOMINAZIONEISTITUTORIFERIMENTO
+	?CODICESCUOLA
+	?DENOMINAZIONESCUOLA
+	?INDIRIZZOSCUOLA
+	?CAPSCUOLA
+	?CODICECOMUNESCUOLA
+	?DESCRIZIONECOMUNE
+	?DESCRIZIONECARATTERISTICASCUOLA
+	?DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA
+	?INDICAZIONESEDEDIRETTIVO
+	?INDICAZIONESEDEOMNICOMPRENSIVO
+	?INDIRIZZOEMAILSCUOLA
+	?INDIRIZZOPECSCUOLA
+	?SITOWEBSCUOLA	
+	?SEDESCOLASTICA
+WHERE {
+	# anno scolastico
+	?as rdf:type o:AnnoScolastico;
+	      o:IniziaIlGiorno ?asDataInizio;
+	      CLV:hasIdentifier ?asCodice.
+	
+	?asCodice l0:identifier ?ANNOSCOLASTICO.
+	
+	 # scuola
+	?s rdf:type o:Scuola;
+	    o:ScuolaRegistrataPerAnnoScolastico ?as;
+	    CLV:hasPrimaryAddress ?sIndirizzo;
+	    l0:name ?DENOMINAZIONESCUOLA;
+	    CLV:hasIdentifier ?sID;
+	    o:ScuolaGestitaDa ?i;
+	    o:HaGradoIstruzione ?sGI;
+	    o:èSedeScolastica ?sSedeSc.
+	
+	OPTIONAL { ?s o:HaIndirizzoEmail ?sEmail. }
+	OPTIONAL { ?s o:HaIndirizzoPEC ?sPEC. }
+	OPTIONAL { ?s o:HaSitoWeb ?sSito. }
+	
+	OPTIONAL {
+		?s o:HaSedeOmnicomprensivoIn ?sOmnic.
+		?sOmnic CLV:hasIdentifier ?sOmnicID.
+		?sOmnic l0:identifier ?sOmnicCodice. 
+	}
+	
+	OPTIONAL { ?s o:ScuolaSedeDirettivoPer ?iSedeDir. }
+	OPTIONAL {?s o:DescrizioneCaratteristicaScuola ?sCaratScuola. }
+	
+	BIND (
+		if(?SedeSc, "SI", "NO") AS ?SEDESCOLASTICA
+	)
+	
+	?sID l0:identifier ?CODICESCUOLA.
+	
+	?sGI l0:name ?DESCRIZIONETIPOLOGIAGRADOISTRUZIONESCUOLA.
+	
+	# informazioni geografiche
+	?sIndirizzo CLV:postCode ?CAPSCUOLA;
+	                  CLV:hasCity ?sComune.
+	                  
+	?sComune l0:name ?DESCRIZIONECOMUNE;
+	                  CLV:hasIdentifier ?sComuneID;
+	                  CLV:hasDirectHigherRank ?sProvincia.
+	                  
+	?sComuneID o:CodiceCatastaleComune ?CODICECOMUNESCUOLA.
+	
+	?sProvincia l0:name ?PROVINCIA;
+	                  CLV:hasDirectHigherRank ?sRegione.
+	
+	?sRegione l0:name ?REGIONE;
+	                 CLV:hasGeographicalDistribution ?sRipGeo.
+	 
+	 ?sRipGeo l0:name ?AREAGEOGRAFICA.
+	 
+	 ?sIndirizzo CLV:hasStreetToponym ?sToponimo;
+	                   CLV:hasNumber ?sNumCivico.
+	 
+	 ?sToponimo CLV:toponymQualifier ?sTopQualificatore;
+	                     CLV:officialStreetName ?sTopDUF.
+	 
+	 ?sNumCivico CLV:streetNumber ?sNumCivicoVal.
+	 
+	 OPTIONAL { ?s CLV:fullAddress ?sIndirizzoCompleto. }
+	 OPTIONAL { ?sNumCivico CLV:peculiarity ?sNumCivicoSpec. }
+	 
+	 BIND(
+	 	if(bound(?sNumCivicoSpec),
+	 		concat("/", str(?sNumCivicoSpec)),
+	 		""
+	 	)
+	 	AS ?sIndirizzoP2
+	 )
+	 
+	 BIND(
+		if(bound(?sIndirizzoCompleto),
+			?sIndirizzoCompleto, # preferisci valore della datype prop "indirizzo completo" (se disponibile)
+			concat(str(?sTopQualificatore), " ", str(?sTopDUF), " ", str(?sNumCivicoVal), ?sIndirizzoP2) # se non disponibile, ricostruisci indirizzo
+		)
+		AS ?INDIRIZZOSCUOLA
+	)
+	 
+	 
+	 # istituto
+	 ?i l0:name ?DENOMINAZIONEISTITUTORIFERIMENTO;
+	     CLV:hasIdentifier ?iID.
+	 
+	 ?iID l0:identifier ?CODICEISTITUTORIFERIMENTO.
+	 
+	 # valori default
+	BIND(
+		if(bound(?sCaratScuola), ?sCaratScuola, "NORMALE")
+		AS ?DESCRIZIONECARATTERISTICASCUOLA
+	)
+	
+	BIND (
+		if(bound(?iSedeDir), "SI", "NO")	
+		AS ?INDICAZIONESEDEDIRETTIVO
+	)
+	
+	BIND (
+		if(bound(?sOmnicCodice), ?OmnicCodice, "Non Disponibile")
+		AS ?INDICAZIONESEDEOMNICOMPRENSIVO		
+	)
+	
+	BIND (
+		if(bound(?sEmail), ?sEmail, "Non Disponibile")
+		AS ?INDIRIZZOEMAILSCUOLA
+	)
+	
+	BIND (
+		if(bound(?sPEC), ?sPEC, "Non Disponibile")
+		AS ?INDIRIZZOPECSCUOLA
+	)
+	
+	BIND (
+		if(bound(?sSito), ?sSito, "Non Disponibile")
+		AS ?SITOWEBSCUOLA
+	)
+}
+

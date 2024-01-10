@@ -1,9 +1,7 @@
 # Metodi di Ingegneria della Conoscenza applicati alle homepage delle scuole superiori italiane
 
 ## Idea del progetto
-L’idea di fondo da cui si è partiti è l’applicazione di alcuni metodi di Ingegneria della Conoscenza
-su un dominio di interesse, l’usabilità di una pagina web. Si va prima a circoscrivere un ambito di riferimento,
-che nel nostro caso, è l’insieme delle Homepage delle scuole superiori pubbliche italiane.
+L’idea di fondo è l’applicazione di alcuni metodi di Ingegneria della Conoscenza su un dominio di interesse, l’usabilità di una pagina web. Si va prima a circoscrivere un ambito di riferimento, che nel nostro caso, è l’insieme delle Homepage delle scuole superiori pubbliche italiane. 
 
 Aggiornamento dataset `ds3_gt`: 11/2023
 
@@ -41,11 +39,14 @@ Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output
    3. Riavviare Protégé.
    4. *File* > *Preferences...* > *Plugins* > *Plugin registry*
    5. Sostituire con
-   ```https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties``` 
-   6. *Ok*
+      
+      ```https://raw.githubusercontent.com/Complexible/pellet/master/protege/plugin/update.properties``` 
+
+   6. *OK*
    7. *File* > *Check for plugins...* > **Pellet Reasoner** > *Install*
    8. Riavviare Protégé.
-   9. *File* > *Preferences...* > *Plugins* > *Plugins registry* > *Reset to default registry location*.
+   9. *File* > *Preferences...* > *Plugins* > *Plugin registry* > *Reset to default registry location*.
+   10. *OK*
    
 ## Esecuzione
 Questo repository contiene già tutti i risultati e i file di output. Se si vuole esplorare le varie sezioni trattate nel progetto, seguire questi passi.
@@ -146,7 +147,7 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
 
 ### Se si vuole esplorare l'ontologia, aggiungere individui o sottoporre query DL o SPARQL...
 1. Aprire Protègè.
-2. *File* > *Open* > Selezionare `agent/ontology/ambitoscuola_v1.owl`
+2. *File* > *Open* > `agent/ontology/ambitoscuola_v1.owl`
 3. *Reasoner* > *Pellet* > *Start reasoner*
 ![protege](./docs/img/protege.PNG)
    

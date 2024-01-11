@@ -12,6 +12,7 @@
 # Appunti ICON
 /docs/ICON*.docx
 /docs/ICON*.pdf
+/docs/report.docx
 
 # Escludi alcuni moduli di aipython
 /agent/libs/aipython/*

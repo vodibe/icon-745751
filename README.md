@@ -145,7 +145,7 @@ Questo repository contiene già tutti i risultati e i file di output. Se si vuol
    ```
 4. **Percorso risultati**: `agent/pgm/bif/`
 
-### Se si vuole esplorare l'ontologia, aggiungere individui o sottoporre query DL o SPARQL...
+### Se si vuole esplorare l'ontologia, aggiungere individui o sottoporre query DL/SPARQL...
 1. Aprire Protègè.
 2. *File* > *Open* > `agent/ontology/ambitoscuola_v1.owl`
 3. *Reasoner* > *Pellet* > *Start reasoner*

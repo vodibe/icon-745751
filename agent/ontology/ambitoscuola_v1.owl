@@ -536,14 +536,7 @@
     <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#èContattabileAllaRisorsa -->
 
     <owl:DatatypeProperty rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#èContattabileAllaRisorsa">
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GaraStudentesca"/>
-                    <rdf:Description rdf:about="https://w3id.org/italia/onto/l0/Agent"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
+        <rdfs:domain rdf:resource="https://w3id.org/italia/onto/l0/Agent"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:label xml:lang="it">è contattabile alla risorsa</rdfs:label>
     </owl:DatatypeProperty>
@@ -698,6 +691,12 @@
         <rdfs:subClassOf rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#Istituzione"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#IstitutoGestisce"/>
+                <owl:allValuesFrom rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#Scuola"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#IstitutoHaCodice"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
@@ -770,6 +769,12 @@
                 <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#HaSedeOmnicomprensivoIn"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
                 <owl:onClass rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#Scuola"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#èContattabileAllaRisorsa"/>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -878,7 +883,8 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#HaGradoIstruzione"/>
-                <owl:someValuesFrom>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
                     <owl:Class>
                         <owl:oneOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_CENTRO_TERRITORIALE"/>
@@ -919,7 +925,7 @@
                             <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_SCUOLA_MAGISTRALE"/>
                         </owl:oneOf>
                     </owl:Class>
-                </owl:someValuesFrom>
+                </owl:onClass>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="it">Scuola Secondaria 2 Grado</rdfs:label>
@@ -1018,6 +1024,17 @@
     
 
 
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_COMUNE_RUVO_DI_PUGLIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_COMUNE_RUVO_DI_PUGLIA">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CodicePer rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA"/>
+        <CodiceCatastaleComune rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">H645</CodiceCatastaleComune>
+        <CLV:identifierType xml:lang="it">CODICECOMUNE</CLV:identifierType>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_REGIONE_13 -->
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_REGIONE_13">
@@ -1079,11 +1096,22 @@
     
 
 
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_SCUOLA_0005 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_SCUOLA_0005">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Identifier"/>
+        <CLV:identifierType xml:lang="it">CODICESCUOLA</CLV:identifierType>
+        <l0:identifier rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">BAPS09000R</l0:identifier>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_CORATO -->
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_CORATO">
         <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/City"/>
         <owl:differentFrom rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_POMEZIA"/>
+        <owl:differentFrom rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA"/>
         <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#PROVINCIA_BARI"/>
         <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_COMUNE_CORATO"/>
         <l0:name xml:lang="it">CORATO</l0:name>
@@ -1095,9 +1123,20 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_POMEZIA">
         <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/City"/>
+        <owl:differentFrom rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA"/>
         <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#PROVINCIA_ROMA"/>
         <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_COMUNE_POMEZIA"/>
         <l0:name xml:lang="it">POMEZIA</l0:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/City"/>
+        <CLV:hasDirectHigherRank rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#PROVINCIA_BARI"/>
+        <l0:name xml:lang="it">RUVO DI PUGLIA</l0:name>
     </owl:NamedIndividual>
     
 
@@ -1510,6 +1549,18 @@
     
 
 
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#INDIRIZZO_0005 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#INDIRIZZO_0005">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/Address"/>
+        <CLV:hasCity rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COMUNE_RUVO_DI_PUGLIA"/>
+        <CLV:hasNumber rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#NUMCIVICA_0005"/>
+        <CLV:hasStreetToponym rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#TOPONIMO_0005"/>
+        <CLV:postCode rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">70037</CLV:postCode>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0001 -->
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0001">
@@ -1522,6 +1573,26 @@
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0002">
         <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#IstitutoScolastico"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0003 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0003">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#IstitutoScolastico"/>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#IstitutoGestisce"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:oneOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#SCUOLA_0005"/>
+                        </owl:oneOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdf:type>
     </owl:NamedIndividual>
     
 
@@ -1559,6 +1630,15 @@
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#NUMCIVICA_0004">
         <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/CivicNumbering"/>
         <CLV:streetNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#int">29</CLV:streetNumber>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#NUMCIVICA_0005 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#NUMCIVICA_0005">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/CivicNumbering"/>
+        <CLV:streetNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#int">13</CLV:streetNumber>
     </owl:NamedIndividual>
     
 
@@ -1672,6 +1752,24 @@
     
 
 
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#SCUOLA_0005 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#SCUOLA_0005">
+        <rdf:type rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ScuolaSecondaria2Grado"/>
+        <HaGradoIstruzione rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#GI_LICEO_SCIENTIFICO"/>
+        <ScuolaRegistrataPerAnnoScolastico rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#AS_2023_2024"/>
+        <ScuolaSedeDirettivoPer rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#ISTITUTO_0003"/>
+        <CLV:hasIdentifier rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#COD_SCUOLA_0005"/>
+        <CLV:hasPrimaryAddress rdf:resource="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#INDIRIZZO_0005"/>
+        <HaIndirizzoEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">BAPS09000R@istruzione.it</HaIndirizzoEmail>
+        <HaIndirizzoPEC rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">baps09000r@pec.istruzione.it</HaIndirizzoPEC>
+        <HaSitoWeb rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">www.liceotedone.gov.it</HaSitoWeb>
+        <èSedeScolastica rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</èSedeScolastica>
+        <l0:name xml:lang="it">LICEO &quot;O. TEDONE&quot;</l0:name>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#STATO_ITALIA -->
 
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#STATO_ITALIA">
@@ -1716,6 +1814,16 @@
     <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#TOPONIMO_0004">
         <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/StreetToponym"/>
         <CLV:officialStreetName xml:lang="it">FRATELLI BANDIERA</CLV:officialStreetName>
+        <CLV:toponymQualifier xml:lang="it">VIA</CLV:toponymQualifier>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#TOPONIMO_0005 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/vodibe/icon-745751/tree/main/agent/ontology/ambitoscuola#TOPONIMO_0005">
+        <rdf:type rdf:resource="https://w3id.org/italia/onto/CLV/StreetToponym"/>
+        <CLV:officialStreetName xml:lang="it">A. VOLTA</CLV:officialStreetName>
         <CLV:toponymQualifier xml:lang="it">VIA</CLV:toponymQualifier>
     </owl:NamedIndividual>
     

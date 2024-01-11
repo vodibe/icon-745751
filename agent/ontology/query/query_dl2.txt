@@ -1,0 +1,14 @@
+(not 'Scuola Secondaria 2 Grado')
+and
+'ha indirizzo primario' exactly 1 (
+	'ha comune' some (
+		'ha livello più alto' some (
+			'ha livello più alto' some (
+				'ha ripartizione geografica' exactly 1 (
+					'ha nome' some (not{"Nord-est"@it, "Nord-ovest"@it}))
+			)
+		)
+	)
+)
+and
+('è contattabile alla risorsa' min 1 (xsd:anyURI))

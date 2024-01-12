@@ -7,7 +7,7 @@ Aggiornamento dataset `ds3_gt`: 11/2023
 
 ## Gruppo di lavoro
 - Vincenzo Di Bisceglie; matr. `745751`; v.dibisceglie3@studenti.uniba.it
-- A.A. 2022/2023
+  - A.A. 2022/2023
 
 ## Documentazione e Risultati
 Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.

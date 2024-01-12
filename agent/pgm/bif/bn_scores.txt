@@ -1,6 +1,6 @@
 
-BN_MLE:
-	Log likelihood: -45735.17485045169
+BN_MLE (2000 simulated rows):
+	Log likelihood: -9179.317490779074
 
-BN_MAP:
-	Log likelihood: -59778.617683561126
+BN_MAP (2000 simulated rows):
+	Log likelihood: -11940.64642431771

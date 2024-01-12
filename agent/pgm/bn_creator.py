@@ -259,10 +259,13 @@ def create_bn_and_query(ds: DataFrame, estimator_type: str, bn_out_path, query_o
         bif_writer = BIFWriter(bn)
         bif_writer.write_bif(bn_out_path)
 
-    simulated_data = bn.simulate(int(1e4))
+    simulated_num = int(2e3)
+    simulated_data = bn.simulate(simulated_num)
     score_ll = log_likelihood_score(bn, simulated_data)
     with open(defs.bn_ll_path, "a") as bn_ll:
-        bn_ll.write(f"\nBN_{estimator_type}:\n\tLog likelihood: {score_ll}\n")
+        bn_ll.write(
+            f"\nBN_{estimator_type} ({str(simulated_num)} simulated rows):\n\tLog likelihood: {score_ll}\n"
+        )
 
     # query
     print("Querying...")
@@ -298,8 +301,6 @@ if __name__ == "__main__":
         feature_domains=defs.ds3_gt_feature_domains,
         mapping=defs.DS_DISCRETE_MAPPING_DEFAULT,
     )
-
-    # ds.to_csv("./test.csv", sep=",", index=False)
 
     # crea bn e fai le query
     create_bn_and_query(

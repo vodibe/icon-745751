@@ -10,7 +10,7 @@ Aggiornamento dataset `ds3_gt`: 11/2023
   - A.A. 2022/2023
 
 ## Documentazione e Risultati
-Vedere `docs/report.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
+Vedere `docs/report-745751.pdf`. In ogni sezione si rimanda ai percorsi dei vari output.
 
 ## Download
 1. Download [Python](https://www.python.org/downloads/), [SWI-Prolog](https://www.swi-prolog.org/Download.html), [Protégé](https://protege.stanford.edu/).

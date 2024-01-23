@@ -1,0 +1,3 @@
+# Ignoring auto-generated Prolog facts
+/agent/kb/kb_shared_facts.pl linguist-detectable=false
+/agent/kb/jobs/job?_clauses.pl linguist-detectable=false
